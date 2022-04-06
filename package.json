@@ -1,0 +1,53 @@
+{
+  "name": "motokv2",
+  "version": "1.0.0",
+  "scripts": {
+    "start": "expo start --dev-client",
+    "android": "expo run:android",
+    "ios": "expo run:ios",
+    "web": "expo start --web",
+    "eject": "expo eject"
+  },
+  "dependencies": {
+    "@expo-google-fonts/teko": "^0.2.2",
+    "@react-native-async-storage/async-storage": "~1.15.0",
+    "@react-native-picker/picker": "2.2.1",
+    "@react-navigation/bottom-tabs": "^6.2.0",
+    "@react-navigation/native": "^6.0.8",
+    "@react-navigation/stack": "^6.1.1",
+    "@types/react-native-snap-carousel": "^3.8.5",
+    "axios": "^0.26.0",
+    "buffer": "^6.0.3",
+    "expo": "~44.0.0",
+    "expo-app-loading": "~1.3.0",
+    "expo-camera": "~12.1.2",
+    "expo-document-picker": "~10.1.3",
+    "expo-font": "~10.0.4",
+    "expo-linear-gradient": "~11.0.1",
+    "expo-splash-screen": "~0.14.1",
+    "expo-status-bar": "~1.2.0",
+    "react": "17.0.1",
+    "react-dom": "17.0.1",
+    "react-native": "0.64.3",
+    "react-native-gesture-handler": "~2.1.0",
+    "react-native-image-base64": "^0.1.4",
+    "react-native-linear-gradient-degree": "^0.0.1",
+    "react-native-mask-text": "^0.7.0",
+    "react-native-responsive-fontsize": "^0.5.1",
+    "react-native-safe-area-context": "3.3.2",
+    "react-native-screens": "~3.10.1",
+    "react-native-snap-carousel": "^3.9.1",
+    "react-native-svg": "12.1.1",
+    "react-native-svg-transformer": "^1.0.0",
+    "react-native-web": "0.17.1",
+    "rn-fetch-blob": "^0.12.0",
+    "styled-components": "^5.3.3"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.12.9",
+    "@types/react": "~17.0.21",
+    "@types/react-native": "~0.64.12",
+    "typescript": "~4.3.5"
+  },
+  "private": true
+}
