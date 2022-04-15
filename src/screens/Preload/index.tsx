@@ -28,7 +28,7 @@ const Preload = () => {
             }else{
                 navigation.navigate('Presentation');
             }
-            await api.get(`Planos`)
+            await api.get(`Planos/ativos`)
               .then(async response => {
                 await AsyncStorage.setItem('planos', JSON.stringify(response.data))
               }).catch(function (error) {

@@ -23,8 +23,6 @@ import BottomTabs from './BottonStack'
 import NovaManuntencao from '../screens/NovaManuntencao'
 import ContratarPlano from '../screens/ContratarPlano'
 
-
-
 const Stack = createStackNavigator();
 
 export default function MainStack() {
@@ -36,40 +34,39 @@ export default function MainStack() {
         return <AppLoading />;
       }
 
-    return <Stack.Navigator
-        initialRouteName="Preload"
-        screenOptions={{
-            headerShown: false,
-        }}
-    >
-        <Stack.Screen name="Preload" component={Preload} />
+    return (
+        <Stack.Navigator
+            initialRouteName="Presentation"
+            screenOptions={{
+                headerShown: false,
+            }}
+        >
+            <Stack.Screen name="Preload" component={Preload} />
 
-        <Stack.Screen name="Presentation" component={Presentation} />
+            <Stack.Screen name="Presentation" component={Presentation} />
 
-        <Stack.Screen name="ContratarPlano" component={ContratarPlano} />
-        
-        <Stack.Screen name="ShowPlans" component={ShowPlans} />
+            <Stack.Screen name="ContratarPlano" component={ContratarPlano} />
 
-        <Stack.Screen name="SignIn" component={SignIn} />
-        
-        <Stack.Screen name="Register" component={RegisterCPForCNPJ} />
-        
-        <Stack.Screen name="RegisterCPF" component={RegisterCPF} />
-        
-        <Stack.Screen name="RegisterCNPJ" component={RegisterCNPJ} />
+            <Stack.Screen name="ShowPlans" component={ShowPlans} />
 
-        <Stack.Screen name="CadastroFinalizado" component={CadastroFinalizado} />
+            <Stack.Screen name="SignIn" component={SignIn} />
 
-        <Stack.Screen name="ManutencaoAgendada" component={ManutencaoAgendada} />
+            <Stack.Screen name="Register" component={RegisterCPForCNPJ} />
 
-        <Stack.Screen name="PagamentoEmAnalise" component={PagamentoEmAnalise} />
+            <Stack.Screen name="RegisterCPF" component={RegisterCPF} />
 
-        <Stack.Screen name="NovaManuntencao" component={NovaManuntencao} />
-        
-        <Stack.Screen name="Home" component={BottomTabs} /> 
-        
-    </Stack.Navigator>;
+            <Stack.Screen name="RegisterCNPJ" component={RegisterCNPJ} />
+
+            <Stack.Screen name="CadastroFinalizado" component={CadastroFinalizado} />
+
+            <Stack.Screen name="ManutencaoAgendada" component={ManutencaoAgendada} />
+
+            <Stack.Screen name="PagamentoEmAnalise" component={PagamentoEmAnalise} />
+
+            <Stack.Screen name="NovaManuntencao" component={NovaManuntencao} />
+
+            <Stack.Screen name="Home" component={BottomTabs} /> 
+
+        </Stack.Navigator>
+    );
 }
-
-
-

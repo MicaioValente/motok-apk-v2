@@ -1,3 +1,4 @@
+import moment from 'moment'
 export interface userCPF {
     image: any
     anoNascimento: string
@@ -24,11 +25,28 @@ export interface userCPF {
     docCarteiraMotorista: string
 }
 
-export async function postUserCpf(userCPF: userCPF, navigation: any) {
-    var formdata = new FormData();
+export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading: any, setAviso: any) {
+    setLoading(true)
+    function response(result: any) {
+        console.log(result)
+        setLoading(false)
 
+        if(result.status === 400){
+            setAviso(true)
+            return
+        }
+        if(result.success){
+            navigation.navigate('SignIn')
+            return
+        }
+    }
+    function errorResponse(error:any) {
+        setAviso(true)
+    }
+    let ValidadeCarteira = moment(userCPF.ValidadeCarteira, 'DDMMYYYY')
+    var formdata = new FormData();
     formdata.append("anoNascimento", userCPF.anoNascimento);
-    // formdata.append("aprovacaoId", '0' );
+    formdata.append("planoId", '0' );
     formdata.append("bairroEnderecoCliente", userCPF.bairroEnderecoCliente );
     formdata.append("cepEnderecoCliente", userCPF.cepEnderecoCliente );
     formdata.append("cidadeClienteId", userCPF.cidadeClienteId );
@@ -46,9 +64,10 @@ export async function postUserCpf(userCPF: userCPF, navigation: any) {
     formdata.append("ruaEnderecoCliente", userCPF.ruaEnderecoCliente );
     formdata.append("senhaCliente", userCPF.senhaCliente );
     formdata.append("telefoneCliente", userCPF.telefoneCliente );
-    formdata.append("ValidadeCarteira", userCPF.ValidadeCarteira );
+    formdata.append("ValidadeCarteira", ValidadeCarteira.format('MM-DD-YYYY') );
     formdata.append("image", userCPF.docCarteiraMotorista);
     formdata.append("image", userCPF.docComprovanteResidencia);
+    formdata.append("PlanoId", '0');
     console.log('formData',  formdata)
 
     var requestOptions = {
@@ -76,9 +95,10 @@ export async function postUserCpf(userCPF: userCPF, navigation: any) {
     
     fetch("https://motok-api.herokuapp.com/api/clientes/pf", requestOptions)
     .then(response => response.json())
-      .then(result => result.success ? navigation.navigate('SignIn') : null)
+        .then(result => response(result))
+    //   .then(result => console.log('result', result))
     //   .then(result => result.status == 201 ? navigation.navigate('SignIn') : null)
     // .then(result => redirect(result))
-    .catch(error => console.log('error', error));
+    .catch(error => errorResponse(error));
 
 }

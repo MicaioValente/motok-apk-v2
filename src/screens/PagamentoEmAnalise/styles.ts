@@ -7,6 +7,7 @@ export const Container = styled.View`
     flex: 1;
     background-color: #1B191A;
     align-items: center;
+    margin-top: ${RFValue(40)}px;
     justify-content: center;
 `
 

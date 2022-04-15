@@ -43,10 +43,9 @@ const Home: React.FC = () => {
                     ):(
                         <>
                         <CardSemPlano user={user} />
-                        <CarroselPlanos />
+                        <CarroselPlanos home={false}/>
                         </>
                     )}
-                    
                 </S.Container>
             </S.Scroll>
     </>

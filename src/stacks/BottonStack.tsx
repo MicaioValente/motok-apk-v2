@@ -10,7 +10,7 @@ export default function BottomTabs() {
 
   return (
     <Tab.Navigator
-        initialRouteName={'Perfil'}
+        initialRouteName={'HomeTap'}
         screenOptions={({ route }) => ({
           headerShown: false,
           tabBarStyle: {backgroundColor: '#343438', borderTopWidth: 0,},

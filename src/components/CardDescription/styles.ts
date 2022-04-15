@@ -6,7 +6,7 @@ import Rastreio from '../../assets/rastreio.svg'
 import Seguro from '../../assets/seguro.svg'
 import Imposto from '../../assets/imposto.svg'
 
-export const Container = styled.TouchableOpacity`
+export const Container = styled.View`
     align-items: center;
     margin-bottom: auto;
     margin-top: ${RFValue(60)}px;

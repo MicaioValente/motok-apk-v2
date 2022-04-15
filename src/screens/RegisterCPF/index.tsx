@@ -8,14 +8,18 @@ import RegisterCPFStep4 from './RegisterCPFStep4'
 import { postUserCpf } from './service';
 import { userCPF } from './service'
 import { useNavigation } from '@react-navigation/native';
+import ModalAlert from '../../components/ModalAlert';
+import Loading from '../../components/Loading';
 
 const RegisterCPF: React.FC = () => {
     const navigation = useNavigation()
     const [step, setStep] = useState(1)
     const [userCPF, setUserCPF] = useState({} as userCPF)
+    const [loading, setLoading] = useState(false)
+    const [aviso, setAviso] = useState(false)
     async function postUser() {
         try{
-            await postUserCpf(userCPF, navigation)
+            await postUserCpf(userCPF, navigation, setLoading, setAviso)
         }catch{
     
         }
@@ -40,7 +44,7 @@ const RegisterCPF: React.FC = () => {
                 [nome]: value    
         })
     }
-    console.log(userCPF)
+
     function stepComponete(name: number) {
         switch (name) {
             case 1:
@@ -57,10 +61,14 @@ const RegisterCPF: React.FC = () => {
     }
 
     return (
-        <S.Container>
-            <HeaderRegister setStep={setStep} step={step} />
-            {stepComponete(step)}
-        </S.Container>
+        <>
+            <ModalAlert modal={aviso} setModal={setAviso} text={'houve um erro ao criar o usuário!'}/>
+            <Loading loading={loading} setLoading={setLoading} mensage='Criando Usuário' />
+            <S.Container>
+                <HeaderRegister setStep={setStep} step={step} />
+                {stepComponete(step)}
+            </S.Container>
+        </>
     )
 }
 

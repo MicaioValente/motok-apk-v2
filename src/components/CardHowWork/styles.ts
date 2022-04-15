@@ -16,7 +16,7 @@ export const Container = styled.View`
 export const ContainerItem = styled.View`
     flex-direction: column;
     align-items: center;
-    margin-top: ${RFValue(60)}px;
+    margin-top: ${RFValue(30)}px;
 `
 
 export const Title = styled.Text`

@@ -7,15 +7,19 @@ import RegisterCNPJStep3 from './RegisterCNPJStep3'
 import RegisterCNPJStep4 from './RegisterCNPJStep4'
 import { postUserCNPJ, userCNPJ } from './service';
 import { useNavigation } from '@react-navigation/native';
+import ModalAlert from '../../components/ModalAlert';
+import Loading from '../../components/Loading';
 
  
 const RegisterCNPJ: React.FC = () => {
     const [step, setStep] = useState(1)
     const [userCNPJ, setUserCNPJ] = useState({} as userCNPJ)
     const navigation = useNavigation()
+    const [loading, setLoading] = useState(false)
+    const [aviso, setAviso] = useState(false)
    async function postUser() {
         try{
-            await postUserCNPJ(userCNPJ, navigation)
+            await postUserCNPJ(userCNPJ, navigation, setLoading, setAviso)
         }catch{
     
         }
@@ -44,10 +48,14 @@ const RegisterCNPJ: React.FC = () => {
     }
 
     return (
+    <>
+        <ModalAlert modal={aviso} setModal={setAviso} text={'houve um erro ao criar o usuário!'}/>
+        <Loading loading={loading} setLoading={setLoading} mensage='Criando Usuário' />
         <S.Container>
             <HeaderRegister setStep={setStep} step={step} />
             {stepComponete(step)}
         </S.Container>
+    </>
     )
 }
 

@@ -12,16 +12,9 @@ export type InputRegisterProps = {
 
 export default function InputDataMoment({ border, placeholder, label, setUser, name, mask}: InputRegisterProps) {
     const [isFocused, setIsFocused] = useState(false);
-    const [text, setText] = useState('');
 
 
 
-    function setUserAndSetIsFocused() {
-        const dataArray = text.split('-') 
-        const data = dataArray[1] + '-' + dataArray[0] + '-' + dataArray[2]
-        setUser(name, data )
-        setIsFocused(false)
-    }
     return (
         <S.Wrapper>
             <S.Title>{label}</S.Title>
@@ -32,11 +25,11 @@ export default function InputDataMoment({ border, placeholder, label, setUser, n
                 <S.MaskInput
                     mask={mask}
                     keyboardType="numeric"
-                    onChangeText={(text: string) => setText(text)}
+                    onChangeText={(text: string) => setUser(name, text)}
                     placeholderTextColor="#E4E4E755" 
                     placeholder={placeholder} 
                     style={{color: '#fff'}}
-                    onBlur={() => setUserAndSetIsFocused()}
+                    onBlur={() => setIsFocused(false)}
                     onFocus={() => setIsFocused(true)} 
                 />
     

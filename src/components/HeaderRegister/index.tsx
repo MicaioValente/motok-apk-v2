@@ -5,10 +5,16 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
-export default function HeaderRegister({ step, setStep, register, title }: any) {
+export default function HeaderRegister({ step, setStep, register, title, route}: any) {
     const navigation = useNavigation()
     function goBack() {
         if(step === 1){
+            if(route){
+                console.log(111111, route)
+                navigation.navigate('Home')
+    
+                return
+            }
             navigation.navigate('Register')
         return
         }

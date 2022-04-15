@@ -1,44 +1,46 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import React, { useEffect, useState } from 'react';
 import { deg } from 'react-native-linear-gradient-degree';
+import { Boleto } from '../../screens/ContratarPlano/PagamentoBoletoPlano';
 import * as S from './styles';
 
 type CardBoleto = {
-    status: 'disponivel' | 'pago' | 'atrasado'
+    boleto: Boleto
 }
 
-const CardBoleto = ({status}: CardBoleto) => {
+const CardBoleto = ({boleto}: CardBoleto) => {
     const [ colorStatus, setColorStatus ] = useState('')
 
     useEffect(() => {
-        if(status === 'disponivel'){
+        if(boleto.statusPagamento === 'pending'){
             setColorStatus('rgba(241, 73, 2, 1)')
-        }else if(status === 'pago'){
+        }else if(boleto.statusPagamento === 'pago'){
             setColorStatus('rgba(20, 184, 166, 1)')
-        }else if(status === 'atrasado'){
+        }else if(boleto.statusPagamento === 'atrasado'){
             setColorStatus('rgba(220, 38, 38, 1)')
         }
-    }, [status])
+    }, [boleto])
 
     function colorIconCoin() {
-        if(status === 'disponivel'){
+        if(boleto.statusPagamento === 'pending'){
             return <S.MoedaDisp />
-        }else if(status === 'pago'){
+        }else if(boleto.statusPagamento === 'pago'){
            return <S.MoedaPago />
-        }else if(status === 'atrasado'){
+        }else if(boleto.statusPagamento === 'atrasado'){
             return <S.MoedaNPago />
         }
     }
     function colorIconCalendar() {
-        if(status === 'disponivel'){
+        if(boleto.statusPagamento === 'pending'){
             return <S.Calendario />
-        }else if(status === 'pago'){
+        }else if(boleto.statusPagamento === 'pago'){
            return <S.calendarioPago />
-        }else if(status === 'atrasado'){
+        }else if(boleto.statusPagamento === 'atrasado'){
             return <S.CalendarioNPago />
         }
     }
-    return (<S.Container>
+    return (
+        <S.Container>
             <S.Content>
                 <S.ContainerIcon>
                     <S.Barras />
@@ -70,9 +72,7 @@ const CardBoleto = ({status}: CardBoleto) => {
                             <S.CopiarTex>copiar código de barras</S.CopiarTex><S.Copiar />
                         </LinearGradient>
                     </S.ContainerArrow>
-
                 </S.ContainerBoleto>    
-
             </S.Content>
         </S.Container>)
 }

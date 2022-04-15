@@ -14,14 +14,15 @@ import MoedaPagoSVG from '../../assets/moedaPago.svg'
 export const Container = styled.View`
     height: ${RFValue(390)}px;
     width: ${RFValue(300)}px;
-    margin-top: ${RFValue(20)}px;
+    margin-top: ${RFValue(10)}px;
+    margin-bottom: ${RFValue(10)}px;
     justify-content: flex-start;
     align-items: flex-start;
 
 `;  
 
 export const Content = styled.View`
-    width: ${RFValue(310)}px;
+    width: ${RFValue(300)}px;
     background-color: #343438;
     padding: ${RFValue(20)}px;
     border-radius: ${RFValue(20)}px;
