@@ -5,7 +5,6 @@ import BoletoSVG from '../../assets/boleto.svg'
 import SinoSVG from '../../assets/sino.svg'
 
 export const Container = styled.View`
-    width: ${RFValue(300)}px;
     justify-content: flex-end;
     align-items: flex-end;
 

@@ -3,7 +3,6 @@ import * as S from './styles';
 
 import { deg } from 'react-native-linear-gradient-degree';
 import { User } from '../../screens/Preload';
-import { View } from '../Inputs/InputRua/style';
 
 export type CardProps = {
     user: User
@@ -11,7 +10,6 @@ export type CardProps = {
 }
 
 const CardPerfil = ({user}: CardProps) => {
-    console.log(user)
     return (
         <S.Container>
             <S.Sino />

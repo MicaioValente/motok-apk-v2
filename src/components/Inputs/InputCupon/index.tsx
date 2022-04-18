@@ -29,7 +29,6 @@ export default function InputCupon({step, setStep, setCupon} : any) {
             console.log('error', error)
         })
     }
-    console.log('opopospdo', loading)
     
 
     return (<>

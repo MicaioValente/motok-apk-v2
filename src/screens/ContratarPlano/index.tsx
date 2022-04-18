@@ -52,7 +52,7 @@ export default function ContratarPlano({navigation, route}: Pagamento) {
             case 5:
                 return <PagamentoBoletoCaucao  user={user} formaDePagamento={formaDePagamento} setFormaDePagamento={setFormaDePagamento} plano={plano} setStep={setStep} step={step} />
             case 6:
-                return <PagamentoEmAnalise />
+                return <PagamentoEmAnalise item={plano}/>
                 default:
                 return null
         }

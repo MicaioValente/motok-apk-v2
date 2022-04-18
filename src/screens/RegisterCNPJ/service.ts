@@ -31,7 +31,7 @@ export interface userCNPJ {
 export async function postUserCNPJ(userCNPJ: userCNPJ, navigation: any, setLoading: any, setAviso: any) {
   setLoading(true)
     function response(result: any) {
-        console.log(result)
+      console.log(1111111, result)
         setLoading(false)
 
         if(result.status === 400){
@@ -49,10 +49,9 @@ export async function postUserCNPJ(userCNPJ: userCNPJ, navigation: any, setLoadi
 
 
   let ValidadeCarteira = moment(userCNPJ.ValidadeCarteira, 'DDMMYYYY')
-  let DataAberturaEmpresaCliente = moment(userCNPJ.DataAberturaEmpresaCliente, 'DDMMYYYY')
-  var formdata = new FormData();
+    let DataAberturaEmpresaCliente = moment(userCNPJ.DataAberturaEmpresaCliente, 'DDMMYYYY')
+    var formdata = new FormData();
 
-    // formdata.append("anoNascimento", userCNPJ.anoNascimento);
     formdata.append("aprovacaoId", '0' );
     formdata.append("planoId", '0' );
     formdata.append("bairroEnderecoCliente", userCNPJ.bairroEnderecoCliente );
@@ -63,30 +62,22 @@ export async function postUserCNPJ(userCNPJ: userCNPJ, navigation: any, setLoadi
     formdata.append("DataAberturaEmpresaCliente", DataAberturaEmpresaCliente.format('MM-DD-YYYY') );
     formdata.append("InscricaoEstadualCliente", userCNPJ.InscricaoEstadualCliente );
     formdata.append("CnpjCliente", userCNPJ.cnpjCliente );
-    // formdata.append("diaNascimento", userCNPJ.diaNascimento );
     formdata.append("emailCliente", userCNPJ.emailCliente );
     formdata.append("estatoClienteId", userCNPJ.estatoClienteId );
-    // formdata.append("mesNascimento", userCNPJ.mesNascimento );
     formdata.append("nomeCliente", userCNPJ.nomeCliente );
-    // formdata.append("nomeMae", userCNPJ.nomeMae );
-    // formdata.append("nomePai", userCNPJ.nomePai );
     formdata.append("numEnderecoCliente", userCNPJ.numEnderecoCliente );
     formdata.append("ruaEnderecoCliente", userCNPJ.ruaEnderecoCliente );
     formdata.append("senhaCliente", userCNPJ.senhaCliente );
     formdata.append("telefoneCliente", userCNPJ.telefoneCliente );
     formdata.append("ValidadeCarteira", ValidadeCarteira.format('MM-DD-YYYY') );
-    formdata.append("image", userCNPJ.docCarteiraMotorista);
-    // formdata.append("DocCarteiraMotorista", userCNPJ.docCarteiraMotorista);
-    // formdata.append("DocComprovanteResidencia", userCNPJ.docComprovanteResidencia);
-    formdata.append("image", userCNPJ.docComprovanteResidencia);
-    // console.log('formData',  formdata)
+    formdata.append("CarteiraMotorista", userCNPJ.docCarteiraMotorista);
+    formdata.append("ComprovanteResidencia", userCNPJ.docComprovanteResidencia);
     formdata.append("PlanoId", '0');
 
     var requestOptions = {
         method: 'POST',
         body: formdata,
         };
-        console.log('1111',  11111)
 
         fetch("https://motok-api.herokuapp.com/api/clientes/pj", requestOptions)
         .then(response => response.json())

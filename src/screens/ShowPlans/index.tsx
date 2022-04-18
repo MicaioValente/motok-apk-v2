@@ -24,10 +24,8 @@ const ShowPlans = ({route}: any) => {
 
         // await api.get(`planos/listar`,config)
         //     .then(async function (response) {
-        //         console.log(response.data)
         //     })
         //     .catch(function (error) {
-        //         console.log('setToken error', error)
         //     });
         // }
         // getNotificacoes()
@@ -37,7 +35,7 @@ const ShowPlans = ({route}: any) => {
                 <ContainerLoginCap route={route} navigation={navigation}/>
                 <ContainerLoginBike route={route} navigation={navigation}/>
                 <S.Text>planos disponíveis</S.Text>
-                <CarroselPlanos route={route} navigation={navigation}/>
+                <CarroselPlanos home={false} route={route} navigation={navigation}/>
             </S.Container>
         )
 

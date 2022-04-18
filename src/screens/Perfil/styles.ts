@@ -5,7 +5,7 @@ import styled from "styled-components/native";
 export const Container = styled.View`
     flex: 1;
     align-items: center;
-    margin-top: ${RFValue(80)}px;
+    margin-top: ${RFValue(50)}px;
 `
 
 export const Scroll = styled.ScrollView`

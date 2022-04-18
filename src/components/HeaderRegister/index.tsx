@@ -10,7 +10,6 @@ export default function HeaderRegister({ step, setStep, register, title, route}:
     function goBack() {
         if(step === 1){
             if(route){
-                console.log(111111, route)
                 navigation.navigate('Home')
     
                 return

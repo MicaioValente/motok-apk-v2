@@ -40,7 +40,6 @@ export default function RegisterCPFStep4({ setStep, step, setUser, postUser }: a
             const data = await camReft.current.takePictureAsync()
             const dataSplit = data.uri.split('/')
             setPhoto(data.uri)
-            console.log('tiro foto', data)
             setUser('docCarteiraMotorista',{
                 uri: data.uri,
                 type: "image/jpeg",

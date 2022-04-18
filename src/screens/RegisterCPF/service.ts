@@ -28,7 +28,7 @@ export interface userCPF {
 export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading: any, setAviso: any) {
     setLoading(true)
     function response(result: any) {
-        console.log(result)
+        console.log(11111, result)
         setLoading(false)
 
         if(result.status === 400){
@@ -46,7 +46,7 @@ export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading:
     let ValidadeCarteira = moment(userCPF.ValidadeCarteira, 'DDMMYYYY')
     var formdata = new FormData();
     formdata.append("anoNascimento", userCPF.anoNascimento);
-    formdata.append("planoId", '0' );
+    formdata.append("planoId", 0 );
     formdata.append("bairroEnderecoCliente", userCPF.bairroEnderecoCliente );
     formdata.append("cepEnderecoCliente", userCPF.cepEnderecoCliente );
     formdata.append("cidadeClienteId", userCPF.cidadeClienteId );
@@ -65,10 +65,8 @@ export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading:
     formdata.append("senhaCliente", userCPF.senhaCliente );
     formdata.append("telefoneCliente", userCPF.telefoneCliente );
     formdata.append("ValidadeCarteira", ValidadeCarteira.format('MM-DD-YYYY') );
-    formdata.append("image", userCPF.docCarteiraMotorista);
-    formdata.append("image", userCPF.docComprovanteResidencia);
-    formdata.append("PlanoId", '0');
-    console.log('formData',  formdata)
+    formdata.append("CarteiraMotorista", userCPF.docCarteiraMotorista);
+    formdata.append("ComprovanteResidencia", userCPF.docComprovanteResidencia);
 
     var requestOptions = {
         method: 'POST',
@@ -84,11 +82,9 @@ export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading:
     //   })
     //     .then(function (response) {
     //       //handle success
-    //       console.log(222 , response);
     //     })
     //     .catch(function (response) {
     //       //handle error
-    //       console.log(111, response.response);
     //     });
     
     

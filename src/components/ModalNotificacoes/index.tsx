@@ -14,7 +14,7 @@ export default function ModalComponent({ idCliente, modalVisible, setModalVisibl
                         setNotificacoes(response.data)
                     })
                     .catch(function (error) {
-                        console.log('setToken error', error)
+                        console.log('setToken error3', error)
                     });
                 }
                 getNotificacoes()
@@ -22,10 +22,10 @@ export default function ModalComponent({ idCliente, modalVisible, setModalVisibl
         }, [])
 
         let dates = [
-            {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
-            {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
-            {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
-            {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
+            // {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
+            // {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
+            // {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
+            // {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
         ]
     return (
         <Modal
@@ -43,7 +43,7 @@ export default function ModalComponent({ idCliente, modalVisible, setModalVisibl
                             <S.CopiarTex>notificações</S.CopiarTex><S.Copiar />
                         </S.ContentArrow>
                     </S.ContainerArrow>
-                    <S.TitleDates>Janeiro 2022</S.TitleDates>
+                    <S.TitleDates>Abriu 2022</S.TitleDates>
                     {dates.map(item => 
                             <>
                                 <S.ContainerDate>

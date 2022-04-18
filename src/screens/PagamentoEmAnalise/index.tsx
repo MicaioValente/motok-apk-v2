@@ -4,11 +4,19 @@ import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 import { deg } from 'react-native-linear-gradient-degree';
 import { RFValue } from 'react-native-responsive-fontsize';
+import AsyncStorage from '@react-native-async-storage/async-storage';
  
 //  voce receberá uma notificação no aplicativo.
 
-export default function PagamentoEmAnalise() {
+export default function PagamentoEmAnalise(item: any) {
     const navigation = useNavigation()
+    async function setPagamentoAndRedirect() {
+        await AsyncStorage.setItem('comprado', JSON.stringify(item))
+            navigation.reset({ routes: [{ name: 'Home' }] })
+        
+    }
+
+
     return (
         <S.Container>
             <S.Icon />
@@ -25,7 +33,7 @@ export default function PagamentoEmAnalise() {
 
 
             </S.ContainerSubTiitle>
-            <S.Button onPress={() => navigation.navigate('Home')}>
+            <S.Button onPress={async() => await setPagamentoAndRedirect()}>
                     <LinearGradient
                         colors={["#FE1D16", "#FD3C14", "#FA7311"]}
                         locations={[0.06, 0.26, 0.92]}  {...deg(68)}

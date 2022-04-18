@@ -55,13 +55,13 @@ export default function CarroselPlanos({navigation, route, home}: any) {
   const _renderItem = ({item, index}: CarouselType) => {
     return (
       <>
-        <S.ContainerCard key={index}>
-            <S.Card onPress={() => !home ?  navigate.navigate('ContratarPlano', {planoSelecionado: item}) : null}>
+        <S.ContainerCard key={index} >
+            <S.Card onPress={() => home ?  navigate.navigate('ContratarPlano', {planoSelecionado: item}) : navigate.navigate('SignIn')}>
                 <S.TitleCard >{item.nomePlano}</S.TitleCard>
                 <S.ContainerValue>
                     <S.TextContentCardValueLeft>R$</S.TextContentCardValueLeft>
-                    <S.ContentCardValue>{item.precoPlano.split(',')[0]}</S.ContentCardValue>
-                    <S.TextContentCardValueRight>/DIA</S.TextContentCardValueRight>
+                    <S.ContentCardValue>{item.precoPlano}</S.ContentCardValue>
+                    <S.TextContentCardValueRight>/Dia</S.TextContentCardValueRight>
                 </S.ContainerValue>
                 <S.TitleCobranca>{'Cobrança ' + item.pagamento}</S.TitleCobranca>
                 <S.ContainerContentCobranca>
@@ -73,14 +73,17 @@ export default function CarroselPlanos({navigation, route, home}: any) {
                     <S.ValueCobranca>{`R$ ${item.valorCaucao}`}</S.ValueCobranca>
                 </S.ContainerContentCobranca>
             </S.Card>
+            <S.ContainerText>
+
               <S.TextoDetalhes>Detalhes</S.TextoDetalhes>
                   {Detalhes.map((item, index) => (
-                      
-                  <S.ContainerTextDot>
+                    
+                    <S.ContainerTextDot>
                       <S.TextDot />
                       <S.SubTexteDetalhes key={index}> {item}</S.SubTexteDetalhes>
                   </S.ContainerTextDot>
                   ))}
+            </S.ContainerText>
         </S.ContainerCard>
       </>
     )

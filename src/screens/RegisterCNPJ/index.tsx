@@ -30,7 +30,6 @@ const RegisterCNPJ: React.FC = () => {
                 [nome]: value
         })
     }
-    console.log('req', userCNPJ)
 
     function stepComponete(name: number) {
         switch (name) {

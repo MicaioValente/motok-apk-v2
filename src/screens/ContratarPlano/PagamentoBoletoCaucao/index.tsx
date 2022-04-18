@@ -6,13 +6,14 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import Loading from '../../../components/Loading';
 import ModalAlert from '../../../components/ModalAlert';
 import api from '../../../service/api';
-import { Boleto } from '../PagamentoBoletoPlano';
 import * as S from './styles';
 import * as Linking from 'expo-linking';
 import * as Clipboard from 'expo-clipboard';
+import { Boleto } from '../PagamentoBoletoPlano';
  
 
 const PagamentoBoletoCaucao = ({ step, setStep, plano, formaDePagamento, setFormaDePagamento, user}: any) => {
+    
     const [loading, setLoading] = useState(false);
     const [modal, setModal] = useState(false)
     const [boleto, setBoleto] = useState<Boleto>({} as Boleto)
@@ -20,17 +21,16 @@ const PagamentoBoletoCaucao = ({ step, setStep, plano, formaDePagamento, setForm
 
     async function getBoletoUser() {
         setLoading(true)
-        console.log(formaDePagamento)
         let dataRequest = {
             formaPagamento: 0,
             clientId: user.idCliente,
             planoId: plano.idPlanos,
-            temCupom: false
+            temCupom: false,
+            tipoCobranca: 1,
+            quantidadeParcelas: formaDePagamento.caucao.parcelas
         }
-        console.log('dataRequest', dataRequest)
-
-        api.post('boleto/caucao', dataRequest).then(function (response){
-            console.log(response.data)
+        api.post('boleto/pagamentoContratacao', dataRequest).then(function (response){
+            console.log(response)
             setLoading(false)
             setBoleto(response.data)
             // Linking.openURL(response.data.boletoUrl)
@@ -38,18 +38,26 @@ const PagamentoBoletoCaucao = ({ step, setStep, plano, formaDePagamento, setForm
         }).catch(function (response){
             setLoading(false)
             setModal(true)
-            console.log('errorrrr', response)
         })
     }
 
     function nextStep() {
-        console.log(formaDePagamento.plano.forma === 'boleto' && boleto.barCode)
         if(formaDePagamento.plano.forma === 'boleto' && boleto.barCode){
             setStep(step + 1)
         }else{
             setModalAviso(true)
         }
     }
+    function planoCaucao(){
+        if(formaDePagamento.caucao.parcelas === 1 ){
+            return 'R$ 600,00'
+        }else if(formaDePagamento.caucao.parcelas === 2){
+            return '2x R$ 300,00'
+        }else{
+            return'3x R$ 200,00'
+        }
+    }
+
 
     return (<>
     {plano && formaDePagamento.caucao.forma === 'boleto' && <>
@@ -68,7 +76,7 @@ const PagamentoBoletoCaucao = ({ step, setStep, plano, formaDePagamento, setForm
                     <S.ContainerCaucao>
                         <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
                             <S.TextCaucao>Caução</S.TextCaucao>
-                            <S.ValueCaucao>{`${plano.valorCaucao}`}</S.ValueCaucao>
+                            <S.ValueCaucao>{planoCaucao()}</S.ValueCaucao>
                         </View>
                     </S.ContainerCaucao>
                 <S.Button style={{marginTop: 20}}  onPress={() => getBoletoUser()}>
@@ -85,9 +93,9 @@ const PagamentoBoletoCaucao = ({ step, setStep, plano, formaDePagamento, setForm
                         </LinearGradient>
                 </S.Button>
 
-                {boleto.boletoUrl ? 
+                {boleto.urlBoleto ? 
                         <>
-                            <S.ContainerCaucao  onPress={() => Linking.openURL(boleto.boletoUrl)}>
+                            <S.ContainerCaucao  onPress={() => Linking.openURL(boleto.urlBoleto)}>
                                 <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <S.ValueCaucao>{`Baixar PDF`}</S.ValueCaucao>
                                     <S.ContainerIconNumber> 

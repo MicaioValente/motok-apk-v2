@@ -16,21 +16,26 @@ export const ContentCarrousel = styled.View`
     flex: 1; 
     flex-direction: row;
     justify-content: center;
+    align-items: center;
 `
 export const ContainerCard = styled.View`
     width: 100%;
     height: ${RFPercentage(100)};
+    align-items: center;
 
 `
 
 export const Card = styled.TouchableOpacity`
     background-color: #343438;
     border-radius: ${RFValue(20)}px;
-    padding: ${RFValue(20)}px;
-    height: ${RFValue(270)}px;
+    padding: ${RFValue(10)}px ${RFValue(20)}px; 
     width: ${RFValue(210)}px;
-    margin-left: ${RFValue(40)}px;
     align-items: center;
+`
+export const ContainerText = styled.View`
+
+
+
 `
 
 export const TitleCard = styled.Text`
@@ -42,25 +47,31 @@ export const TitleCard = styled.Text`
 
 export const ContainerValue = styled.View`
     flex-direction: row;
-    height: ${RFValue(100)}px;
-    width:${RFValue(125)}px;
+    height: ${RFValue(80)}px;
 `
 
 export const ContentCardValue = styled.Text`
-    font-size: ${RFValue(112)}px;
+    font-size: ${RFValue(100)}px;
     font-family: 'Teko_400Regular';
     text-transform: uppercase;
     margin-left: ${RFValue(5)}px;
     margin-top: ${RFValue(-20)}px;
     color: #f14902;
 `
-
+export const ContentCardCentavos = styled.Text`
+    font-size: ${RFValue(82)}px;
+    font-family: 'Teko_400Regular';
+    text-transform: uppercase;
+    margin-left: ${RFValue(5)}px;
+    margin-top: ${RFValue(-20)}px;
+    color: #f14902;
+`
 export const TextContentCardValueLeft = styled.Text`
     margin-top: ${RFValue(40)}px;
     color: #fff;
 `
 export const TextContentCardValueRight = styled.Text`
-    margin-top: ${RFValue(65)}px;
+    margin-top: ${RFValue(50)}px;
     color: #fff;
 `
 
@@ -96,8 +107,7 @@ export const TextoDetalhes = styled.Text`
     font-family: 'Teko_400Regular';
     font-size: ${RFValue(20)}px;
     margin-top: ${RFValue(10)}px;
-    margin-right: ${RFValue(65)}px;
-    margin-left: auto;
+    text-align: center;
 `
 
 export const SubTexteDetalhes = styled.Text`

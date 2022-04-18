@@ -17,7 +17,7 @@ export type Boleto = {
     dataEmissao: string 
     dataVencimento: string 
     statusPagamento: string 
-    boletoUrl: string 
+    urlBoleto: string 
     valor: number 
     barCode: string 
     imagemBase64QrCode: string 
@@ -33,16 +33,16 @@ const PagamentoBoleto = ({ step, setStep, plano, formaDePagamento, cupon, user}:
 
     async function getBoletoUser() {
         setLoading(true)
-        console.log(formaDePagamento)
         let dataRequest = {
             formaPagamento: 0,
             clientId: user.idCliente,
             planoId: plano.idPlanos,
-            temCupom: cupon
+            temCupom: cupon,
+            tipoCobranca: 0,
+            quantidadeParcelas: 1
         }
 
-        api.post('boleto', dataRequest).then(function (response){
-            console.log(response.data)
+        api.post('boleto/pagamentoContratacao', dataRequest).then(function (response){
             setLoading(false)
             setBoleto(response.data)
             // Linking.openURL(response.data.boletoUrl)
@@ -50,7 +50,6 @@ const PagamentoBoleto = ({ step, setStep, plano, formaDePagamento, cupon, user}:
         }).catch(function (response){
             setLoading(false)
             setModal(true)
-            console.log('errorrrr', response)
         })
     }
 
@@ -72,7 +71,6 @@ const PagamentoBoleto = ({ step, setStep, plano, formaDePagamento, cupon, user}:
     }
 
     function nextStep() {
-        console.log(formaDePagamento.plano.forma === 'boleto' && boleto.barCode)
         if(formaDePagamento.plano.forma === 'boleto' && boleto.barCode){
             setStep(step + 1)
         }else{
@@ -115,9 +113,9 @@ const PagamentoBoleto = ({ step, setStep, plano, formaDePagamento, cupon, user}:
                         </LinearGradient>
                     </S.Button>
 
-                    {boleto.boletoUrl ? 
+                    {boleto.urlBoleto ? 
                         <>
-                            <S.ContainerCaucao  onPress={() => Linking.openURL(boleto.boletoUrl)}>
+                            <S.ContainerCaucao  onPress={() => Linking.openURL(boleto.urlBoleto)}>
                                 <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
                                     <S.ValueCaucao>{`Baixar PDF`}</S.ValueCaucao>
                                     <S.ContainerIconNumber> 

@@ -36,7 +36,7 @@ export default function MainStack() {
 
     return (
         <Stack.Navigator
-            initialRouteName="Presentation"
+            initialRouteName="Preload"
             screenOptions={{
                 headerShown: false,
             }}

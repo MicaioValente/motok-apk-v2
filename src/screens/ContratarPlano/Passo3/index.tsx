@@ -45,7 +45,6 @@ const Passo3 = ({ step, setStep, plano, formaDePagamento, cupon}: any) => {
             setTres(true)
         }
     }
-    console.log(cupon)
 
     return (<>
     {plano && <>
@@ -84,7 +83,6 @@ const Passo3 = ({ step, setStep, plano, formaDePagamento, cupon}: any) => {
                     </View>
                     <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
                         <S.TextCaucao>Condição</S.TextCaucao>
-                        {console.log('asdasd',formaDePagamento.caucao.parcelas)}
                         <S.ValueCaucao>{`${formaDePagamento.caucao.parcelas == 1 ? 'À VISTA' : formaDePagamento.caucao.parcelas == 2 ? '2x R$ 300,00' : '3x R$ 200,00'}`}</S.ValueCaucao>
                     </View>
                 </S.ContainerCaucao>

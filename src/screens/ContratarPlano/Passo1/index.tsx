@@ -148,7 +148,7 @@ const Passo1 = ({ step, setStep, plano, formaDePagamento, setFormaDePagamento}: 
                     </S.Ball>
                 </S.ContainerPagamento> */}
 
-            <S.TextCobranca style={{marginTop: RFValue(20), marginRight: 'auto', marginBottom: RFValue(20), marginLeft: RFValue(20)}}>CONDIÇÕES DE PAGAMENTO PAGAMENTO</S.TextCobranca>
+            <S.TextCobranca style={{marginTop: RFValue(20), marginRight: 'auto', marginBottom: RFValue(20), marginLeft: RFValue(20)}}>CONDIÇÕES DE PAGAMENTO</S.TextCobranca>
             <S.ContainerCaucao onPress={() => setPagamento('uma')} selecionado={avista}>
                 <S.TextCaucao>À Vista </S.TextCaucao>
                 <S.ValueCaucao>R$ 600,00</S.ValueCaucao>

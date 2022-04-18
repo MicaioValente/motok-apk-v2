@@ -24,16 +24,14 @@ const SignIn: React.FC = () => {
 
     }
     async function loginUser() {
-        console.log(userLogin)
         await api.post('login', userLogin)
         .then(async function (response) {
             await AsyncStorage.setItem('user', JSON.stringify(response.data))
-            navigation.reset({ routes: [{ name: 'Home' }] })
+            navigation.navigate('Home', { user: response.data})
 
         })
         .catch(function (error) {
             setModal(!modal)
-            console.log('setToken error', error)
         });
         
         

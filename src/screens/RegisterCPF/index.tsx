@@ -26,12 +26,10 @@ const RegisterCPF: React.FC = () => {
     }
     function setUser(nome: string, value: any){
         if(nome === 'docCarteiraMotorista'){
-            console.log('seto foto')
             let obj = {
                 docCarteiraMotorista: value
             }
             let Data = Object.assign(userCPF, obj)
-            console.log('seto foto', Data)
 
             setUserCPF({
                 ...userCPF,

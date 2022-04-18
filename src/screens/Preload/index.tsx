@@ -24,7 +24,7 @@ const Preload = () => {
         const checkToken = async () => {
             const token = await AsyncStorage.getItem('user');
             if(token && JSON.parse(token).token){
-                navigation.navigate('Home');
+                navigation.navigate('SignIn');
             }else{
                 navigation.navigate('Presentation');
             }

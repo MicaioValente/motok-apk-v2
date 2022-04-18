@@ -38,7 +38,7 @@ export default function Select({ border, setUser}: InputRegisterProps) {
             setEstados(response.data)
         })
         .catch(function (error) {
-            console.log('setToken error', error)
+            console.log('setToken error1', error)
         });
     }, [])
     
@@ -48,7 +48,7 @@ export default function Select({ border, setUser}: InputRegisterProps) {
                 setCidades(response.data)
             })
             .catch(function (error) {
-                console.log('setToken error', error)
+                console.log('setToken error2', error)
             });
         }, [idEstado])
 
