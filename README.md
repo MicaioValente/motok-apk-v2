@@ -1,3 +1,23 @@
+# Rodando o projeto
+
+Quando iniciar o desenvolvimento será necessário instalar as dependências do node, para isso estamos utilizando o gerenciador de pacotes `Yarn`, o comando para instalação das dependências é simples.
+
+```sh
+yarn
+```
+
+Para construir a aplicação para desenvolvimento em Android, deveremos utilizar o comando da `cli` do `react-native`.
+
+```sh
+yarn react-native run-android
+```
+
+Para construir uma aplicação de release, utilizamos o `eas`, plataforma de build do Expo, que constrói o App Bundle a partir do código em uma `Continuous Integration` do Expo.
+
+```sh
+eas build --platform android
+```
+
 # Configurando o MercadoPago
 
 Para configurar o SDK do mercado pago, é necessário acessar o arquivo `/src/service/payment/payment.json`, e adicionar o `publicKey` e o `accessToken` de produção antes de lançar uma nova versão.
