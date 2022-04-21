@@ -1053,6 +1053,11 @@
     "@babel/helper-validator-identifier" "^7.16.7"
     to-fast-properties "^2.0.0"
 
+"@blackbox-vision/react-native-mercadopago-px@^0.7.2":
+  version "0.7.2"
+  resolved "https://registry.yarnpkg.com/@blackbox-vision/react-native-mercadopago-px/-/react-native-mercadopago-px-0.7.2.tgz#ebfdf79106bebc1ee4a97129322149ae3ec3c550"
+  integrity sha512-NOULPf0b3c8yws4YI8bXmp1ATkmPErk8sK4s+uMhxemAzNfq7If1y465CE2t3Ng6LKmpJZMw2K8A430piHaksQ==
+
 "@cnakazawa/watch@^1.0.3":
   version "1.0.4"
   resolved "https://registry.npmjs.org/@cnakazawa/watch/-/watch-1.0.4.tgz"

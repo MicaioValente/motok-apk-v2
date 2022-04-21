@@ -1,0 +1,15 @@
+{
+    "accessToken": "TEST-6563206312560475-031414-2ea79d264f611f7823e060d89f08d462-1066900489",
+    "publicKey": "TEST-a1c24222-2fe2-4604-948c-5efbdf2422c7",
+    "excluded_payment_types": [
+        {
+            "id": "ticket"
+        },
+        {
+            "id": "atm"
+        },
+        {
+            "id": "debit_card"
+        }
+    ]
+}
