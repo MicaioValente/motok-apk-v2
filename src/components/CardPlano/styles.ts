@@ -11,7 +11,8 @@ import CopiarSVG from '../../assets/copiar.svg'
 export const Container = styled.View`
     height: ${RFValue(265)}px;
     width: ${RFValue(300)}px;
-    margin-top: ${RFValue(20)}px;
+    margin-top: ${RFValue(10)}px;
+    /* margin-bottom: ${RFValue(25)}px; */
     justify-content: flex-start;
     align-items: flex-start;
 

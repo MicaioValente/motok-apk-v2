@@ -3,11 +3,15 @@ import * as S from './styles';
 
 import { deg } from 'react-native-linear-gradient-degree';
 
-const CardPagamento = ({modalVisible, setModalVisible, user}: any) => {
+const CardPagamento = ({modalVisible, setModalVisible, user, idPrint}: any) => {
+
+
+
     return (
         <S.Container>
             <S.Sino onPress={() => setModalVisible(!modalVisible)} />
             <S.Content>
+            <S.ContainerSpacer/>
                 <S.Gradient
                     colors={["#FE1D16", "#FD3C14", "#FA7311"]}
                     locations={[0.06, 0.26, 0.92]}  {...deg(68)}

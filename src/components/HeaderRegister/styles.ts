@@ -4,6 +4,7 @@ import { RFValue, RFPercentage } from "react-native-responsive-fontsize";
 import { Ionicons } from '@expo/vector-icons';
 
 export const Container = styled.View`
+margin-top: 25px;
 `
 
 export const Content = styled.View`

@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect } from "react"
 import { createStackNavigator } from '@react-navigation/stack';
 import AppLoading from 'expo-app-loading'
 import { 
@@ -22,6 +22,7 @@ import ShowPlans from "../screens/ShowPlans";
 import BottomTabs from './BottonStack'
 import NovaManuntencao from '../screens/NovaManuntencao'
 import ContratarPlano from '../screens/ContratarPlano'
+import Reupload from "../screens/Reupload";
 
 const Stack = createStackNavigator();
 
@@ -30,13 +31,16 @@ export default function MainStack() {
         Teko_300Light, Teko_400Regular, Teko_500Medium, Teko_600SemiBold, Teko_700Bold
       });
  
-      if (!fontsLoaded) {
-        return <AppLoading />;
-      }
+    if (!fontsLoaded) {
+    return <AppLoading />;
+    }
+    
+   
+
 
     return (
         <Stack.Navigator
-            initialRouteName="ShowPlans"
+            initialRouteName="Preload"
             screenOptions={{
                 headerShown: false,
             }}
@@ -66,6 +70,8 @@ export default function MainStack() {
             <Stack.Screen name="NovaManuntencao" component={NovaManuntencao} />
 
             <Stack.Screen name="Home" component={BottomTabs} /> 
+
+            <Stack.Screen name="Reupload" component={Reupload} /> 
 
         </Stack.Navigator>
     );

@@ -7,6 +7,7 @@ import { useNavigation } from '@react-navigation/native';
 
 export default function HeaderRegister({ step, setStep, register, title, route}: any) {
     const navigation = useNavigation()
+
     function goBack() {
         if(step === 1){
             if(route){

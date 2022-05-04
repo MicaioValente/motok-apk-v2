@@ -5,22 +5,41 @@ import { deg } from 'react-native-linear-gradient-degree';
 import InputRegister from '../../../components/Inputs/InputRegister'
 import InputData from '../../../components/Inputs/InputData'
 import {LinearGradient} from 'expo-linear-gradient';
+import { ToastAndroid } from 'react-native';
+import { userCPF } from '../service';
 
 export type StepProps = {
     setStep: Function
     step: number
     setUser: Function
     register?: boolean
+    userCPF: userCPF
     title?: string
 }
 
-export default function RegisterCPFStep1({ step, setStep, setUser }: StepProps) {
+export default function RegisterCPFStep1({step, setStep, setUser, userCPF }: StepProps) {
     const [segundaParte, setSegundaParte] = useState(false)
 
     function situacao() {
         if (segundaParte) {
-            setStep(2)
+            if(
+                userCPF.cpfCliente 
+                && userCPF.nomeCliente 
+                && userCPF.emailCliente 
+                && userCPF.senhaCliente
+                && userCPF.nomeMae
+                && userCPF.nomePai
+                && userCPF.diaNascimento
+                && userCPF.mesNascimento
+                && userCPF.anoNascimento
+                ){
+                    setStep(2)
+                    return
+                }else{
+                    ToastAndroid.show('Prencha todos os Campos', ToastAndroid.LONG);
+                }
             return
+
         }
         setSegundaParte(true)
     }

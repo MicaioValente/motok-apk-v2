@@ -14,7 +14,7 @@ export default function ModalComponent({ idCliente, modalVisible, setModalVisibl
                         setNotificacoes(response.data)
                     })
                     .catch(function (error) {
-                        console.log('setToken error3', error)
+                        console.log('notificacoes ', error)
                     });
                 }
                 getNotificacoes()
@@ -43,7 +43,7 @@ export default function ModalComponent({ idCliente, modalVisible, setModalVisibl
                             <S.CopiarTex>notificações</S.CopiarTex><S.Copiar />
                         </S.ContentArrow>
                     </S.ContainerArrow>
-                    <S.TitleDates>Abriu 2022</S.TitleDates>
+                    <S.TitleDates>Maio 2022</S.TitleDates>
                     {dates.map(item => 
                             <>
                                 <S.ContainerDate>

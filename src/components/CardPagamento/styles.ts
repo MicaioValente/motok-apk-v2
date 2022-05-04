@@ -45,6 +45,13 @@ export const ContainerIcon = styled.View`
     justify-content: center;
 `;
 
+export const ContainerSpacer = styled.View`
+    height: ${RFValue(55)}px;
+    background-color: #fff;
+
+`
+
+
 export const Boleto = styled(BoletoSVG)``
 
 export const Sino = styled(SinoSVG)`

@@ -1,0 +1,29 @@
+export type UserGetById = {
+    idCliente: number
+    nomeCliente: string
+    cpfCliente: string
+    cnpjCliente: string 
+    inscricaoEstadualCliente: string
+    dataAberturaEmpresaCliente: string
+    emailCliente: string
+    diaNascimento: string
+    mesNascimento: string
+    anoNascimento: string
+    nomeMae: string
+    nomePai: string
+    telefoneCliente: string
+    codigoCliente: string
+    ruaEnderecoCliente: string
+    numEnderecoCliente: string
+    cepEnderecoCliente: string
+    bairroEnderecoCliente: string
+    complementoEnderecoCliente: string
+    docCarteiraMotorista: string
+    docComprovanteResidencia: string
+    ativo: string
+    arquivoBase64DocCarteira: string
+    arquivoBase64DocResidencia: string
+    dscMotivoReprovacao: string
+    aprovacaoId: number
+    planoId: number
+}

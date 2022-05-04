@@ -13,27 +13,34 @@ import CardSemPlano from '../../components/CardSemPlano';
 import CardRetireSuaMotok from '../../components/CardRetireSuaMotok';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import api from '../../service/api';
+import { UserGetById } from '../../components/CardPlano/types';
 
 
 const Home: React.FC = () => {
     const [modalNotificacoes, setModalVisible] = useState(false)
-    const [ user, setUser] = useState<User>({} as User)
+    const [ user, setUser] = useState<UserGetById>({} as UserGetById)
     const [ planoComprado, setPlanoComprado] = useState<any>()
-    console.log(user)
+
+
+    console.log('user', user)
+    console.log('planoComprado', planoComprado)
     useEffect(() => {
         const checkToken = async () => {
             const token = await AsyncStorage.getItem('user');
-            const userId = JSON.parse(token) 
-            async function getUserById(){
-                console.log(555, userId)
-                api.get(`clientes/${userId.idCliente}`).then(function (response ){
+            const {idCliente} = JSON.parse(token) 
+            const user = JSON.parse(token) 
+    console.log('111111111', user)
+    async function getUserById(){
+                // console.log(555, userId)
+                api.get(`clientes/${idCliente}`).then(function (response ){
+                    // api.get(`clientes/${userId.idCliente}`).then(function (response ){
                     delete response.data.arquivoBase64DocCarteira
                     delete response.data.arquivoBase64DocResidencia
                     setUser(response.data)
                     
                 }).catch(function (error){
-                    console.log(333, error)
                 })
+               
             }
             getUserById()
         }
@@ -50,35 +57,62 @@ const Home: React.FC = () => {
         }
         getPlano()
     }, [])
+
+    function userReprovado(aprovacaoId: number){
+        if(aprovacaoId === 2){
+            return true
+        }
+    }
+    function userEmAnalise(aprovacaoId: number){
+
+        if(aprovacaoId === 3){
+            return true
+        }
+    }
+    function userAprovado(aprovacaoId: number){
+
+        if(aprovacaoId === 1){
+            return true
+        }
+    }
+
+    function userTemMotoCadastrada(){
+        // if(user.)
+        return false
+    }
     return (<>
         <ModalNotificacoes modalVisible={modalNotificacoes} setModalVisible={setModalVisible} idCliente={10} ></ModalNotificacoes>
             <S.Scroll>
                 <S.Container>
                     <CardPagamento user={user} modalVisible={modalNotificacoes} setModalVisible={setModalVisible}/>
-                    {user.planoId ? 
-                        (
-                            <>
-                                <CardBoleto status="disponivel"/>
-                                <CardPlano />
-                                <CardStatusCadastro user={user}/>
-                                <ProximaPage rota='home' title='Alterar Plano' BGcolor='rgba(72, 55, 46, 0.6)' color='rgba(241, 73, 2, 1)'/>
-                                <ProximaPage  rota='home' title='Cancelar Plano' BGcolor='rgba(72, 46, 46, 0.6)' color='rgba(220, 38, 38, 1)'/>
-                            </>
-                        ): user.aprovacaoId === 3 ?
-                            <CardStatusCadastro user={user}/>
-                        :
-                        <>
-                        {planoComprado?.item.idPlanos ?
-                            <CardRetireSuaMotok user={user} />
-                        : 
-                        !planoComprado?.idPlanos ?
-                        <>
-                            <CardSemPlano user={user} />
-                            <CarroselPlanos home={true}/>
-                        </>
+                    {userTemMotoCadastrada() ? 
+                        null
+                        : userReprovado(user.aprovacaoId) ? 
+                            <CardStatusCadastro user={user} reprovado={true}/>
+                            :
+                                userEmAnalise(user.aprovacaoId) ?
+                                    <CardStatusCadastro analise={true}  user={user}/>
+                                    : userAprovado(user.aprovacaoId) ?
+                                        user.planoId ? 
+                                            (
+                                                <>
+                                                    <CardBoleto idUser={user.idCliente}/>
+                                                    <CardPlano  user={user} />
+                                                    <CardStatusCadastro user={user}/>
+                                                    <ProximaPage rota='home' title='Alterar Plano' BGcolor='rgba(72, 55, 46, 0.6)' color='rgba(241, 73, 2, 1)'/>
+                                                    <ProximaPage  rota='home' title='Cancelar Plano' BGcolor='rgba(72, 46, 46, 0.6)' color='rgba(220, 38, 38, 1)'/>
+                                                </>
+                                            )
+                                        :planoComprado?.idPlanos ?
+                                            <CardRetireSuaMotok user={user} />
+                                        :!planoComprado?.idPlanos ? 
+                                            <>
+                                                <CardSemPlano user={user} />
+                                                <CarroselPlanos home={true}/>
+                                            </>
+                                        : null 
                         : null
-                        }
-                        </>
+                                        
                     }
                 </S.Container>
             </S.Scroll>

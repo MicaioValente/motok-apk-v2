@@ -6,17 +6,22 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "updates": {
+      "enabled": false,
       "fallbackToCacheTimeout": 0
     },
     "assetBundlePatterns": [
       "**/*"
     ],
+    "notification": {
+      "icon": "./assets/icon.png"
+    },
     "ios": {
       "supportsTablet": true
     },
     "android": {
       "permissions": [],
-      "package": "com.motok.moto.rental"
+      "package": "com.motok.moto.rental",
+      "googleServicesFile": "./google-services.json"
     }
   }
 }

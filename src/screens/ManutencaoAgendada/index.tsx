@@ -22,7 +22,7 @@ export default function ManutencaoAgendada() {
                 <S.SubTitle>receberá uma notificação no</S.SubTitle>
                 <S.SubTitle>aplicativo</S.SubTitle>
             </S.ContainerSubTiitle>
-            <S.Button onPress={() => navigation.navigate('Presentation')}>
+            <S.Button onPress={() => navigation.navigate('Home')}>
                     <LinearGradient
                         colors={["#FE1D16", "#FD3C14", "#FA7311"]}
                         locations={[0.06, 0.26, 0.92]}  {...deg(68)}

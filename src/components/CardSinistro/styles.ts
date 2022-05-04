@@ -4,7 +4,7 @@ import MotoSVG from '../../assets/motoBatida.svg'
 
 export const Container = styled.View`
     width: ${RFValue(310)}px;
-    margin-top: ${RFValue(20)}px;
+    margin-top: ${RFValue(10)}px;
     justify-content: flex-start;
     align-items: flex-start;
 

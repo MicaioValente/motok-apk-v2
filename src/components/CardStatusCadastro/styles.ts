@@ -4,8 +4,8 @@ import FecharSVG from '../../assets/fechar.svg'
 
 export const Container = styled.View`
     width: ${RFValue(310)}px;
-    margin-top: ${RFValue(20)}px;
-    margin-bottom: ${RFValue(20)}px;
+    margin-top: ${RFValue(10)}px;
+    /* margin-bottom: ${RFValue(10)}px; */
     justify-content: flex-start;
     align-items: flex-start;
 `;  
@@ -18,7 +18,6 @@ export const Content = styled.View`
     align-items: center;
 `;
 export const ContianerStatus = styled.View`
-    background-color: ${({color}: any) => color};
     width: 100%;
     margin-top: ${RFValue(10)}px;
     border-radius: ${RFValue(10)}px;
@@ -35,7 +34,7 @@ export const StatusReprovado = styled.Text`
     text-transform: uppercase;
 `
 
-export const ContainerBottom = styled.View`
+export const ContainerBottom = styled.TouchableOpacity`
     background-color: #1B1B1B;
     width: 100%;
     /* height: ${RFValue(78)}px; */

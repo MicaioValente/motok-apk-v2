@@ -36,7 +36,8 @@ export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading:
             return
         }
         if(result.success){
-            navigation.navigate('SignIn')
+            navigation.reset({ routes: [{ name: 'SignIn' }] })
+
             return
         }
     }

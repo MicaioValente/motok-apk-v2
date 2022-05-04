@@ -13,7 +13,7 @@ import MoedaPagoSVG from '../../assets/moedaPago.svg'
 
 export const Container = styled.View`
     width: ${RFValue(310)}px;
-    margin-top: ${RFValue(20)}px;
+    margin-top: ${RFValue(10)}px;
     justify-content: flex-start;
     align-items: flex-start;
 
@@ -93,7 +93,7 @@ export const TextBoldNumber = styled.Text`
 `
 
 
-export const ContainerBoleto = styled.View`
+export const ContainerBoleto = styled.TouchableOpacity`
     background-color: #1B1B1B;
     width: 100%;
     /* height: ${RFValue(78)}px; */
@@ -154,7 +154,7 @@ export const BoletoCodigo = styled.Text`
 `
 
 
-export const ContainerIconNumber = styled.View`
+export const ContainerIconNumber = styled.TouchableOpacity`
     height: ${RFValue(31)}px;
     width: ${RFValue(31)}px;
     border-radius: ${RFValue(20)}px;

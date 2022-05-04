@@ -6,12 +6,11 @@ import Counter from '../../../components/Counter'
 import { deg } from 'react-native-linear-gradient-degree';
 import { RFValue } from 'react-native-responsive-fontsize';
 import {LinearGradient} from 'expo-linear-gradient';
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ToastAndroid} from 'react-native';
 import { Camera } from 'expo-camera';
 import {FontAwesome} from '@expo/vector-icons'
-import { useNavigation } from '@react-navigation/native';
 
-export default function RegisterCPFStep4({  postUser, setStep, step, setUser }: any) {
+export default function RegisterCPFStep4({ userCNPJ, postUser, setStep, step, setUser }: any) {
     const [camera, setCamera] = useState<boolean>(false);
     const [cameraResi, setCameraResi] = useState<boolean>(false);
     const [hasPermission, setHasPermission] = useState(null);
@@ -63,19 +62,29 @@ export default function RegisterCPFStep4({  postUser, setStep, step, setUser }: 
         }
     }
 
+    async function portUserAndValidate(){
+        if(userCNPJ.ValidadeCarteira && 
+            userCNPJ.docComprovanteResidencia &&
+            userCNPJ.docCarteiraMotorista
+        ){
+            await postUser()
+        }else{
+            ToastAndroid.show('Prencha todos os Campos', ToastAndroid.LONG);
 
+        }
+    }
        
     return (<>
         <S.ContainerScroll>
             <S.Container>
                 <Counter Label={"Dados Pessoais"} setStep={setStep} step={step} />
-                <CardRegisterCNH setUser={setUser} setCamera={setCamera} camera={camera} setPhoto={setPhoto} photo={photo} />
+                <CardRegisterCNH validade={true} setUser={setUser} setCamera={setCamera} camera={camera} setPhoto={setPhoto} photo={photo} />
                 <CardRegisterCR  setUser={setUser} setCameraResi={setCameraResi} cameraResi={cameraResi} setPhotoResi={setPhotoResi} photoResi={photoResi} />
                 <S.ContainerBottom>
                     <S.ContainerButtomLeft >
                         <S.TextButtonLeft>VOLTAR</S.TextButtonLeft>
                     </S.ContainerButtomLeft>
-                    <S.Button onPress={async () =>  await postUser()}>
+                    <S.Button onPress={() => portUserAndValidate()}>
                         <LinearGradient
                             colors={["#FE1D16", "#FD3C14", "#FA7311"]}
                             locations={[0.06, 0.26, 0.92]}  {...deg(68)}

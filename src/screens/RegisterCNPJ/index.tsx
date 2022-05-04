@@ -34,13 +34,13 @@ const RegisterCNPJ: React.FC = () => {
     function stepComponete(name: number) {
         switch (name) {
             case 1:
-                return <RegisterCNPJStep1 setUser={setUser}  setStep={setStep} step={step} />
+                return <RegisterCNPJStep1 userCNPJ={userCNPJ} setUser={setUser}  setStep={setStep} step={step} />
             case 2:
-                return <RegisterCNPJStep2 setUser={setUser}  setStep={setStep} step={step} />
+                return <RegisterCNPJStep2 userCNPJ={userCNPJ} setUser={setUser}  setStep={setStep} step={step} />
             case 3:
-                return <RegisterCNPJStep3 setUser={setUser}  setStep={setStep} step={step} />
+                return <RegisterCNPJStep3 userCNPJ={userCNPJ} setUser={setUser}  setStep={setStep} step={step} />
             case 4:
-                return <RegisterCNPJStep4  postUser={postUser}  setUser={setUser}  setStep={setStep} step={step} />
+                return <RegisterCNPJStep4 userCNPJ={userCNPJ}postUser={postUser} setUser={setUser}  setStep={setStep} step={step} />
             default:
                 return 0
         }

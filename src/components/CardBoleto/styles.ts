@@ -10,12 +10,13 @@ import CalendarioDisponivelSVG from '../../assets/calendario.svg'
 import MoedaDisponivelSVG from '../../assets/moeda.svg'
 import MoedaNPagoSVG from '../../assets/moedaNPago.svg'
 import MoedaPagoSVG from '../../assets/moedaPago.svg'
+import DownloadSVG from '../../assets/download.svg'
 
 export const Container = styled.View`
-    height: ${RFValue(390)}px;
+    /* height: ${RFValue(390)}px; */
     width: ${RFValue(300)}px;
     margin-top: ${RFValue(10)}px;
-    margin-bottom: ${RFValue(10)}px;
+    /* margin-bottom: ${RFValue(10)}px; */
     justify-content: flex-start;
     align-items: flex-start;
 
@@ -85,7 +86,7 @@ export const TextBold = styled.Text`
 export const ContainerBoleto = styled.View`
     background-color: #1B1B1B;
     width: 100%;
-    height: ${RFValue(255)}px;
+    /* height: ${RFValue(255)}px; */
     margin-top: ${RFValue(10)}px;
     border-radius: ${RFValue(10)}px;
     padding: ${RFValue(10)}px ${RFValue(20)}px ${RFValue(20)}px ${RFValue(20)}px;
@@ -129,6 +130,8 @@ export const Calendario = styled(CalendarioDisponivelSVG)``
 
 export const CalendarioNPago = styled(CalendarioNPagoSVG)``
 
+export const CalendarioSem = styled(CalendarioNPagoSVG)``
+
 export const calendarioPago = styled(CalendarioPagoSVG)``
 
 export const BoletoCodigo = styled.Text`
@@ -161,3 +164,5 @@ export const CopiarTex = styled.Text`
     margin-right: ${RFValue(10)}px;
 
 `
+
+export const download = styled(DownloadSVG)``

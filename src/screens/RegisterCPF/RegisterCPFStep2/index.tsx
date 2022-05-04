@@ -6,11 +6,15 @@ import InputCodigo from '../../../components/Inputs/InputCodigo'
 import InputPhoneNumber from '../../../components/Inputs/InputPhoneNumber'
 import {LinearGradient} from 'expo-linear-gradient';
 import { StepProps } from '../RegisterCPFStep1';
-
-export default function RegisterCPFStep2({ step, setStep, setUser }: StepProps) {
+import { ToastAndroid } from 'react-native'
+export default function RegisterCPFStep2({ userCPF, setStep, setUser, step }: StepProps) {
 
     function situacao() {
-        setStep(3)
+        if(userCPF.telefoneCliente){
+            setStep(3)
+        }else{
+            ToastAndroid.show('Prencha todos os Campos', ToastAndroid.LONG);
+        }
     }
 
     return <S.Content>

@@ -2,13 +2,34 @@ import React from 'react';
 import * as S from './styles';
 
 import { deg } from 'react-native-linear-gradient-degree';
-import { User } from '../../screens/Preload';
+import { UserGetById } from '../CardPlano/types';
 
 export type CardProps = {
-    user: User
+    user: UserGetById
     navigation?: any
 }
 
+function userEmAnalise(aprovacaoId: number){
+    console.log(2222, aprovacaoId)
+
+    if(aprovacaoId === 3){
+        return true
+    }
+}
+function userAprovado(aprovacaoId: number){
+    console.log(333, aprovacaoId)
+
+    if(aprovacaoId === 1){
+        return true
+    }
+}
+
+function userReprovado(aprovacaoId: number){
+    console.log(1111, aprovacaoId)
+    if(aprovacaoId === 2){
+        return true
+    }
+}
 const CardPerfil = ({user}: CardProps) => {
     return (
         <S.Container>
@@ -24,14 +45,17 @@ const CardPerfil = ({user}: CardProps) => {
                        </S.ContainerIcon>
                 </S.Gradient>
                 {/* <S.Text>Agende manutenções e sinistros para sua</S.Text> */}
-                {user?.aprovacaoId === 3  &&
+                { userEmAnalise(user?.aprovacaoId) &&
                 <>
                     <S.Text >{`Olá ${user.nomeCliente} Aguarde o retorno da nossa equipe `}</S.Text>
                     <S.Text>{`No app ou por email `}</S.Text>
                 </>
                 }
-                {user?.aprovacaoId === 1  &&
+                {userAprovado(user?.aprovacaoId) &&
                     <S.Text >{`Olá ${user.nomeCliente} `}</S.Text>
+                }
+                {userReprovado(user?.aprovacaoId) &&
+                    <S.Text >{`Olá ${user.nomeCliente} Seu perfil foi Rejeitado`}</S.Text>
                 }
             </S.Content>
 

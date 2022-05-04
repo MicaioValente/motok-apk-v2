@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "370606002433",
+    "project_id": "motok-rental",
+    "storage_bucket": "motok-rental.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:370606002433:android:73a1d353b150db647f0b00",
+        "android_client_info": {
+          "package_name": "com.motok.moto.rental"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "370606002433-jlks4qkgff3q5l0sc4qp5qg40qdkpub7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjhAwjVtdV9yp03wV7dOWmg1IOZEj-V3Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "370606002433-jlks4qkgff3q5l0sc4qp5qg40qdkpub7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

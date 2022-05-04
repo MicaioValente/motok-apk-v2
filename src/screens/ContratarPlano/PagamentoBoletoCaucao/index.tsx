@@ -8,9 +8,9 @@ import ModalAlert from '../../../components/ModalAlert';
 import api from '../../../service/api';
 import * as S from './styles';
 import * as Linking from 'expo-linking';
-import * as Clipboard from 'expo-clipboard';
 import { Boleto } from '../PagamentoBoletoPlano';
- 
+import * as Clipboard from 'expo-clipboard';
+import { ToastAndroid } from 'react-native'
 
 const PagamentoBoletoCaucao = ({ step, setStep, plano, formaDePagamento, setFormaDePagamento, user}: any) => {
     
@@ -184,7 +184,7 @@ const PagamentoBoletoCaucao = ({ step, setStep, plano, formaDePagamento, setForm
                     <S.ContainerCaucao>
                         <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
                             <S.ValueCaucao>{`09163375000147`}</S.ValueCaucao>
-                            <S.ContainerIconNumber>
+                            <S.ContainerIconNumber onPress={() => {Clipboard.setString('09163375000147'),ToastAndroid.show('Código Copiado', ToastAndroid.LONG)}}>
                                 <S.Copiar />
                             </S.ContainerIconNumber>
                         </View>

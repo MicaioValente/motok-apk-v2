@@ -6,6 +6,8 @@ import { RFValue } from "react-native-responsive-fontsize";
 export const Container = styled.View`
     flex: 1;
     background-color: #1B191A;
+    padding-top: 25px;
+
 `
 export const Button = styled.TouchableOpacity`
     width: 100%;

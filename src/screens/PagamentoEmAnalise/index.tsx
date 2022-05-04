@@ -5,17 +5,20 @@ import { useNavigation } from '@react-navigation/native';
 import { deg } from 'react-native-linear-gradient-degree';
 import { RFValue } from 'react-native-responsive-fontsize';
 import AsyncStorage from '@react-native-async-storage/async-storage';
- 
-//  voce receberá uma notificação no aplicativo.
+import api from '../../service/api';
 
-export default function PagamentoEmAnalise(item: any) {
-    const navigation = useNavigation()
+export default function PagamentoEmAnalise(plano: any, user: any) {
+    const navigation = useNavigation<any>()
+
     async function setPagamentoAndRedirect() {
-        await AsyncStorage.setItem('comprado', JSON.stringify(item))
+        let dataRequest = {idCliente: plano.user.idCliente, idPlano: plano.plano.idPlanos}
+        console.log(dataRequest)
+        api.put('planos/alterarplano/cliente', dataRequest).then( async function (response){
+            console.log(response)
+            await AsyncStorage.setItem('comprado', JSON.stringify(plano.plano))
             navigation.reset({ routes: [{ name: 'Home' }] })
-        
+        }).catch(function (response){ console.log( 2222, response )})
     }
-
 
     return (
         <S.Container>

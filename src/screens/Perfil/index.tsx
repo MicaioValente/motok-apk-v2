@@ -12,17 +12,27 @@ import { User } from '../Preload';
 import { View } from 'react-native';
 import CardRetireSuaMotok from '../../components/CardRetireSuaMotok';
 import api from '../../service/api';
+import { UserGetById } from '../../components/CardPlano/types';
 
 
 const Perfil: React.FC = () => {
-    const [ user, setUser] = useState<User>({} as User)
+    const [ user, setUser] = useState<UserGetById>({} as UserGetById)
     const [ planoComprado, setPlanoComprado] = useState<any>()
+    const [ veiculoId, setVeiculoId] = useState<any>()
+
+    useEffect(() => {
+        const GetVeiculo = async() => {
+            const token = await AsyncStorage.getItem('user');
+            const { veiculoId } = JSON.parse(token) 
+            setVeiculoId(veiculoId)
+        }
+        GetVeiculo()
+    }, [])
     useEffect(() => {
         const checkToken = async () => {
             const token = await AsyncStorage.getItem('user');
             const userId = JSON.parse(token) 
             async function getUserById(){
-                console.log(555, userId)
                 api.get(`clientes/${userId.idCliente}`).then(function (response ){
                     delete response.data.arquivoBase64DocCarteira
                     delete response.data.arquivoBase64DocResidencia
@@ -36,35 +46,50 @@ const Perfil: React.FC = () => {
         }
         checkToken();
     }, []);
+
     useEffect(() => {
         async function getPlano() {
             const plano = await AsyncStorage.getItem('comprado')
             const planJson = JSON.parse(plano)
             if(planJson != null && planJson != undefined){
-                console.log('seto')
                 setPlanoComprado(planJson)
             }
         }
         getPlano()
     }, [])
+
+    function userEmAnalise(aprovacaoId: number){
+
+        if(aprovacaoId === 3){
+            return true
+        }
+    }
+    function userReprovado(aprovacaoId: number){
+        if(aprovacaoId === 2){
+            return true
+        }
+    }
+
     return (
         <S.Scroll>
             <S.Container>
                 <CardPerfil user={user}/>
-                
-                {user?.aprovacaoId === 3 &&
-                    <CardStatusCadastro user={user}/>
+                {userReprovado(user.aprovacaoId) ? 
+                        <CardStatusCadastro user={user} reprovado={true}/>
+                        :
+                userEmAnalise(user?.aprovacaoId) ?
+                    <CardStatusCadastro user={user}/> : null
                 }
 
-                    {planoComprado?.item.idPlanos &&
+                    {planoComprado?.idPlanos &&
                         <CardRetireSuaMotok user={user} /> 
                     }
                 {user?.planoId != null ? 
                     <>
-                        <CardSinistro />
-                        <CardManuntencao/>
+                        <CardSinistro user={user} veiculoId={veiculoId}/>
+                        <CardManuntencao user={user} veiculoId={veiculoId}/>
                     </> 
-                    : !planoComprado?.item.idPlanos ?
+                    : !planoComprado?.idPlanos && userEmAnalise(user?.aprovacaoId)?
                     <>
                         <CardSemPlano user={user}/>
                     </>

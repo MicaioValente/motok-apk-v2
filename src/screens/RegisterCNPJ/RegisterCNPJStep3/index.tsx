@@ -1,24 +1,34 @@
 import React, { useState } from 'react';
-import * as S from './styles'
-import Counter from '../../../components/Counter'
+import * as S from './styles';
+import Counter from '../../../components/Counter';
 import { deg } from 'react-native-linear-gradient-degree';
-import InputCep from '../../../components/Inputs/InputCep'
-import InputRegister from '../../../components/Inputs/InputRegister'
-
-import InputRua from '../../../components/Inputs/InputRua'
-import InputNumero from '../../../components/Inputs/InputNumero'
-
-import InputCidade from '../../../components/Inputs/InputCidade'
-import InputEstado from '../../../components/Inputs/InputEstado'
+import InputCep from '../../../components/Inputs/InputCep';
+import InputRegister from '../../../components/Inputs/InputRegister';
+import InputRua from '../../../components/Inputs/InputRua';
+import InputNumero from '../../../components/Inputs/InputNumero';
 import { RFValue } from 'react-native-responsive-fontsize';
 import {LinearGradient} from 'expo-linear-gradient';
 import { StepProps } from '../RegisterCNPJStep1';
 import Select from '../../../components/Inputs/Select';
+import { ToastAndroid } from 'react-native';
 
-export default function RegisterCNPJStep3({ step, setStep, setUser }: StepProps) {
+export default function RegisterCNPJStep3({ userCNPJ, step, setStep, setUser }: StepProps) {
 
     function situacao() {
-        setStep(4)
+        if(userCNPJ.cepEnderecoCliente && 
+            userCNPJ.estatoClienteId &&
+            userCNPJ.cidadeClienteId && 
+            userCNPJ.bairroEnderecoCliente && 
+            userCNPJ.ruaEnderecoCliente && 
+            userCNPJ.numEnderecoCliente && 
+            userCNPJ.complementoEnderecoCliente 
+            ){
+
+            setStep(4)
+        }else{
+            ToastAndroid.show('Prencha todos os Campos', ToastAndroid.LONG);
+
+        }
     }
 
     return <S.Content>

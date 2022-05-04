@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, seEffect, useState } from 'react';
 import * as S from './styles'
 import { useNavigation } from '@react-navigation/native';
 import ContainerLoginCap from '../../components/ContainerLoginCap'
@@ -6,10 +6,11 @@ import ContainerLoginBike from '../../components/ContainerLoginBike'
 import CarroselPlanos from '../../components/CarroselPlanos'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../service/api';
-
+import { BackHandler } from 'react-native'
+import ModalAlert from '../../components/ModalAlertVersion';
 const ShowPlans = ({route}: any) => {
     const navigation = useNavigation();
-    
+    const [ modal, setModal] = useState(false)
     // async function getNotificacoes() {
     //     const token = await AsyncStorage.getItem('apiToken')
         // var config = {
@@ -29,9 +30,30 @@ const ShowPlans = ({route}: any) => {
         //     });
         // }
         // getNotificacoes()
+        
+    useEffect(() => {
+        const versao = 1
+        const checkVersion = async () => {
+            await api.get(`appversions/${versao}`)
+              .then(async response => {
+                if(response.data.version == versao){
+                    return
+                }else{  
+                  setModal(true)
+
+                }
+
+              }).catch(function (error) {
+                console.log(999999, error)
+
+              });
+            }
+            checkVersion();
+    }, []);
 
     return (
             <S.Container>
+                <ModalAlert modal={modal} setModal={setModal} text={'Você precisa atulizar o app'}/>
                 <ContainerLoginCap route={route} navigation={navigation}/>
                 <ContainerLoginBike route={route} navigation={navigation}/>
                 <S.Text>planos disponíveis</S.Text>

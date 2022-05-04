@@ -13,7 +13,7 @@ export interface userCPF {
 	ano_manu: string,
 }
 
-const RegisterCPF: React.FC = () => {
+const RegisterCPF: React.FC = ({route} : any) => {
     const [userCPF, setUserCPF] = useState({} as userCPF)
     function setUser(nome, value, name){
 
@@ -26,8 +26,8 @@ const RegisterCPF: React.FC = () => {
 
     return (
         <S.Container>
-            <HeaderRegister title={'SOLICITAR NOVA MANUNTENÇÂO'} />
-            <Manuntencao setUser={setUser} />
+            <HeaderRegister step={1} route={'Home'} title={'SOLICITAR NOVA MANUNTENÇÂO'} />
+            <Manuntencao route={route} setUser={setUser} />
         </S.Container>
     )
 }

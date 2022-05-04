@@ -10,10 +10,23 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StepProps } from '../RegisterCPFStep1';
 import Select from '../../../components/Inputs/Select';
-
-export default function RegisterCPFStep3({ step, setStep, setUser }: StepProps) {
+import { ToastAndroid } from 'react-native'
+export default function RegisterCPFStep3({ userCPF, step, setStep, setUser }: StepProps) {
     function situacao() {
-        setStep(4)
+        if(userCPF.cepEnderecoCliente && 
+            userCPF.estatoClienteId &&
+            userCPF.cidadeClienteId && 
+            userCPF.bairroEnderecoCliente && 
+            userCPF.ruaEnderecoCliente && 
+            userCPF.numEnderecoCliente && 
+            userCPF.complementoEnderecoCliente 
+            ){
+
+            setStep(4)
+        }else{
+            ToastAndroid.show('Prencha todos os Campos', ToastAndroid.LONG);
+
+        }
     }
 
     return <S.Content>

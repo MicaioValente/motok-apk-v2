@@ -19,8 +19,9 @@ type CardRegisterCNH = {
     photo: any
     setUser: Function
     setModalExclusao?: Function
+    validade: boolean
 }
-export default function CardRegisterCNH({setCamera, camera, photo, setPhoto, setUser}: CardRegisterCNH ) {
+export default function CardRegisterCNH({setCamera, camera, photo, setPhoto, setUser, validade}: CardRegisterCNH ) {
     const [modalVisible, setModalVisible] = useState(false);
     const [modalVisiblePre, setModalVisiblePre] = useState(true);
     const [modalOpenCamera, setModalOpenCamera] = useState(false);
@@ -49,6 +50,7 @@ export default function CardRegisterCNH({setCamera, camera, photo, setPhoto, set
 
 return (<>
         <S.Container>
+            
             {photo &&<> 
             <S.ContentImagem>
                 <S.Imagem source={{uri: photo}} />
@@ -61,7 +63,9 @@ return (<>
                     <Lixeira />
                 </S.ContainerLixeira>
             </S.ContainerButton>
-            <InputDataMoment mask={'99-99-9999'} border={false} placeholder="Informe a validade da CNH" label="Validade da CNH"  name="ValidadeCarteira" setUser={setUser} />
+                {validade && 
+                    <InputDataMoment mask={'99-99-9999'} border={false} placeholder="Informe a validade da CNH" label="Validade da CNH"  name="ValidadeCarteira" setUser={setUser} />
+                }
             
             </> 
             }

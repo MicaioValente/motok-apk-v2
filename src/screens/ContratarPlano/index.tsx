@@ -24,6 +24,7 @@ export type Pagamento = {
     route: Route
 }
 export default function ContratarPlano({navigation, route}: Pagamento) {
+    
     const plano = route.params.planoSelecionado
     const [step, setStep] = useState(1)
     const [ user, setUser] = useState<User>({} as User)
@@ -52,7 +53,7 @@ export default function ContratarPlano({navigation, route}: Pagamento) {
             case 5:
                 return <PagamentoBoletoCaucao  user={user} formaDePagamento={formaDePagamento} setFormaDePagamento={setFormaDePagamento} plano={plano} setStep={setStep} step={step} />
             case 6:
-                return <PagamentoEmAnalise item={plano}/>
+                return <PagamentoEmAnalise user={user} plano={plano}/>
                 default:
                 return null
         }

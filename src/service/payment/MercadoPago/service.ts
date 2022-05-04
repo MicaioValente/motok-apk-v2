@@ -26,6 +26,7 @@ export default class MercadoPagoService implements IMercadoPagoService {
                 )
                 
                 const preference = await response.json()
+                console.log(33333, preference)
                 resolve(new MercadoPagoPreference({ id: preference.id }))
             } catch (error) {
                 reject(error)

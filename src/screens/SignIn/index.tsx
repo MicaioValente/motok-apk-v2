@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SubTitle from '../../components/SubText'
 import * as S from './styles'
 import Logo from '../../assets/logoCor.svg'
@@ -9,36 +9,80 @@ import { useNavigation } from '@react-navigation/native';
 import api from '../../service/api';
 import ModalComponent from '../../components/Modal';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-
+import PaymentCoordinator from '../../service/payment'
+import Loading from '../../components/Loading';
+import axios from 'axios';
+import messaging from '@react-native-firebase/messaging';
+import { Alert } from 'react-native'
 const SignIn: React.FC = () => {
-    const navigation = useNavigation();
+    const navigation = useNavigation<any>();
     const [userLogin, setUserLogin] = useState({})
     const [modal, setModal] = useState(false)
-
+    const [loading, setLoading] = useState(false)
+    const [token, setToken] = useState<any>()
 
     function setUser(nome: string, value: any){
         setUserLogin({
             ...userLogin,
                 [nome]: value    
         })
-
     }
+
     async function loginUser() {
+        setLoading(true)
+        // PaymentCoordinator.start(obj)
+        // return
         await api.post('login', userLogin)
-        .then(async function (response) {
+            .then(async function (response) {
+                console.log(response.data.idCliente)
+            setLoading(false)
             await AsyncStorage.setItem('user', JSON.stringify(response.data))
+            await postTokenAndUser(response.data.idCliente)
             navigation.navigate('Home', { user: response.data})
 
         })
         .catch(function (error) {
+            setLoading(false)
             setModal(!modal)
         });
-        
-        
     }
     
+    async function postTokenAndUser(id:number) {
+        api.put(`Clientes/alterarIdFirebase/${token}/cliente/${id}`).then(function (response) {
+            console.log(response)
+        }).catch(function (error) {
+            console.log(error)
+        })
+    }
+
+    useEffect(() =>{
+        getTokenNotification()
+    }, [])
+    const getTokenNotification = async () => {
+        const status = await messaging().requestPermission()
+
+        const enable = status === 1 || status === 2
+
+        if(enable) {
+            let tokenFcm = await messaging().getToken()
+            console.log('token ', tokenFcm)
+            setToken(tokenFcm)
+
+            messaging().onTokenRefresh(newToken => {
+                console.log('newToken ', newToken)
+                setToken(tokenFcm)
+            })
+
+            // const unsubscribe = messaging().onMessage(async remoteMessage => {
+            //     Alert.alert('Uma Nova chave Unica new FCM message arrived!', JSON.stringify(remoteMessage));
+            //   });
+          
+            //   return unsubscribe;
+        }
+    }
     return (
         <>
+        <Loading loading={loading} setLoading={setLoading} mensage='Entrando' />
         <S.Container>
             <S.Content>
                 <S.containerImage>
@@ -65,6 +109,10 @@ const SignIn: React.FC = () => {
                         </LinearGradient>
                     </S.ContainerArrow>
                 </S.ContainerTextBottom>
+                {/* <S.ContainerLeft>
+                    <S.TextContainerLeft>Cadastra-se</S.TextContainerLeft>
+                </S.ContainerLeft> */}
+
             </S.Content>
             <SubTitle color='#F14902' />
         </S.Container>

@@ -46,13 +46,13 @@ const RegisterCPF: React.FC = () => {
     function stepComponete(name: number) {
         switch (name) {
             case 1:
-                return <RegisterCPFStep1 setUser={setUser} setStep={setStep} step={step} />
+                return <RegisterCPFStep1 userCPF={userCPF} setUser={setUser} setStep={setStep} step={step} />
             case 2:
-                return <RegisterCPFStep2 setUser={setUser} setStep={setStep} step={step} />
+                return <RegisterCPFStep2 userCPF={userCPF} setUser={setUser} setStep={setStep} step={step} />
             case 3:
-                return <RegisterCPFStep3 setUser={setUser} setStep={setStep} step={step} />
+                return <RegisterCPFStep3 userCPF={userCPF} setUser={setUser} setStep={setStep} step={step} />
             case 4:
-                return <RegisterCPFStep4 postUser={postUser} setUser={setUser} setStep={setStep} step={step} />
+                return <RegisterCPFStep4 userCPF={userCPF} postUser={postUser} setUser={setUser} setStep={setStep} step={step} />
             default:
                 return 0
         }

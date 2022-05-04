@@ -13,7 +13,13 @@ export default function BottomTabs() {
         initialRouteName={'HomeTap'}
         screenOptions={({ route }) => ({
           headerShown: false,
-          tabBarStyle: {backgroundColor: '#343438', borderTopWidth: 0,},
+          tabBarStyle: {
+            backgroundColor: '#343438', 
+            borderTopWidth: 0,
+            borderTopLeftRadius: 20,
+            borderTopRightRadius: 20,
+            position: 'absolute'
+          },
           tabBarActiveTintColor: '#F14902',
           tabBarInactiveTintColor: '#FEBB9A'
         })}

@@ -4,7 +4,8 @@ import Carousel from 'react-native-snap-carousel';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../service/api';
 import { useNavigation } from '@react-navigation/native';
-
+import Loading from '../Loading';
+import { ToastAndroid } from 'react-native'
 type cardProps = {
     nome_plano:string,
     preco_plano: string,
@@ -36,16 +37,20 @@ export type Planos = {
   
 export default function CarroselPlanos({navigation, route, home}: any) {
   const [ data, setData ] = useState<Planos[]>([] as Planos[])
+  const [ loading, setLoading ] = useState<boolean>(true)
   const navigate = useNavigation<any>()
   let Detalhes = ['Manutenção preventiva.', 'Suporte e resgate.', 'Seguro contra terceiros.', 'Isenção de IPVA e Licenciamento.']
   useEffect(() => {
     async function getPlanos() {
+      setLoading(false)
       // const planos = await AsyncStorage.getItem('planos');
       await api.get(`Planos/ativos`)
       .then(async response => {
         setData(response.data)
+        setLoading(false)
         await AsyncStorage.setItem('planos', JSON.stringify(response.data))
       }).catch(function (error) {
+        setLoading(false)
       });
      }
     getPlanos()
@@ -55,8 +60,13 @@ export default function CarroselPlanos({navigation, route, home}: any) {
   const _renderItem = ({item, index}: CarouselType) => {
     return (
       <>
+        <Loading loading={loading} setLoading={setLoading} mensage='Carregando Planos...' />
+
         <S.ContainerCard key={index} >
-            <S.Card onPress={() => home ?  navigate.navigate('ContratarPlano', {planoSelecionado: item}) : navigate.navigate('SignIn')}>
+            <S.Card onPress={() => 
+                home ? item.nomePlano === 'MINHA MOTOK' ? ToastAndroid.show('No momento não há motos disponíveis para este plano.', ToastAndroid.LONG) 
+                :  navigate.navigate('ContratarPlano', {planoSelecionado: item}) 
+                : navigate.navigate('SignIn') }>
                 <S.TitleCard >{item.nomePlano}</S.TitleCard>
                 <S.ContainerValue>
                     <S.TextContentCardValueLeft>R$</S.TextContentCardValueLeft>
