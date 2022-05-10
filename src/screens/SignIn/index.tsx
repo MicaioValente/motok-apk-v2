@@ -117,7 +117,7 @@ const SignIn: React.FC = () => {
             <SubTitle color='#F14902' />
         </S.Container>
         <ModalComponent modalVisible={modal} setModalVisible={setModal}>
-            <S.TextContainerLeft>Login ou Senha estão errados</S.TextContainerLeft>
+            <S.TextContainerLeft>CPF ou Senha estão errados</S.TextContainerLeft>
             <S.TextContainerLeft onPress={() => setModal(!modal)} style={{ marginLeft: 'auto', marginTop: 30, color: '#F14902'}}>OK!</S.TextContainerLeft>
         </ModalComponent>
         </>
