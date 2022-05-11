@@ -18,4 +18,8 @@ export const Text = styled.Text`
     margin-right: auto;
     margin-left: ${RFValue(40)}px;
 `
-
+export const TextContainerLeft = styled.Text`
+    font-size: ${RFValue(20)}px;
+    font-family: "Teko_700Bold";
+    color: #ffff;
+`

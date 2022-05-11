@@ -15,7 +15,10 @@ import api from '../../service/api';
 import { UserGetById } from '../../components/CardPlano/types';
 
 
-const Perfil: React.FC = () => {
+type Perfil = {
+    userUp: UserGetById
+}
+const Perfil = ({userUp} : Perfil) => {
     const [ user, setUser] = useState<UserGetById>({} as UserGetById)
     const [ planoComprado, setPlanoComprado] = useState<any>()
     const [ veiculoId, setVeiculoId] = useState<any>()
@@ -73,7 +76,7 @@ const Perfil: React.FC = () => {
     return (
         <S.Scroll>
             <S.Container>
-                <CardPerfil user={user}/>
+                <CardPerfil user={userUp}/>
                 {userReprovado(user.aprovacaoId) ? 
                         <CardStatusCadastro user={user} reprovado={true}/>
                         :

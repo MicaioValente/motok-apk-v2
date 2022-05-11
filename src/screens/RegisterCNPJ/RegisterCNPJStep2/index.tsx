@@ -19,9 +19,9 @@ export default function RegisterCNPJStep2({ userCNPJ, step, setStep, setUser }: 
     }
 
     return <S.Content>
-        <Counter Label={"Validar o Numero"} setStep={setStep} step={step} />
+        <Counter Label={"Validar o Número"} setStep={setStep} step={step} />
         <S.ContainerSegundaParte>
-            <InputPhoneNumber setUser={setUser}  border={false} placeholder="- (12) 34567-89000" label="Informe seu telefone" />
+            <InputPhoneNumber setUser={setUser}  border={false} placeholder="(12) 34567-89000" label="Informe seu telefone" />
             {/* <InputCodigo label="Código" /> */}
         </S.ContainerSegundaParte>
         <S.ContainerBottom>

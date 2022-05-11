@@ -1,4 +1,5 @@
 import moment from 'moment'
+import { ToastAndroid } from 'react-native'
 export interface userCPF {
     image: any
     anoNascimento: string
@@ -27,27 +28,45 @@ export interface userCPF {
 
 export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading: any, setAviso: any) {
     setLoading(true)
+    console.log(userCPF)
+
     function response(result: any) {
-        console.log(11111, result)
-        setLoading(false)
+            setLoading(false)
+
+        if(result.errors){
+            console.log(222)
+
+            const keys = Object.keys(result.errors)
+            console.log(222, keys)
+            keys.map(e => 
+            ToastAndroid.show(`${e} nao foi enviado`, ToastAndroid.SHORT)
+                
+                )
+            console.log(3333, result.errors[keys[0]])
+            result.errors[keys[0]]
+        }
 
         if(result.status === 400){
+            console.log(444)
             setAviso(true)
             return
         }
-        if(result.success){
-            navigation.reset({ routes: [{ name: 'SignIn' }] })
 
+        if(result.success){
+            console.log(555)
+            navigation.reset({ routes: [{ name: 'SignIn' }] })
             return
         }
     }
     function errorResponse(error:any) {
+        console.log(error)
         setAviso(true)
+        setLoading(false)
     }
     let ValidadeCarteira = moment(userCPF.ValidadeCarteira, 'DDMMYYYY')
     var formdata = new FormData();
     formdata.append("anoNascimento", userCPF.anoNascimento);
-    formdata.append("planoId", 0 );
+    formdata.append("planoId", '0' );
     formdata.append("bairroEnderecoCliente", userCPF.bairroEnderecoCliente );
     formdata.append("cepEnderecoCliente", userCPF.cepEnderecoCliente );
     formdata.append("cidadeClienteId", userCPF.cidadeClienteId );
@@ -90,9 +109,9 @@ export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading:
     
     
     
-    fetch("https://motok-api.herokuapp.com/api/clientes/pf", requestOptions)
+    fetch("https://apimotok.workdb.com.br/api/clientes/pf", requestOptions)
     .then(response => response.json())
-        .then(result => response(result))
+        .then(result =>response(result))
     //   .then(result => console.log('result', result))
     //   .then(result => result.status == 201 ? navigation.navigate('SignIn') : null)
     // .then(result => redirect(result))

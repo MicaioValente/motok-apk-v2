@@ -19,6 +19,6 @@ export default function SubTitle({ color }: Color) {
     `
 
     return <Container>
-        <Text >Assinatura</Text>
+        <Text >Motok</Text>
     </Container>
 }

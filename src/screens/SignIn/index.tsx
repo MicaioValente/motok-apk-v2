@@ -120,6 +120,7 @@ const SignIn: React.FC = () => {
             <S.TextContainerLeft>Login ou Senha estão errados</S.TextContainerLeft>
             <S.TextContainerLeft onPress={() => setModal(!modal)} style={{ marginLeft: 'auto', marginTop: 30, color: '#F14902'}}>OK!</S.TextContainerLeft>
         </ModalComponent>
+       
         </>
     )
     

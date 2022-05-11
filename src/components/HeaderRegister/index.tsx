@@ -5,7 +5,7 @@ import { RFValue } from 'react-native-responsive-fontsize';
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
 
-export default function HeaderRegister({ step, setStep, register, title, route}: any) {
+export default function HeaderRegister({ step, setStep, register, title, route, stepRegister}: any) {
     const navigation = useNavigation()
 
     function goBack() {
@@ -22,7 +22,7 @@ export default function HeaderRegister({ step, setStep, register, title, route}:
     }
 
     return (
-        <S.Container>
+        <S.Container style={{marginTop: stepRegister ? 0 : 25}}>
             <S.Content>
                 <S.ContainerArrow onPress={() => goBack()}>
                     <S.Icon name="arrow-back" size={25} color="#E4E4E7" />

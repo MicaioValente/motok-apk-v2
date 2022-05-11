@@ -29,7 +29,6 @@ const Home: React.FC = () => {
             const token = await AsyncStorage.getItem('user');
             const {idCliente} = JSON.parse(token) 
             const user = JSON.parse(token) 
-    console.log('111111111', user)
     async function getUserById(){
                 // console.log(555, userId)
                 api.get(`clientes/${idCliente}`).then(function (response ){

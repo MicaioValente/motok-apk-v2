@@ -63,7 +63,7 @@ const RegisterCPF: React.FC = () => {
             <ModalAlert modal={aviso} setModal={setAviso} text={'houve um erro ao criar o usuário!'}/>
             <Loading loading={loading} setLoading={setLoading} mensage='Criando Usuário' />
             <S.Container>
-                <HeaderRegister setStep={setStep} step={step} />
+                <HeaderRegister stepRegister setStep={setStep} step={step} />
                 {stepComponete(step)}
             </S.Container>
         </>

@@ -45,14 +45,16 @@ const CardPerfil = ({user}: CardProps) => {
                        </S.ContainerIcon>
                 </S.Gradient>
                 {/* <S.Text>Agende manutenções e sinistros para sua</S.Text> */}
-                { userEmAnalise(user?.aprovacaoId) &&
+                { userEmAnalise(user.aprovacaoId) &&
                 <>
                     <S.Text >{`Olá ${user.nomeCliente} Aguarde o retorno da nossa equipe `}</S.Text>
                     <S.Text>{`No app ou por email `}</S.Text>
                 </>
                 }
-                {userAprovado(user?.aprovacaoId) &&
+                {userAprovado(user?.aprovacaoId) &&<>
                     <S.Text >{`Olá ${user.nomeCliente} `}</S.Text>
+                    <S.Text >{`Você ainda não possui nenhum veiculo`}</S.Text>
+                </>
                 }
                 {userReprovado(user?.aprovacaoId) &&
                     <S.Text >{`Olá ${user.nomeCliente} Seu perfil foi Rejeitado`}</S.Text>
