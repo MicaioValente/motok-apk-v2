@@ -32,7 +32,7 @@ export const ContainerLine = styled.View`
 `
 
 export const Input = styled.TextInput`
-    width: ${RFValue(220)}px;
+    width: ${RFValue(210)}px;
     background-color: #3F3F46;
     height: ${RFValue(52)}px;
     border-radius: 10px;

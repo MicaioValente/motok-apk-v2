@@ -2,11 +2,29 @@ import * as S from './styles'
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Home from '../screens/Home'
 import Perfil from '../screens/Perfil'
+import { useEffect, useState } from 'react';
+import { UserGetById } from '../components/CardPlano/types';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import api from '../service/api';
 const Tab = createBottomTabNavigator();
 
 export default function BottomTabs() {
+  const [ user, setUser] = useState<UserGetById>({} as UserGetById)
 
-
+  useEffect(() => {
+    const checkToken = async () => {
+        const token = await AsyncStorage.getItem('user');
+        const {idCliente} = JSON.parse(token) 
+        api.get(`clientes/${idCliente}`).then(function (response ){
+            delete response.data.arquivoBase64DocCarteira
+            delete response.data.arquivoBase64DocResidencia
+            response.data.J
+            setUser(response.data)
+        }).catch(function (error){
+        })
+    }
+    checkToken();
+  }, []);
 
   return (
     <Tab.Navigator
@@ -37,7 +55,7 @@ export default function BottomTabs() {
         />
         <Tab.Screen 
           name="Perfil" 
-          component={Perfil}
+          component={() => <Perfil userUp={user}/>}
           options={{
               tabBarLabel: 'Perfil',
               tabBarIcon: ({ color, size }) => (

@@ -79,7 +79,7 @@ export async function postUserCNPJ(userCNPJ: userCNPJ, navigation: any, setLoadi
         body: formdata,
         };
 
-        fetch("https://motok-api.herokuapp.com/api/clientes/pj", requestOptions)
+        fetch("https://apimotok.workdb.com.br/api/clientes/pj", requestOptions)
         .then(response => response.json())
       // .then(result => console.log('result', result ))
       .then(result => response(result))

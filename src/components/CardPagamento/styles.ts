@@ -13,7 +13,6 @@ export const Container = styled.View`
 export const Content = styled.View`
     width: ${RFValue(310)}px;
     background-color: #343438;
-    height: ${RFValue(110)}px;
     padding: ${RFValue(20)}px;
     border-radius: ${RFValue(20)}px;
     align-items: center;
@@ -46,8 +45,9 @@ export const ContainerIcon = styled.View`
 `;
 
 export const ContainerSpacer = styled.View`
-    height: ${RFValue(55)}px;
-    background-color: #fff;
+    height: ${RFValue(25)}px;
+    /* background-color: #fff; */
+    width: 100%;
 
 `
 

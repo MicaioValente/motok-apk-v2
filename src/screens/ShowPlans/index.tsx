@@ -1,4 +1,4 @@
-import React, { useEffect, seEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import * as S from './styles'
 import { useNavigation } from '@react-navigation/native';
 import ContainerLoginCap from '../../components/ContainerLoginCap'
@@ -8,8 +8,10 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import api from '../../service/api';
 import { BackHandler } from 'react-native'
 import ModalAlert from '../../components/ModalAlertVersion';
+import ModalComponent from '../../components/Modal';
 const ShowPlans = ({route}: any) => {
     const navigation = useNavigation();
+    const [teste, setTeste] = useState(true)
     const [ modal, setModal] = useState(false)
     // async function getNotificacoes() {
     //     const token = await AsyncStorage.getItem('apiToken')
@@ -52,6 +54,7 @@ const ShowPlans = ({route}: any) => {
     }, []);
 
     return (
+          <>
             <S.Container>
                 <ModalAlert modal={modal} setModal={setModal} text={'Você precisa atulizar o app'}/>
                 <ContainerLoginCap route={route} navigation={navigation}/>
@@ -59,6 +62,11 @@ const ShowPlans = ({route}: any) => {
                 <S.Text>planos disponíveis</S.Text>
                 <CarroselPlanos home={false} route={route} navigation={navigation}/>
             </S.Container>
+            <ModalComponent modalVisible={teste} setModalVisible={setTeste}>
+              <S.TextContainerLeft>Esta é versão e apenas para testes</S.TextContainerLeft>
+              <S.TextContainerLeft onPress={() => setTeste(!teste)} style={{ marginLeft: 'auto',marginTop: -20, color: '#F14902'}}>OK!</S.TextContainerLeft>
+            </ModalComponent>
+          </>
         )
 
 }

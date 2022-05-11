@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const api = axios.create({
-    baseURL: 'https://motok-api-homologacao.herokuapp.com/api/'
+    baseURL: 'https://apimotok.workdb.com.br/api/'
     // baseURL: 'https://motok-api.herokuapp.com/api/'
 });
 

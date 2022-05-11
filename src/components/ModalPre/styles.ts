@@ -35,13 +35,13 @@ export const ContainerTextRow = styled.View`
 
 export const TextRow = styled.Text`
     font-family: "Teko_400Regular";
-    font-size: ${RFValue(18)}px;
+    font-size: ${RFValue(16)}px;
     color: #E4E4E7;
 `
 
 export const TextRowBold = styled.Text`
     font-family: "Teko_600SemiBold";
-    font-size: ${RFValue(18)}px;
+    font-size: ${RFValue(16)}px;
     color: #E4E4E7;
 `
 

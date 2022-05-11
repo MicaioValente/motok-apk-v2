@@ -64,9 +64,9 @@ export default function RegisterCPFStep4({ userCPF, setStep, step, setUser, post
         }
     }
     async function portUserAndValidate(){
-        if(userCPF.ValidadeCarteira && 
-            userCPF.docComprovanteResidencia &&
-            userCPF.docCarteiraMotorista
+        if(
+            userCPF.docComprovanteResidencia 
+            // userCPF.docCarteiraMotorista
         ){
             await postUser()
         }else{
