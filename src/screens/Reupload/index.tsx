@@ -26,9 +26,10 @@ export default function Reupload() {
     const [cnh, setCnh] = useState<any>();
     const [res, setRes] = useState<any>();
     const camReft = useRef<any>(null)
-    const navigation = useNavigation()
+    const navigation = useNavigation<any>()
     
     function setUser(name: string, value: any){
+        console.log('askdjkas')
         setUserReup({...userReup, [name]: value })
         // setUserCNPJ({
         //     ...userCNPJ,
@@ -110,28 +111,45 @@ export default function Reupload() {
     async function postUser() {
 
         var formdata = new FormData();
-        console.log(userReup.CarteiraMotorista)
-        formdata.append("CarteiraMotorista", cnh );
-        formdata.append("ComprovanteResidencia", res );
+        formdata.append("CarteiraMotorista", userReup?.docCarteiraMotorista);
+        formdata.append("ComprovanteResidencia",  userReup?.docComprovanteResidencia );
         formdata.append("IdCliente", userReup.IdCliente);
-
+        formdata.append("HaveComprovanteResidencia", userReup?.docComprovanteResidencia ? true : false);
+        formdata.append("HaveCarteiraMotorista", userReup?.docCarteiraMotorista ? true : false);
         console.log('dataRequest', formdata)
-        api.put('Clientes/alterarImagens', formdata).then(function (response) {
-            console.log('response', response)
-        }).catch(function (error){
-            console.log('error', error.response)
-            // console.log('error', error)
+        var requestOptions = {
+            method: 'PUT',
+            body: formdata,
+            };
+        fetch("https://motok-api.herokuapp.com/api/Clientes/alterarImagens", requestOptions)
+        .then(response => response.json())
+            // .then(result => navigation.reset({ routes: [{ name: 'Home' }] }))
+            // .then(result => console.log(result.success))
+          .then(result => result?.success ? navigation.navigate('Home') : ToastAndroid.show(`${result?.message}`, ToastAndroid.LONG) )
+        //   .then(result => result.status == 201 ? navigation.navigate('SignIn') : null)
+        // .then(result => redirect(result))
+        .catch(error => console.log(error));
+            return
+        // const config = {
+        //     headers: formdata.getHeaders()
+        //   }
+        
+        // await api.put('Clientes/alterarImagens', formdata, config).then(function (response) {
+        //     console.log('response', response)
+        // }).catch(function (error){
+        //     console.log('error', error.response)
+        //     // console.log('error', error)
             
-            console.log('error', Object.keys(error.response))
-        })
+        //     console.log('error', Object.keys(error.response))
+        // })
     }
-
-
+    
+    console.log(userReup)
     return (<>
         <S.ContainerScroll>
             <S.Container>
-                <CardRegisterCNH validade={false} setUser={setUser} setCamera={setCamera} camera={camera} setPhoto={setPhoto} photo={photo} />
-                <CardRegisterCR  setUser={setUser} setCameraResi={setCameraResi} cameraResi={cameraResi} setPhotoResi={setPhotoResi} photoResi={photoResi} />
+                <CardRegisterCNH setCnh={setCnh} validade={false} setUser={setUser} setCamera={setCamera} camera={camera} setPhoto={setPhoto} photo={photo} />
+                <CardRegisterCR  setRes={setRes} setUser={setUser} setCameraResi={setCameraResi} cameraResi={cameraResi} setPhotoResi={setPhotoResi} photoResi={photoResi} />
                 <S.ContainerBottom>
                     <S.ContainerButtomLeft onPress={() => navigation.navigate('Home')}>
                         <S.TextButtonLeft>VOLTAR</S.TextButtonLeft>

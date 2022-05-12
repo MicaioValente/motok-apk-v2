@@ -12,9 +12,10 @@ type CardRegisterCR = {
     setPhotoResi: Function
     photoResi: any
     setUser: Function
+    setRes: Function
 }
 
-const CardRegisterCR = ({ setCameraResi, cameraResi, setPhotoResi, photoResi, setUser }: CardRegisterCR) => {
+const CardRegisterCR = ({ setRes, setCameraResi, cameraResi, setPhotoResi, photoResi, setUser }: CardRegisterCR) => {
     const [modalOpenCamera, setModalOpenCamera] = useState(false);
     const [file, setFile] = useState(false);
     const [modalVisible, setModalVisible] = useState(false);
@@ -38,6 +39,14 @@ const CardRegisterCR = ({ setCameraResi, cameraResi, setPhotoResi, photoResi, se
             type: result.mimeType,
             name: result.name
         })
+        if(setRes){
+            setRes({
+                uri: result.uri,
+                type: result.mimeType,
+                name: result.name
+            })
+
+        }
         setModalOpenCamera(false)
         setFile(true)
     }

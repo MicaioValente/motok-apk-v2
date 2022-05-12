@@ -62,10 +62,10 @@ const ShowPlans = ({route}: any) => {
                 <S.Text>planos disponíveis</S.Text>
                 <CarroselPlanos home={false} route={route} navigation={navigation}/>
             </S.Container>
-            <ModalComponent modalVisible={teste} setModalVisible={setTeste}>
+            {/* <ModalComponent modalVisible={teste} setModalVisible={setTeste}>
               <S.TextContainerLeft>Esta é versão e apenas para testes</S.TextContainerLeft>
               <S.TextContainerLeft onPress={() => setTeste(!teste)} style={{ marginLeft: 'auto',marginTop: -20, color: '#F14902'}}>OK!</S.TextContainerLeft>
-            </ModalComponent>
+            </ModalComponent> */}
           </>
         )
 

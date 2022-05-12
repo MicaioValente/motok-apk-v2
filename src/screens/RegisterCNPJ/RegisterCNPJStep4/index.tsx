@@ -18,6 +18,7 @@ export default function RegisterCPFStep4({ userCNPJ, postUser, setStep, step, se
     const [photo, setPhoto] = useState(null);
     const [photoResi, setPhotoResi] = useState(null);
     const camReft = useRef<any>(null)
+    const [cnh, setCnh] = useState(null);
 
     useEffect(() => {
         (async () => {
@@ -78,8 +79,8 @@ export default function RegisterCPFStep4({ userCNPJ, postUser, setStep, step, se
         <S.ContainerScroll>
             <S.Container>
                 <Counter Label={"Dados Pessoais"} setStep={setStep} step={step} />
-                <CardRegisterCNH validade={true} setUser={setUser} setCamera={setCamera} camera={camera} setPhoto={setPhoto} photo={photo} />
-                <CardRegisterCR  setUser={setUser} setCameraResi={setCameraResi} cameraResi={cameraResi} setPhotoResi={setPhotoResi} photoResi={photoResi} />
+                <CardRegisterCNH setCnh={setCnh} validade={true} setUser={setUser} setCamera={setCamera} camera={camera} setPhoto={setPhoto} photo={photo} />
+                <CardRegisterCR setRes={setCnh}  setUser={setUser} setCameraResi={setCameraResi} cameraResi={cameraResi} setPhotoResi={setPhotoResi} photoResi={photoResi} />
                 <S.ContainerBottom>
                     <S.ContainerButtomLeft >
                         <S.TextButtonLeft>VOLTAR</S.TextButtonLeft>

@@ -40,17 +40,12 @@ const CardSinistro = ({user}: CardBoleto) => {
         )
     }, [])
 
-
-
-
     return (
         <S.Container>
             <S.Content>
                 <S.ContainerIcon>
                     <S.Plano />
                 </S.ContainerIcon>
-
-
                 <S.ContainerText>
                     <S.Text>Plano Atual</S.Text>
                     <S.TextBold>{plano.nomePlano}</S.TextBold>

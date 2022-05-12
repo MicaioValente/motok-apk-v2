@@ -20,8 +20,9 @@ type CardRegisterCNH = {
     setUser: Function
     setModalExclusao?: Function
     validade: boolean
+    setCnh: Function
 }
-export default function CardRegisterCNH({setCamera, camera, photo, setPhoto, setUser, validade}: CardRegisterCNH ) {
+export default function CardRegisterCNH({setCamera, camera, setCnh, photo, setPhoto, setUser, validade}: CardRegisterCNH ) {
     const [modalVisible, setModalVisible] = useState(false);
     const [modalVisiblePre, setModalVisiblePre] = useState(true);
     const [modalOpenCamera, setModalOpenCamera] = useState(false);
@@ -39,6 +40,11 @@ export default function CardRegisterCNH({setCamera, camera, photo, setPhoto, set
             type: result.mimeType,
             name: result.name
         })
+            setCnh({
+                uri: result.uri,
+                type: result.mimeType,
+                name: result.name
+            })
         setPhoto(result.uri)
         setModalOpenCamera(false)
         setFile(true)

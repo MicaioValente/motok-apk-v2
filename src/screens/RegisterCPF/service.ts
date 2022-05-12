@@ -87,7 +87,7 @@ export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading:
     formdata.append("ValidadeCarteira", ValidadeCarteira.format('MM-DD-YYYY') );
     formdata.append("CarteiraMotorista", userCPF.docCarteiraMotorista);
     formdata.append("ComprovanteResidencia", userCPF.docComprovanteResidencia);
-
+    console.log('44444444444444444444444444', formdata)
     var requestOptions = {
         method: 'POST',
         body: formdata,
@@ -109,7 +109,7 @@ export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading:
     
     
     
-    fetch("https://apimotok.workdb.com.br/api/clientes/pf", requestOptions)
+    fetch("https://motok-api.herokuapp.com/api/clientes/pf", requestOptions)
     .then(response => response.json())
         .then(result =>response(result))
     //   .then(result => console.log('result', result))

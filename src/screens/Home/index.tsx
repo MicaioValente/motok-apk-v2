@@ -29,15 +29,19 @@ const Home: React.FC = () => {
             const token = await AsyncStorage.getItem('user');
             const {idCliente} = JSON.parse(token) 
             const user = JSON.parse(token) 
-    async function getUserById(){
+            async function getUserById(){
                 // console.log(555, userId)
                 api.get(`clientes/${idCliente}`).then(function (response ){
                     // api.get(`clientes/${userId.idCliente}`).then(function (response ){
                     delete response.data.arquivoBase64DocCarteira
                     delete response.data.arquivoBase64DocResidencia
+                    console.log(response.data)
+
                     setUser(response.data)
                     
                 }).catch(function (error){
+                    console.log(error)
+
                 })
                
             }

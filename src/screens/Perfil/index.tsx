@@ -35,6 +35,7 @@ const Perfil = ({userUp} : Perfil) => {
         const checkToken = async () => {
             const token = await AsyncStorage.getItem('user');
             const userId = JSON.parse(token) 
+            console.log(userId)
             async function getUserById(){
                 api.get(`clientes/${userId.idCliente}`).then(function (response ){
                     delete response.data.arquivoBase64DocCarteira

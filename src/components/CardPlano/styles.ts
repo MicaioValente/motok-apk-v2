@@ -1,22 +1,13 @@
 import { RFValue } from 'react-native-responsive-fontsize';
 import styled from 'styled-components/native';
-import {LinearGradient} from 'expo-linear-gradient';
 import PlanoSVG from '../../assets/plano.svg'
-import SinoSVG from '../../assets/sino.svg'
-import MoedaSVG from '../../assets/moeda.svg'
-import CalendarioSVG from '../../assets/calendario.svg'
-import CopiarSVG from '../../assets/copiar.svg'
-
 
 export const Container = styled.View`
     height: ${RFValue(265)}px;
     width: ${RFValue(300)}px;
     margin-top: ${RFValue(10)}px;
-    /* margin-bottom: ${RFValue(25)}px; */
     justify-content: flex-start;
     align-items: flex-start;
-
-
 `;  
 
 export const Content = styled.View`
