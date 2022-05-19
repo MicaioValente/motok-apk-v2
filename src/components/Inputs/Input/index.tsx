@@ -27,6 +27,7 @@ export default function Input({ placeholder, iconRight, iconLeft,nome, setUser }
                         placeholderTextColor="#E4E4E755"  
                         style={{color: '#fff'}}
                         mask={["999.999.999-99", "999.999.999/9999-99"]}
+                        keyboardType="numeric"
                         placeholder={placeholder}
                         value={text} 
                         text={text}

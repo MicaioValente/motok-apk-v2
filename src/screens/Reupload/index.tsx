@@ -9,12 +9,9 @@ import {LinearGradient} from 'expo-linear-gradient';
 import { StyleSheet, Text, View, TouchableOpacity, ToastAndroid} from 'react-native';
 import { Camera } from 'expo-camera';
 import {FontAwesome} from '@expo/vector-icons'
-import axios from 'axios';
 import { useNavigation } from '@react-navigation/native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import api from '../../service/api';
-import RegisterCNPJStep3 from '../RegisterCNPJ/RegisterCNPJStep3';
-
+import { URL } from '../../service/url';
 export default function Reupload() {
     const [camera, setCamera] = useState<boolean>(false);
     const [cameraResi, setCameraResi] = useState<boolean>(false);
@@ -121,7 +118,7 @@ export default function Reupload() {
             method: 'PUT',
             body: formdata,
             };
-        fetch("https://motok-api.herokuapp.com/api/Clientes/alterarImagens", requestOptions)
+        fetch(`${URL}Clientes/alterarImagens`, requestOptions)
         .then(response => response.json())
             // .then(result => navigation.reset({ routes: [{ name: 'Home' }] }))
             // .then(result => console.log(result.success))

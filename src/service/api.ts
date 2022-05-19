@@ -1,8 +1,8 @@
 import axios from 'axios';
+import {URL} from './url'
 
 const api = axios.create({
-    // baseURL: 'https://apimotok.workdb.com.br/api/'
-    baseURL: 'https://motok-api.herokuapp.com/api/'
+    baseURL: URL
 });
 
 export default api;

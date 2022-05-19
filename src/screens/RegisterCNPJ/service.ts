@@ -1,4 +1,5 @@
 import moment from "moment"
+import { URL } from "../../service/url"
 
 export interface userCNPJ {
     image: any
@@ -79,7 +80,7 @@ export async function postUserCNPJ(userCNPJ: userCNPJ, navigation: any, setLoadi
         body: formdata,
         };
 
-        fetch("https://motok-api.herokuapp.com/api/clientes/pj", requestOptions)
+        fetch(`${URL}clientes/pj`, requestOptions)
         .then(response => response.json())
       // .then(result => console.log('result', result ))
       .then(result => response(result))

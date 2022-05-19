@@ -45,18 +45,19 @@ const CardManuntencao = ({user, veiculoId}: CardPlano) => {
                 console.log(error)
             }
         )
-        api.get(`manutencoes`).then(
+        api.get(`Manutencoes/moto/${veiculoId}`).then(
             function (response){
                 setManutencoes(response.data)
-                console.log('33333', manutencoes)
-                let result: Manutencao[] = response.data.filter((e: Manutencao, i: number) => {
-                    if(e.idMoto === veiculoId){
-                        return e.dataEntrada
-                        // return moment(e.dataEntrada).format('DD/MM/YYYY')
-                    }
-                })
-                setDataInicio(result[0].dataEntrada)
-                setEntrega(result[0].dataEntrega)
+                console.log('33333', response.data)
+
+                // let result: Manutencao[] = response.data.filter((e: Manutencao, i: number) => {
+                //     if(e.idMoto === veiculoId){
+                //         return e.dataEntrada
+                //         // return moment(e.dataEntrada).format('DD/MM/YYYY')
+                //     }
+                // })
+                // setDataInicio(result[0].dataEntrada)
+                // setEntrega(result[0].dataEntrega)
             }
         ).catch(
             function (error){
@@ -65,12 +66,9 @@ const CardManuntencao = ({user, veiculoId}: CardPlano) => {
         )
     }, [])
     
-    function dataProximaManutencao(){
-    
-    }
 
-
-    return (<S.Container>
+    return (
+    <S.Container>
             <S.Content>
                 <S.ContainerIcon>
                     <S.Barras />

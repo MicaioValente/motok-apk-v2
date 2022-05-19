@@ -13,6 +13,7 @@ import { View } from 'react-native';
 import CardRetireSuaMotok from '../../components/CardRetireSuaMotok';
 import api from '../../service/api';
 import { UserGetById } from '../../components/CardPlano/types';
+import CardManutencaoPendente from '../../components/CardManutencaoPendente';
 
 
 type Perfil = {
@@ -91,6 +92,7 @@ const Perfil = ({userUp} : Perfil) => {
                 {user?.planoId != null ? 
                     <>
                         <CardSinistro user={user} veiculoId={veiculoId}/>
+                        <CardManutencaoPendente user={user} veiculoId={veiculoId}/>
                         <CardManuntencao user={user} veiculoId={veiculoId}/>
                     </> 
                     : !planoComprado?.idPlanos && userEmAnalise(user?.aprovacaoId)?
@@ -99,10 +101,13 @@ const Perfil = ({userUp} : Perfil) => {
                     </>
                     : null
                  }
+                 
                 <View style={{marginTop: user?.planoId != null ? 20 : '100%'}}>
                     <ProximaPage rota='home' title='Alterar Dados Cadastrais' BGcolor='rgba(72, 55, 46, 0.6)' color='rgba(241, 73, 2, 1)'/>
                     <ProximaPage  rota='SignIn' title='Sair da Conta' BGcolor='rgba(72, 46, 46, 0.6)' color='rgba(220, 38, 38, 1)' Icon={SairAppSVG}/> 
                 </View>
+                <View style={{height: 30, width: 34}}/>
+
             </S.Container>
         </S.Scroll>
     )

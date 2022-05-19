@@ -9,10 +9,14 @@ import api from '../../service/api';
 import { BackHandler } from 'react-native'
 import ModalAlert from '../../components/ModalAlertVersion';
 import ModalComponent from '../../components/Modal';
+import { URL } from '../../service/url';
 const ShowPlans = ({route}: any) => {
     const navigation = useNavigation();
     const [teste, setTeste] = useState(true)
     const [ modal, setModal] = useState(false)
+    const [ version, setVersion ] = useState<number>(1)
+    const [ modalVersion, setModalVersion] = useState(false)
+
     // async function getNotificacoes() {
     //     const token = await AsyncStorage.getItem('apiToken')
         // var config = {
@@ -32,16 +36,38 @@ const ShowPlans = ({route}: any) => {
         //     });
         // }
         // getNotificacoes()
-        
+      //   useEffect(() => {
+      //     const versao = 22
+      //     const checkVersion = async () => {
+      //         await api.get(`appversions/${1}`)
+      //           .then(async response => {
+      //               console.log(response.data.version  == versao)
+      //             setVersion(response.data.version)
+      //             if(response.data.version == versao){
+      //                 return
+      //             }else{  
+      //               setModal(true)
+  
+      //             }
+  
+      //           }).catch(function (error) {
+      //             console.log(999999, error)
+  
+      //           });
+      //         }
+      //         checkVersion();
+      // }, []);
     useEffect(() => {
-        const versao = 1
+        const versao = 22
         const checkVersion = async () => {
-            await api.get(`appversions/${versao}`)
+            await api.get(`appversions/${1}`)
               .then(async response => {
+                console.log('responseeee', response.data.version)
+                console.log(1, parseInt(response.data.version) == versao)
                 if(response.data.version == versao){
                     return
                 }else{  
-                  setModal(true)
+                  setModalVersion(true)
 
                 }
 
@@ -55,17 +81,22 @@ const ShowPlans = ({route}: any) => {
 
     return (
           <>
+                <ModalAlert modal={modalVersion} setModal={setModalVersion} text={`Você precisa atulizar o app`}/>
+
             <S.Container>
-                <ModalAlert modal={modal} setModal={setModal} text={'Você precisa atulizar o app'}/>
+                {/* <ModalAlert modal={modal} setModal={setModal} text={'Você precisa atulizar o app'}/> */}
                 <ContainerLoginCap route={route} navigation={navigation}/>
                 <ContainerLoginBike route={route} navigation={navigation}/>
                 <S.Text>planos disponíveis</S.Text>
                 <CarroselPlanos home={false} route={route} navigation={navigation}/>
             </S.Container>
-            {/* <ModalComponent modalVisible={teste} setModalVisible={setTeste}>
+            {
+              URL === 'https://apimotok.workdb.com.br/api/' &&
+            <ModalComponent modalVisible={teste} setModalVisible={setTeste}>
               <S.TextContainerLeft>Esta é versão e apenas para testes</S.TextContainerLeft>
               <S.TextContainerLeft onPress={() => setTeste(!teste)} style={{ marginLeft: 'auto',marginTop: -20, color: '#F14902'}}>OK!</S.TextContainerLeft>
-            </ModalComponent> */}
+            </ModalComponent>
+            }
           </>
         )
 

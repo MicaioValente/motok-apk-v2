@@ -14,6 +14,7 @@ import CardRetireSuaMotok from '../../components/CardRetireSuaMotok';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import api from '../../service/api';
 import { UserGetById } from '../../components/CardPlano/types';
+import { View } from 'react-native';
 
 
 const Home: React.FC = () => {
@@ -102,8 +103,10 @@ const Home: React.FC = () => {
                                                     <CardBoleto idUser={user.idCliente}/>
                                                     <CardPlano  user={user} />
                                                     <CardStatusCadastro user={user}/>
-                                                    <ProximaPage rota='home' title='Alterar Plano' BGcolor='rgba(72, 55, 46, 0.6)' color='rgba(241, 73, 2, 1)'/>
-                                                    <ProximaPage  rota='home' title='Cancelar Plano' BGcolor='rgba(72, 46, 46, 0.6)' color='rgba(220, 38, 38, 1)'/>
+                                                    <View style={{marginTop: user?.planoId != null ? 18 : '100%'}}>
+                                                        <ProximaPage rota='home' title='Alterar Plano' BGcolor='rgba(72, 55, 46, 0.6)' color='rgba(241, 73, 2, 1)'/>
+                                                        <ProximaPage  rota='home' title='Cancelar Plano' BGcolor='rgba(72, 46, 46, 0.6)' color='rgba(220, 38, 38, 1)'/>
+                                                    </View>
                                                 </>
                                             )
                                         :planoComprado?.idPlanos ?
@@ -115,8 +118,8 @@ const Home: React.FC = () => {
                                             </>
                                         : null 
                         : null
-                                        
                     }
+                    <View style={{height: 30, width: 34}}/>
                 </S.Container>
             </S.Scroll>
     </>

@@ -1,5 +1,6 @@
 import moment from 'moment'
 import { ToastAndroid } from 'react-native'
+import { URL } from '../../service/url'
 export interface userCPF {
     image: any
     anoNascimento: string
@@ -109,7 +110,7 @@ export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading:
     
     
     
-    fetch("https://motok-api.herokuapp.com/api/clientes/pf", requestOptions)
+    fetch(`${URL}clientes/pf`, requestOptions)
     .then(response => response.json())
         .then(result =>response(result))
     //   .then(result => console.log('result', result))

@@ -29,3 +29,10 @@ export const TextButton = styled.Text`
 export const ContainerSegundaParte = styled.View`
 
 `
+
+export const TextContainerLeft = styled.Text`
+    font-size: ${RFValue(20)}px;
+    font-family: "Teko_700Bold";
+    color: #ffff;
+`
+
