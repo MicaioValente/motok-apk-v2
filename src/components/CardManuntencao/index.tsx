@@ -28,7 +28,6 @@ export type Manutencao = {
 }
 
 const CardManuntencao = ({user, veiculoId}: CardPlano) => {
-    console.log('veiculoId', veiculoId)
     const [ veiculo, setVeiculo] = useState<Veiculo>({} as Veiculo)
     const [ manutencoes, setManutencoes] = useState<Manutencao[]>([] as Manutencao[])
     const [ dataInicio, setDataInicio] = useState<any>()
@@ -48,7 +47,6 @@ const CardManuntencao = ({user, veiculoId}: CardPlano) => {
         api.get(`Manutencoes/moto/${veiculoId}`).then(
             function (response){
                 setManutencoes(response.data)
-                console.log('33333', response.data)
 
                 // let result: Manutencao[] = response.data.filter((e: Manutencao, i: number) => {
                 //     if(e.idMoto === veiculoId){

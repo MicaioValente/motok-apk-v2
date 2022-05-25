@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import * as S from './styles'
 import CardPagamento from '../../components/CardPagamento'
 import CardBoleto from '../../components/CardBoleto';
@@ -14,34 +14,43 @@ import CardRetireSuaMotok from '../../components/CardRetireSuaMotok';
 import { createIconSetFromFontello } from 'react-native-vector-icons';
 import api from '../../service/api';
 import { UserGetById } from '../../components/CardPlano/types';
-import { View } from 'react-native';
+import { View, RefreshControl} from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 
 const Home: React.FC = () => {
     const [modalNotificacoes, setModalVisible] = useState(false)
     const [ user, setUser] = useState<UserGetById>({} as UserGetById)
     const [ planoComprado, setPlanoComprado] = useState<any>()
+    const [refreshing, setRefreshing] = useState(false);
+    const [trigger, setTrigger] = useState(false)
 
 
-    console.log('user', user)
-    console.log('planoComprado', planoComprado)
     useEffect(() => {
+        console.log(1111111)
+
         const checkToken = async () => {
+
+        console.log(22222)
+            
+
+
             const token = await AsyncStorage.getItem('user');
             const {idCliente} = JSON.parse(token) 
             const user = JSON.parse(token) 
+
             async function getUserById(){
-                // console.log(555, userId)
                 api.get(`clientes/${idCliente}`).then(function (response ){
                     // api.get(`clientes/${userId.idCliente}`).then(function (response ){
                     delete response.data.arquivoBase64DocCarteira
                     delete response.data.arquivoBase64DocResidencia
-                    console.log(response.data)
 
                     setUser(response.data)
+                    setRefreshing(false);
                     
                 }).catch(function (error){
                     console.log(error)
+                    setRefreshing(false);
 
                 })
                
@@ -49,7 +58,7 @@ const Home: React.FC = () => {
             getUserById()
         }
         checkToken();
-    }, []);
+    }, [trigger]);
 
     useEffect(() => {
         async function getPlano() {
@@ -67,26 +76,35 @@ const Home: React.FC = () => {
             return true
         }
     }
-    function userEmAnalise(aprovacaoId: number){
 
+    function userEmAnalise(aprovacaoId: number){
         if(aprovacaoId === 3){
             return true
         }
     }
-    function userAprovado(aprovacaoId: number){
 
+    function userAprovado(aprovacaoId: number){
         if(aprovacaoId === 1){
             return true
         }
     }
 
     function userTemMotoCadastrada(){
-        // if(user.)
         return false
     }
+
+    const onRefresh = () => {
+        setRefreshing(true);
+        setTrigger(!trigger);
+
+    };
+
     return (<>
         <ModalNotificacoes modalVisible={modalNotificacoes} setModalVisible={setModalVisible} idCliente={10} ></ModalNotificacoes>
-            <S.Scroll>
+            <SafeAreaView style={{backgroundColor: '#fff', flex: 1}}>
+            <S.Scroll
+                refreshControl={<RefreshControl progressBackgroundColor={'#fff'}refreshing={refreshing} onRefresh={onRefresh} />}
+            >
                 <S.Container>
                     <CardPagamento user={user} modalVisible={modalNotificacoes} setModalVisible={setModalVisible}/>
                     {userTemMotoCadastrada() ? 
@@ -122,6 +140,7 @@ const Home: React.FC = () => {
                     <View style={{height: 30, width: 34}}/>
                 </S.Container>
             </S.Scroll>
+            </SafeAreaView>
     </>
     )
 }

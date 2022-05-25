@@ -7,6 +7,7 @@ import InputData from '../../../components/Inputs/InputData'
 import {LinearGradient} from 'expo-linear-gradient';
 import { ToastAndroid } from 'react-native';
 import { userCPF } from '../service';
+import { cpf } from 'cpf-cnpj-validator'; 
 
 export type StepProps = {
     setStep: Function
@@ -18,7 +19,7 @@ export type StepProps = {
 }
 
 export default function RegisterCPFStep1({step, setStep, setUser, userCPF }: StepProps) {
-    const [segundaParte, setSegundaParte] = useState(false)
+    const [segundaParte, setSegundaParte] = useState(userCPF.nomeCliente)
 
     function situacao() {
         if (segundaParte) {
@@ -33,8 +34,14 @@ export default function RegisterCPFStep1({step, setStep, setUser, userCPF }: Ste
                 && userCPF.mesNascimento
                 && userCPF.anoNascimento
                 ){
-                    setStep(2)
-                    return
+                    if(cpf.isValid(userCPF.cpfCliente)){
+                        setStep(2)
+                        return
+                    }else{
+                    ToastAndroid.show('cpf não é válido', ToastAndroid.LONG);
+
+                    }
+                    
                 }else{
                     ToastAndroid.show('Prencha todos os Campos', ToastAndroid.LONG);
                 }
@@ -43,19 +50,21 @@ export default function RegisterCPFStep1({step, setStep, setUser, userCPF }: Ste
         }
         setSegundaParte(true)
     }
+
+
     return (
         <S.Container >
             <Counter Label={"Dados Pessoais"} setStep={setStep} step={step} />
-            <InputRegister mask={'999.999.999-99'} border={true} placeholder="Informe seu CPF" label="Informe seu CPF" name="cpfCliente" setUser={setUser} />
-            {segundaParte &&
+            <InputRegister value={userCPF.cpfCliente} mask={'999.999.999-99'} border={true} placeholder="Informe seu CPF" label="Informe seu CPF" name="cpfCliente" setUser={setUser} />
+            {segundaParte || userCPF.nomeCliente ? 
             <>
                 <S.ContainerSegundaParte >
-                    <InputRegister border={false} placeholder="Nome Completo" label="Nome"  name="nomeCliente" setUser={setUser} />
-                    <InputRegister border={false} placeholder="Informe seu email" label="Email"  name="emailCliente" setUser={setUser} />
-                    <InputRegister border={false} placeholder="Informe sua senha" label="Senha"  name="senhaCliente" setUser={setUser} />
-                    <InputRegister border={false} placeholder="Nome da Mãe" label="Nome da Mãe"  name="nomeMae" setUser={setUser} />
-                    <InputRegister border={false} placeholder="Nome do Pai" label="Nome do Pai"  name="nomePai" setUser={setUser} />
-                    <InputData label="Data de Nascimento" setUser={setUser} />
+                    <InputRegister value={userCPF.nomeCliente} border={false} placeholder="Nome Completo" label="Nome"  name="nomeCliente" setUser={setUser} />
+                    <InputRegister value={userCPF.emailCliente} border={false} placeholder="Informe seu email" label="Email"  name="emailCliente" setUser={setUser} />
+                    <InputRegister value={userCPF.senhaCliente} border={false} placeholder="Informe sua senha" label="Senha"  name="senhaCliente" setUser={setUser} />
+                    <InputRegister value={userCPF.nomeMae} border={false} placeholder="Nome da Mãe" label="Nome da Mãe"  name="nomeMae" setUser={setUser} />
+                    <InputRegister value={userCPF.nomePai} border={false} placeholder="Nome do Pai" label="Nome do Pai"  name="nomePai" setUser={setUser} />
+                    <InputData  value={userCPF} label="Data de Nascimento" setUser={setUser} />
                     <S.Button segundaParte={segundaParte} onPress={() => situacao()} >
                         <LinearGradient
                             colors={["#FE1D16", "#FD3C14", "#FA7311"]}
@@ -71,7 +80,7 @@ export default function RegisterCPFStep1({step, setStep, setUser, userCPF }: Ste
                     </S.Button>
                 </S.ContainerSegundaParte>
             </>
-            }
+            : null}
             {!segundaParte && 
             <S.Button segundaParte={segundaParte} onPress={() => situacao()} >
                 <LinearGradient
@@ -83,7 +92,7 @@ export default function RegisterCPFStep1({step, setStep, setUser, userCPF }: Ste
                         alignItems: "center",
                         borderRadius: 10
                     }}>
-                    <S.TextButton >{segundaParte ? "PRÓXIMO2" : "CONTINUAR"}</S.TextButton>
+                    <S.TextButton >{segundaParte ? "PRÓXIMO" : "CONTINUAR"}</S.TextButton>
                 </LinearGradient>
             </S.Button>
             }

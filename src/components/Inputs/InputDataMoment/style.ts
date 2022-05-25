@@ -6,12 +6,12 @@ export const Wrapper = styled.View`
     margin-top: ${RFValue(20)}px;
 `
 
-export const WrapperContent = styled.View`
+export const WrapperContent = styled.TouchableOpacity`
     width: 100%;
     height: ${RFValue(49)}px;
 `
 
-export const Container = styled.View`
+export const Container = styled.TouchableOpacity`
     flex-direction: row;
     align-items: center;
     background-color: #3F3F46;

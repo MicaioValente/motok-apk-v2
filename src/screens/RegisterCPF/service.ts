@@ -29,38 +29,31 @@ export interface userCPF {
 
 export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading: any, setAviso: any) {
     setLoading(true)
-    console.log(userCPF)
 
     function response(result: any) {
             setLoading(false)
 
         if(result.errors){
-            console.log(222)
 
             const keys = Object.keys(result.errors)
-            console.log(222, keys)
             keys.map(e => 
             ToastAndroid.show(`${e} nao foi enviado`, ToastAndroid.SHORT)
                 
                 )
-            console.log(3333, result.errors[keys[0]])
             result.errors[keys[0]]
         }
 
         if(result.status === 400){
-            console.log(444)
             setAviso(true)
             return
         }
 
         if(result.success){
-            console.log(555)
             navigation.reset({ routes: [{ name: 'SignIn' }] })
             return
         }
     }
     function errorResponse(error:any) {
-        console.log(error)
         setAviso(true)
         setLoading(false)
     }
@@ -88,7 +81,6 @@ export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading:
     formdata.append("ValidadeCarteira", ValidadeCarteira.format('MM-DD-YYYY') );
     formdata.append("CarteiraMotorista", userCPF.docCarteiraMotorista);
     formdata.append("ComprovanteResidencia", userCPF.docComprovanteResidencia);
-    console.log('44444444444444444444444444', formdata)
     var requestOptions = {
         method: 'POST',
         body: formdata,

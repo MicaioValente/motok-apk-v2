@@ -30,7 +30,6 @@ const PagamentoBoletoCaucao = ({ step, setStep, plano, formaDePagamento, setForm
             quantidadeParcelas: formaDePagamento.caucao.parcelas
         }
         api.post('boleto/pagamentoContratacao', dataRequest).then(function (response){
-            console.log(response)
             setLoading(false)
             setBoleto(response.data)
             // Linking.openURL(response.data.boletoUrl)

@@ -12,9 +12,7 @@ export default function PagamentoEmAnalise(plano: any, user: any) {
 
     async function setPagamentoAndRedirect() {
         let dataRequest = {idCliente: plano.user.idCliente, idPlano: plano.plano.idPlanos}
-        console.log(dataRequest)
         api.put('planos/alterarplano/cliente', dataRequest).then( async function (response){
-            console.log(response)
             await AsyncStorage.setItem('comprado', JSON.stringify(plano.plano))
             navigation.reset({ routes: [{ name: 'Home' }] })
         }).catch(function (response){ console.log( 2222, response )})

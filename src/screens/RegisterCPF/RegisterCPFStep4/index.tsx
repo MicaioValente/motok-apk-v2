@@ -80,11 +80,11 @@ export default function RegisterCPFStep4({ userCPF, setStep, step, setUser, post
         <S.ContainerScroll>
             <S.Container>
                 <Counter Label={"Dados Pessoais"} setStep={setStep} step={step} />
-                <CardRegisterCNH setCnh={setCnh} validade={true} modalExclusao={modalExclusao} setModalExclusao={setModalExclusao} setUser={setUser} setCamera={setCamera} camera={camera} setPhoto={setPhoto} photo={photo} />
+                <CardRegisterCNH userCPF={userCPF} setCnh={setCnh} validade={true} modalExclusao={modalExclusao} setModalExclusao={setModalExclusao} setUser={setUser} setCamera={setCamera} camera={camera} setPhoto={setPhoto} photo={photo} />
                 <CardRegisterCR   setRes={setCnh} setUser={setUser} setCameraResi={setCameraResi} cameraResi={cameraResi} setPhotoResi={setPhotoResi} photoResi={photoResi} />
                 <S.ContainerBottom>
                     <S.ContainerButtomLeft >
-                        <S.TextButtonLeft>VOLTAR</S.TextButtonLeft>
+                        <S.TextButtonLeft onPress={() => setStep(step - 1)}>VOLTAR</S.TextButtonLeft>
                     </S.ContainerButtomLeft>
                     <S.Button onPress={() => portUserAndValidate()}>
                         <LinearGradient

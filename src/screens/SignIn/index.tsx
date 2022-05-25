@@ -30,11 +30,9 @@ const SignIn: React.FC = () => {
 
     async function loginUser() {
         setLoading(true)
-        // PaymentCoordinator.start(obj)
-        // return
+
         await api.post('login', userLogin)
             .then(async function (response) {
-                console.log(response.data.idCliente)
             setLoading(false)
             await AsyncStorage.setItem('user', JSON.stringify(response.data))
             await postTokenAndUser(response.data.idCliente)
@@ -49,9 +47,7 @@ const SignIn: React.FC = () => {
     
     async function postTokenAndUser(id:number) {
         api.put(`Clientes/alterarIdFirebase/${token}/cliente/${id}`).then(function (response) {
-            console.log(response)
         }).catch(function (error) {
-            console.log(error)
         })
     }
 
@@ -65,11 +61,9 @@ const SignIn: React.FC = () => {
 
         if(enable) {
             let tokenFcm = await messaging().getToken()
-            console.log('token ', tokenFcm)
             setToken(tokenFcm)
 
             messaging().onTokenRefresh(newToken => {
-                console.log('newToken ', newToken)
                 setToken(tokenFcm)
             })
 

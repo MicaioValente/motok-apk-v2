@@ -23,17 +23,13 @@ const CardBoleto = ({idUser}: CardBoleto) => {
     const [ colorStatus, setColorStatus ] = useState('')
     const [ labelBoletoStatus, setLabelBoletoStatus ] = useState('')
     const [ semBoletos, setSemBoletos ] = useState<semPlano | null>()
-    console.log('boleto 111',boleto)
-    console.log('idUser  111 ', idUser)
     useEffect(() => {
         api.get(`boleto/${idUser}`).then(
             function (response){
-                console.log(999999, response.data)
                 if(response.data.length > 0){
                     setBoleto(response.data[response.data.length - 1])
                     return
                 }
-                console.log(4444, response.data)
                     setSemBoletos({valor: 0, dataVencimento: 'Sem data', code: 'Sem código'})
                     return
             }
@@ -88,7 +84,6 @@ const CardBoleto = ({idUser}: CardBoleto) => {
             ToastAndroid.show('Código Não disponível', ToastAndroid.LONG)
             return
         }
-        console.log(cod)
         Clipboard.setString(cod)
         ToastAndroid.show('Código Copiado', ToastAndroid.LONG)
     }

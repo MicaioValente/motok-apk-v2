@@ -3,7 +3,7 @@ import { InputEndereco } from '../InputCep';
 import * as S from './style'
 
 
-export default function InputNumero({setUser, name}: InputEndereco) {
+export default function InputNumero({setUser, name, value}: InputEndereco) {
     return (<S.Wrapper>
         <S.ContainerTitle>
             <S.Title>Número</S.Title>
@@ -16,6 +16,7 @@ export default function InputNumero({setUser, name}: InputEndereco) {
                     keyboardType='numeric'
                     style={{color: '#fff'}}
                     onChangeText={text => setUser(name, text)}
+                    value={value}
                 />
             </S.Container>
         </S.WrapperContent>

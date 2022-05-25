@@ -33,19 +33,19 @@ export default function RegisterCPFStep3({ userCPF, step, setStep, setUser }: St
         <S.Wrapper>
             <Counter Label={"Dados Pessoais"} setStep={setStep} step={step} />
             <S.ContainerTerceiraParte>
-                <InputCep setUser={setUser} name={'cepEnderecoCliente'} />
+                <InputCep value={userCPF.cepEnderecoCliente} setUser={setUser} name={'cepEnderecoCliente'} />
                 <Select setUser={setUser} border={false} />
-                <InputRegister setUser={setUser} name={'bairroEnderecoCliente'} border={false} placeholder="Insira seu bairro" label="Bairro" />
+                <InputRegister value={userCPF.bairroEnderecoCliente} setUser={setUser} name={'bairroEnderecoCliente'} border={false} placeholder="Insira seu bairro" label="Bairro" />
                 <S.Row>
-                    <InputRua placeholder={'Insira a rua'} setUser={setUser} name={'ruaEnderecoCliente'} />
-                    <InputNumero setUser={setUser} name={'numEnderecoCliente'} />
+                    <InputRua value={userCPF.ruaEnderecoCliente} placeholder={'Insira a rua'} setUser={setUser} name={'ruaEnderecoCliente'} />
+                    <InputNumero value={userCPF.numEnderecoCliente} setUser={setUser} name={'numEnderecoCliente'} />
                 </S.Row>
-                <InputRegister setUser={setUser} name={'complementoEnderecoCliente'} border={false} placeholder="Complemento Endereço" label="Complemento" />
+                <InputRegister value={userCPF.complementoEnderecoCliente} setUser={setUser} name={'complementoEnderecoCliente'} border={false} placeholder="Complemento Endereço" label="Complemento" />
             </S.ContainerTerceiraParte >
             <S.ContainerBottom>
 
                 <S.ContainerButtomLeft >
-                    <S.TextButtonLeft>VOLTAR</S.TextButtonLeft>
+                    <S.TextButtonLeft onPress={() => setStep(step - 1)}>VOLTAR</S.TextButtonLeft>
                 </S.ContainerButtomLeft>
                 <S.Button onPress={() => situacao()} >
                     <LinearGradient

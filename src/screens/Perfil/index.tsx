@@ -9,7 +9,7 @@ import ProximaPage from '../../components/ProximaPage';
 import SairAppSVG from '../../assets/sairApp.svg'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { User } from '../Preload';
-import { View } from 'react-native';
+import { View, RefreshControl } from 'react-native';
 import CardRetireSuaMotok from '../../components/CardRetireSuaMotok';
 import api from '../../service/api';
 import { UserGetById } from '../../components/CardPlano/types';
@@ -23,6 +23,7 @@ const Perfil = ({userUp} : Perfil) => {
     const [ user, setUser] = useState<UserGetById>({} as UserGetById)
     const [ planoComprado, setPlanoComprado] = useState<any>()
     const [ veiculoId, setVeiculoId] = useState<any>()
+    const [refreshing, setRefreshing] = useState(false);
 
     useEffect(() => {
         const GetVeiculo = async() => {
@@ -36,7 +37,6 @@ const Perfil = ({userUp} : Perfil) => {
         const checkToken = async () => {
             const token = await AsyncStorage.getItem('user');
             const userId = JSON.parse(token) 
-            console.log(userId)
             async function getUserById(){
                 api.get(`clientes/${userId.idCliente}`).then(function (response ){
                     delete response.data.arquivoBase64DocCarteira
@@ -75,8 +75,14 @@ const Perfil = ({userUp} : Perfil) => {
         }
     }
 
+    function onRefresh () {
+
+    }
+    console.log('userPai', userUp)
     return (
-        <S.Scroll>
+        <S.Scroll
+                refreshControl={<RefreshControl progressBackgroundColor={'#fff'}refreshing={refreshing} onRefresh={onRefresh} />}
+            >
             <S.Container>
                 <CardPerfil user={userUp}/>
                 {userReprovado(user.aprovacaoId) ? 

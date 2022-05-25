@@ -7,7 +7,9 @@ import InputPhoneNumber from '../../../components/Inputs/InputPhoneNumber'
 import {LinearGradient} from 'expo-linear-gradient';
 import { StepProps } from '../RegisterCPFStep1';
 import { ToastAndroid } from 'react-native'
-export default function RegisterCPFStep2({ userCPF, setStep, setUser, step }: StepProps) {
+
+
+export default function RegisterCPFStep2({ userCPF, setStep, setUser, step}: StepProps) {
 
     function situacao() {
         if(userCPF.telefoneCliente){
@@ -20,13 +22,14 @@ export default function RegisterCPFStep2({ userCPF, setStep, setUser, step }: St
     return <S.Content>
         <Counter Label={"Validar o Número"} setStep={setStep} step={step} />
         <S.ContainerSegundaParte>
-            <InputPhoneNumber setUser={setUser} border={false} placeholder="(12) 34567-89000" label="Informe seu telefone" />
+                        
+            <InputPhoneNumber value={userCPF.telefoneCliente} setUser={setUser} border={false} placeholder="(12) 34567-89000" label="Informe seu telefone" />
             {/* <InputCodigo label="Código" /> */}
         </S.ContainerSegundaParte>
         <S.ContainerBottom>
 
             <S.ContainerButtomLeft >
-                <S.TextButtonLeft>VOLTAR</S.TextButtonLeft>
+                <S.TextButtonLeft onPress={() => setStep(step - 1)}>VOLTAR</S.TextButtonLeft>
             </S.ContainerButtomLeft>
             <S.Button onPress={() => situacao()} >
                 <LinearGradient

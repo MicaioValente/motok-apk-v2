@@ -26,7 +26,6 @@ export default function Reupload() {
     const navigation = useNavigation<any>()
     
     function setUser(name: string, value: any){
-        console.log('askdjkas')
         setUserReup({...userReup, [name]: value })
         // setUserCNPJ({
         //     ...userCNPJ,
@@ -113,7 +112,6 @@ export default function Reupload() {
         formdata.append("IdCliente", userReup.IdCliente);
         formdata.append("HaveComprovanteResidencia", userReup?.docComprovanteResidencia ? true : false);
         formdata.append("HaveCarteiraMotorista", userReup?.docCarteiraMotorista ? true : false);
-        console.log('dataRequest', formdata)
         var requestOptions = {
             method: 'PUT',
             body: formdata,
@@ -127,21 +125,8 @@ export default function Reupload() {
         // .then(result => redirect(result))
         .catch(error => console.log(error));
             return
-        // const config = {
-        //     headers: formdata.getHeaders()
-        //   }
-        
-        // await api.put('Clientes/alterarImagens', formdata, config).then(function (response) {
-        //     console.log('response', response)
-        // }).catch(function (error){
-        //     console.log('error', error.response)
-        //     // console.log('error', error)
-            
-        //     console.log('error', Object.keys(error.response))
-        // })
     }
     
-    console.log(userReup)
     return (<>
         <S.ContainerScroll>
             <S.Container>

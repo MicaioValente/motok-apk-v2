@@ -1,12 +1,14 @@
 import React, { useState } from 'react';
+import { userCPF } from '../../../screens/RegisterCPF/service';
 import * as S from './style'
 
 export type InputDataProps = {
     label: string
     setUser: Function
+    value: userCPF
 }
 
-export default function InputData({ label, setUser}: InputDataProps) {
+export default function InputData({ label, setUser, value }: InputDataProps) {
     const [isFocused, setIsFocused] = useState(false);
     const [isFocused2, setIsFocused2] = useState(false);
     const [isFocused3, setIsFocused3] = useState(false);
@@ -25,6 +27,7 @@ export default function InputData({ label, setUser}: InputDataProps) {
                         onChangeText={(text: string) => setUser('diaNascimento',text )}
                         onBlur={() => {setIsFocused(false)}}
                         onFocus={() => setIsFocused(true)}
+                        value={value.diaNascimento}
                     />
                 </S.Container>
                 <S.Container>
@@ -37,6 +40,7 @@ export default function InputData({ label, setUser}: InputDataProps) {
                         maxLength={2}
                         onChangeText={(text: string) => setUser('mesNascimento',text )}
                         onBlur={() => {setIsFocused2(false)}}
+                        value={value.mesNascimento}
                         onFocus={() => setIsFocused2(true)}
                     />
                 </S.Container>
@@ -47,6 +51,7 @@ export default function InputData({ label, setUser}: InputDataProps) {
                         placeholder="Ano"
                         style={{color: '#fff'}}
                         keyboardType='numeric'
+                        value={value.anoNascimento}
                         maxLength={4}
                         onChangeText={(text: string) => setUser('anoNascimento',text )}
                         onBlur={() => {setIsFocused3(false)}}

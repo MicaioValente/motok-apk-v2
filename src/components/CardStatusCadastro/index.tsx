@@ -5,9 +5,7 @@ import * as S from './styles';
 
 const CardStatusCadastro = ({user, aprovado, reprovado, analise}: any) => {
     const navigation = useNavigation<any>()
-    console.log(user?.dscMotivoReprovacao)
     const motivo = user?.dscMotivoReprovacao?.split('//')
-    console.log('motivooo', motivo)
     return (<>
         {reprovado ? 
             <S.Container>

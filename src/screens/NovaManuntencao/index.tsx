@@ -33,7 +33,6 @@ const RegisterCPF: React.FC = ({route} : any) => {
         }
         GetVeiculo()
     }, [])
-    console.log(userCPF)
 
     return (
         <S.Container>

@@ -25,8 +25,6 @@ export type Plano = {
 }
 const CardSinistro = ({user}: CardBoleto) => {
     const [ plano, setPlano ] = useState<Plano>({} as Plano)
-    const [ labelBoletoStatus, setLabelBoletoStatus ] = useState('')
-    console.log('user dentro do Card', user)
 
     useEffect(() => {
         api.get(`planos/${user.idCliente}`).then(

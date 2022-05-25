@@ -13,10 +13,11 @@ import Loading from '../../components/Loading';
 
 const RegisterCPF: React.FC = () => {
     const navigation = useNavigation()
-    const [step, setStep] = useState(1)
+    const [step, setStep] = useState(4)
     const [userCPF, setUserCPF] = useState({} as userCPF)
     const [loading, setLoading] = useState(false)
     const [aviso, setAviso] = useState(false)
+
     async function postUser() {
         try{
             await postUserCpf(userCPF, navigation, setLoading, setAviso)
@@ -24,6 +25,7 @@ const RegisterCPF: React.FC = () => {
     
         }
     }
+
     function setUser(nome: string, value: any){
         if(nome === 'docCarteiraMotorista'){
             let obj = {
@@ -42,6 +44,7 @@ const RegisterCPF: React.FC = () => {
                 [nome]: value    
         })
     }
+    console.log(userCPF)
 
     function stepComponete(name: number) {
         switch (name) {

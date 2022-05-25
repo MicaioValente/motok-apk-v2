@@ -17,53 +17,11 @@ const ShowPlans = ({route}: any) => {
     const [ version, setVersion ] = useState<number>(1)
     const [ modalVersion, setModalVersion] = useState(false)
 
-    // async function getNotificacoes() {
-    //     const token = await AsyncStorage.getItem('apiToken')
-        // var config = {
-        //     method: 'get',
-        //     url: 'https://api.motok.com.br/v2/planos/listar/',
-        //     headers: { 
-        //       'Authorization': 'Bearer dG9rZW5fX193b3JrZGJfX19tb3Rva19fX2FjZXNzb19fX3BhcmFfX19vX19fYXBsaWNhdGl2bw==', 
-        //       'Content-Type': 'application/x-www-form-urlencoded'
-        //     },
-        //     data : data
-        //   };
-
-        // await api.get(`planos/listar`,config)
-        //     .then(async function (response) {
-        //     })
-        //     .catch(function (error) {
-        //     });
-        // }
-        // getNotificacoes()
-      //   useEffect(() => {
-      //     const versao = 22
-      //     const checkVersion = async () => {
-      //         await api.get(`appversions/${1}`)
-      //           .then(async response => {
-      //               console.log(response.data.version  == versao)
-      //             setVersion(response.data.version)
-      //             if(response.data.version == versao){
-      //                 return
-      //             }else{  
-      //               setModal(true)
-  
-      //             }
-  
-      //           }).catch(function (error) {
-      //             console.log(999999, error)
-  
-      //           });
-      //         }
-      //         checkVersion();
-      // }, []);
     useEffect(() => {
-        const versao = 22
+        const versao = 24
         const checkVersion = async () => {
             await api.get(`appversions/${1}`)
               .then(async response => {
-                console.log('responseeee', response.data.version)
-                console.log(1, parseInt(response.data.version) == versao)
                 if(response.data.version == versao){
                     return
                 }else{  
@@ -72,7 +30,6 @@ const ShowPlans = ({route}: any) => {
                 }
 
               }).catch(function (error) {
-                console.log(999999, error)
 
               });
             }

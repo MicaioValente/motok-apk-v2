@@ -3,6 +3,7 @@ import * as S from './styles';
 
 import { deg } from 'react-native-linear-gradient-degree';
 import { UserGetById } from '../CardPlano/types';
+import { userCPF } from '../../screens/RegisterCPF/service';
 
 export type CardProps = {
     user: UserGetById
@@ -10,14 +11,12 @@ export type CardProps = {
 }
 
 function userEmAnalise(aprovacaoId: number){
-    console.log(2222, aprovacaoId)
 
     if(aprovacaoId === 3){
         return true
     }
 }
 function userAprovado(aprovacaoId: number){
-    console.log(333, aprovacaoId)
 
     if(aprovacaoId === 1){
         return true
@@ -25,11 +24,18 @@ function userAprovado(aprovacaoId: number){
 }
 
 function userReprovado(aprovacaoId: number){
-    console.log(1111, aprovacaoId)
     if(aprovacaoId === 2){
         return true
     }
 }
+function userTemVeiculo(user: any){
+    console.log('user', user)
+    // if(user){
+
+    // }
+}
+
+
 const CardPerfil = ({user}: CardProps) => {
     return (
         <S.Container>
@@ -51,10 +57,12 @@ const CardPerfil = ({user}: CardProps) => {
                     <S.Text>{`No app ou por email `}</S.Text>
                 </>
                 }
-                {userAprovado(user?.aprovacaoId) &&<>
+                {userAprovado(user?.aprovacaoId) &&  <>
                     <S.Text >{`Olá ${user.nomeCliente} `}</S.Text>
-                    <S.Text >{`Você ainda não possui nenhum veiculo`}</S.Text>
+                    {/* <S.Text >{`Você ainda não possui nenhum veiculo`}</S.Text> */}
                 </>
+                }
+                {userTemVeiculo(user) 
                 }
                 {userReprovado(user?.aprovacaoId) &&
                     <S.Text >{`Olá ${user.nomeCliente} Seu perfil foi Rejeitado`}</S.Text>

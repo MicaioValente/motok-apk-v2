@@ -22,7 +22,6 @@ const CardManutencaoPendente = ({user, veiculoId}: CardPlano) => {
         api.get(`Manutencoes/moto/${veiculoId}`).then(
             function (response){
                 setManutencoes(response.data)
-                console.log('response', response.data)
 
             }
         ).catch(

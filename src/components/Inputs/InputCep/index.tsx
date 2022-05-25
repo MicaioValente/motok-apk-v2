@@ -5,9 +5,10 @@ export type InputEndereco = {
     setUser?: Function 
     name: string 
     placeholder?: string
+    value: string
 }
 
-export default function InputRegister({setUser, name}: InputEndereco) {
+export default function InputRegister({setUser, name, value}: InputEndereco) {
     const [isFocused, setIsFocused] = useState(false);
     return (
         <S.Wrapper>
@@ -25,6 +26,7 @@ export default function InputRegister({setUser, name}: InputEndereco) {
                         onChangeText={(text:string) => setUser(name, text)}
                         onBlur={() => setIsFocused(false)}
                         onFocus={() => setIsFocused(true)}
+                        value={value}
                         />
                 </S.Container>
             </S.WrapperContent>

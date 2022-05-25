@@ -8,9 +8,10 @@ export type InputRegisterProps = {
     setUser: Function
     name: string
     mask?: string | null
+    value: string
 }
 
-export default function InputRegister({ border, placeholder, label, setUser, name, mask}: InputRegisterProps) {
+export default function InputRegister({ border, placeholder, label, setUser, name, mask, value}: InputRegisterProps) {
     const [isFocused, setIsFocused] = useState(false);
     const [text, setText] = useState('');
 
@@ -33,19 +34,18 @@ export default function InputRegister({ border, placeholder, label, setUser, nam
 
                 <S.Container border={border}>
                 {isFocused ? <S.ContainerLine /> : null}
-                {mask ?
-                (
-                <S.MaskInput
-                    mask={mask}
-                    keyboardType="numeric"
-                    onChangeText={(text: string) =>  setDataAnd(text)}
-                    placeholderTextColor="#E4E4E755" 
-                    placeholder={placeholder} 
-                    style={{color: '#fff'}}
-                    onBlur={() => name === 'DataAberturaEmpresaCliente' ? setUserAndSetIsFocused() : setIsFocused(false)}
-                    onFocus={() => setIsFocused(true)} 
-                />
-
+                {mask ?(
+                    <S.MaskInput
+                        mask={mask}
+                        keyboardType="numeric"
+                        onChangeText={(text: string) =>  setDataAnd(text)}
+                        placeholderTextColor="#E4E4E755" 
+                        placeholder={placeholder} 
+                        style={{color: '#fff'}}
+                        onBlur={() => name === 'DataAberturaEmpresaCliente' ? setUserAndSetIsFocused() : setIsFocused(false)}
+                        onFocus={() => setIsFocused(true)}
+                        value={value} 
+                    />
                 ) : (
                     <S.Input 
                         onChangeText={(text: string) => setUser(name, text, null )}
@@ -54,7 +54,8 @@ export default function InputRegister({ border, placeholder, label, setUser, nam
                         style={{color: '#fff'}}
                         autoCapitalize='none'
                         onBlur={() => setIsFocused(false)}
-                        onFocus={() => setIsFocused(true)} 
+                        onFocus={() => setIsFocused(true)}
+                        value={value} 
                     />
                 )}
                 </S.Container>

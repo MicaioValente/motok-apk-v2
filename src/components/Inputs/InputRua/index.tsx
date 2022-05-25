@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { InputEndereco } from '../InputCep';
 import * as S from './style'
 
-export default function InputRua({setUser, name, placeholder}: InputEndereco) {
+export default function InputRua({setUser, name, placeholder, value}: InputEndereco) {
     const [isFocused, setIsFocused] = useState(false);
     return (
         <S.Wrapper>
@@ -12,13 +12,14 @@ export default function InputRua({setUser, name, placeholder}: InputEndereco) {
             <S.WrapperContent>
                 <S.Container>
                 {isFocused ? <S.ContainerLine /> : null}
-                <S.Input 
+                    <S.Input 
                         placeholderTextColor="#E4E4E755" 
                         placeholder={placeholder ? placeholder : "Insira a cidade" }
                         style={{color: '#fff'}}
                         onChangeText={text => setUser(name, text)}
                         onBlur={() => setIsFocused(false)}
                         onFocus={() => setIsFocused(true)}
+                        value={value}
                     />
                 </S.Container>
             </S.WrapperContent>

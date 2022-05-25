@@ -42,7 +42,6 @@ const CardPagamento = ({modalVisible, setModalVisible, user, idPrint}: any) => {
                         {/* <S.Text>gere boletos para pagamento.</S.Text> */}
                     </>
                 )}
-                {console.log(user.nomeCliente)}
             </S.Content>
 
         </S.Container>)

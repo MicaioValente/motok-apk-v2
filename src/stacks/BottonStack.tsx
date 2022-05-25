@@ -18,14 +18,13 @@ export default function BottomTabs() {
         api.get(`clientes/${idCliente}`).then(function (response ){
             delete response.data.arquivoBase64DocCarteira
             delete response.data.arquivoBase64DocResidencia
-            response.data.J
             setUser(response.data)
         }).catch(function (error){
         })
     }
     checkToken();
   }, []);
-
+console.log('userUp', user)
   return (
     <Tab.Navigator
         initialRouteName={'HomeTap'}
