@@ -8,6 +8,8 @@ import { userCPF } from '../../screens/RegisterCPF/service';
 export type CardProps = {
     user: UserGetById
     navigation?: any
+    modalVisible?: boolean
+    setModalVisible?: Function 
 }
 
 function userEmAnalise(aprovacaoId: number){
@@ -29,17 +31,16 @@ function userReprovado(aprovacaoId: number){
     }
 }
 function userTemVeiculo(user: any){
-    console.log('user', user)
     // if(user){
 
     // }
 }
 
 
-const CardPerfil = ({user}: CardProps) => {
+const CardPerfil = ({user, modalVisible, setModalVisible}: CardProps) => {
     return (
         <S.Container>
-            <S.Sino />
+            <S.Sino onPress={() => setModalVisible(true)}/>
             <S.Content>
                 <S.Gradient
                     colors={["#FE1D16", "#FD3C14", "#FA7311"]}

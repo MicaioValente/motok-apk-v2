@@ -27,12 +27,9 @@ const Home: React.FC = () => {
 
 
     useEffect(() => {
-        console.log(1111111)
 
         const checkToken = async () => {
 
-        console.log(22222)
-            
 
 
             const token = await AsyncStorage.getItem('user');
@@ -100,7 +97,7 @@ const Home: React.FC = () => {
     };
 
     return (<>
-        <ModalNotificacoes modalVisible={modalNotificacoes} setModalVisible={setModalVisible} idCliente={10} ></ModalNotificacoes>
+        <ModalNotificacoes modalVisible={modalNotificacoes} setModalVisible={setModalVisible} idCliente={user?.idCliente} ></ModalNotificacoes>
             <SafeAreaView style={{backgroundColor: '#fff', flex: 1}}>
             <S.Scroll
                 refreshControl={<RefreshControl progressBackgroundColor={'#fff'}refreshing={refreshing} onRefresh={onRefresh} />}
@@ -121,10 +118,10 @@ const Home: React.FC = () => {
                                                     <CardBoleto idUser={user.idCliente}/>
                                                     <CardPlano  user={user} />
                                                     <CardStatusCadastro user={user}/>
-                                                    <View style={{marginTop: user?.planoId != null ? 18 : '100%'}}>
+                                                    {/* <View style={{marginTop: user?.planoId != null ? 18 : '100%'}}>
                                                         <ProximaPage rota='home' title='Alterar Plano' BGcolor='rgba(72, 55, 46, 0.6)' color='rgba(241, 73, 2, 1)'/>
                                                         <ProximaPage  rota='home' title='Cancelar Plano' BGcolor='rgba(72, 46, 46, 0.6)' color='rgba(220, 38, 38, 1)'/>
-                                                    </View>
+                                                    </View> */}
                                                 </>
                                             )
                                         :planoComprado?.idPlanos ?

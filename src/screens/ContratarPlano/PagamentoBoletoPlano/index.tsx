@@ -119,13 +119,13 @@ const PagamentoBoleto = ({ step, setStep, plano, formaDePagamento, cupon, user}:
                         <>
                             <S.ContainerCaucao  onPress={() => Linking.openURL(boleto.urlBoleto)}>
                                 <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <S.ValueCaucao>{`Baixar PDF`}</S.ValueCaucao>
+                                    <S.ValueCaucao>{`Baixar PDF1`}</S.ValueCaucao>
                                     <S.ContainerIconNumber> 
                                         <S.Icon name='download' size={25} color="#F14902"/>
                                     </S.ContainerIconNumber>
                                 </View>
                             </S.ContainerCaucao>
-                            <S.ContainerCaucao onPress={() => Clipboard.setString(boleto.barCode)}>
+                            <S.ContainerCaucao onPress={() => {Clipboard.setString(boleto.barCode), ToastAndroid.show('Código Copiado', ToastAndroid.LONG)}}>
                                 <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                                     <S.ValueCaucao >{`${boleto.barCode}`}</S.ValueCaucao>
                                     <S.ContainerIconNumber onPress={() => Clipboard.setString('mail@mail.com')}> 

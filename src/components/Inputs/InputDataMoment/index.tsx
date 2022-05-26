@@ -13,7 +13,7 @@ export type InputRegisterProps = {
     mask?: string | null
 }
 
-export default function InputDataMoment({ border, placeholder, label, setUser, name, mask, value}: InputRegisterProps) {
+export default function InputDataMoment({ label, setUser, name}: InputRegisterProps) {
     const [isFocused, setIsFocused] = useState(false);
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
@@ -21,21 +21,23 @@ export default function InputDataMoment({ border, placeholder, label, setUser, n
 
     
     const onChange = (event: any, selectedDate: any) => {
+        if (event?.type === 'dismissed') {
+            setDate(date);
+            return;
+        }
         const dateMoment = moment(selectedDate)
         setValueInput(dateMoment.format('DD/MM/YYYY'))
         setUser(name, dateMoment.format('DD/MM/YYYY'))
-        console.log('show')
         setShow(!show);
         setDate(selectedDate);
     };
   
     const showDatepicker = () => {
-        console.log(222, show)
         setShow(!show);
     };
   
     return (
-        <S.Wrapper>
+        <S.Wrapper onPress={ showDatepicker}>
             <S.Title>{label}</S.Title>
             <S.WrapperContent>
 
@@ -48,9 +50,8 @@ export default function InputDataMoment({ border, placeholder, label, setUser, n
                     />
                 ): null}
 
-                <S.Container border={border}>
-
-                    <S.Input
+                <S.Container>
+                    {/* <S.Input
                         keyboardType="numeric"
                         onChangeText={(text: string) => setUser(name, text)}
                         placeholderTextColor="#E4E4E755" 
@@ -59,11 +60,14 @@ export default function InputDataMoment({ border, placeholder, label, setUser, n
                         onFocus={() => showDatepicker()}
                         onBlur={() => setIsFocused(false)}
                         value={valueInput}
-                    />
-
+                    /> */}
+                    <S.Title style={{color: valueInput ? '#fff' : '#E4E4E755'}}> 
+                        {valueInput ? valueInput : 'Data de Vencimento'}
+                    </S.Title>
                 </S.Container>
                 
             </S.WrapperContent>
         </S.Wrapper>
     )
 }
+

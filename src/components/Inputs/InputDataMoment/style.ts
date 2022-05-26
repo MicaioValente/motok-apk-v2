@@ -2,16 +2,16 @@ import styled from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
 import { MaskedTextInput } from "react-native-mask-text";
 
-export const Wrapper = styled.View`
+export const Wrapper = styled.TouchableOpacity`
     margin-top: ${RFValue(20)}px;
 `
 
-export const WrapperContent = styled.TouchableOpacity`
+export const WrapperContent = styled.View`
     width: 100%;
     height: ${RFValue(49)}px;
 `
 
-export const Container = styled.TouchableOpacity`
+export const Container = styled.View`
     flex-direction: row;
     align-items: center;
     background-color: #3F3F46;

@@ -32,7 +32,6 @@ export interface userCNPJ {
 export async function postUserCNPJ(userCNPJ: userCNPJ, navigation: any, setLoading: any, setAviso: any) {
   setLoading(true)
     function response(result: any) {
-      console.log(1111111, result)
         setLoading(false)
 
         if(result.status === 400){

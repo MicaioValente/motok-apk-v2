@@ -17,6 +17,7 @@ export default function InputNumero({setUser, name, value}: InputEndereco) {
                     style={{color: '#fff'}}
                     onChangeText={text => setUser(name, text)}
                     value={value}
+                    maxLength={6}
                 />
             </S.Container>
         </S.WrapperContent>

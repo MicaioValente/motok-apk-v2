@@ -13,7 +13,7 @@ import Loading from '../../components/Loading';
 
 const RegisterCPF: React.FC = () => {
     const navigation = useNavigation()
-    const [step, setStep] = useState(4)
+    const [step, setStep] = useState(1)
     const [userCPF, setUserCPF] = useState({} as userCPF)
     const [loading, setLoading] = useState(false)
     const [aviso, setAviso] = useState(false)
@@ -44,12 +44,11 @@ const RegisterCPF: React.FC = () => {
                 [nome]: value    
         })
     }
-    console.log(userCPF)
 
     function stepComponete(name: number) {
         switch (name) {
             case 1:
-                return <RegisterCPFStep1 userCPF={userCPF} setUser={setUser} setStep={setStep} step={step} />
+                return <RegisterCPFStep1 userCPF={userCPF} setUser={setUser} setStep={setStep} step={step} postUser={postUser} />
             case 2:
                 return <RegisterCPFStep2 userCPF={userCPF} setUser={setUser} setStep={setStep} step={step} />
             case 3:

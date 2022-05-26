@@ -14,6 +14,7 @@ import CardRetireSuaMotok from '../../components/CardRetireSuaMotok';
 import api from '../../service/api';
 import { UserGetById } from '../../components/CardPlano/types';
 import CardManutencaoPendente from '../../components/CardManutencaoPendente';
+import ModalNotificacoes from '../../components/ModalNotificacoes';
 
 
 type Perfil = {
@@ -24,6 +25,7 @@ const Perfil = ({userUp} : Perfil) => {
     const [ planoComprado, setPlanoComprado] = useState<any>()
     const [ veiculoId, setVeiculoId] = useState<any>()
     const [refreshing, setRefreshing] = useState(false);
+    const [modal, setModal] = useState(false);
 
     useEffect(() => {
         const GetVeiculo = async() => {
@@ -78,13 +80,14 @@ const Perfil = ({userUp} : Perfil) => {
     function onRefresh () {
 
     }
-    console.log('userPai', userUp)
     return (
         <S.Scroll
                 refreshControl={<RefreshControl progressBackgroundColor={'#fff'}refreshing={refreshing} onRefresh={onRefresh} />}
             >
+        <ModalNotificacoes modalVisible={modal} setModalVisible={setModal} idCliente={user?.idCliente} />
+
             <S.Container>
-                <CardPerfil user={userUp}/>
+                <CardPerfil user={userUp} modalVisible={modal} setModalVisible={setModal}/>
                 {userReprovado(user.aprovacaoId) ? 
                         <CardStatusCadastro user={user} reprovado={true}/>
                         :
@@ -109,7 +112,7 @@ const Perfil = ({userUp} : Perfil) => {
                  }
                  
                 <View style={{marginTop: user?.planoId != null ? 20 : '100%'}}>
-                    <ProximaPage rota='home' title='Alterar Dados Cadastrais' BGcolor='rgba(72, 55, 46, 0.6)' color='rgba(241, 73, 2, 1)'/>
+                    {/* <ProximaPage rota='home' title='Alterar Dados Cadastrais' BGcolor='rgba(72, 55, 46, 0.6)' color='rgba(241, 73, 2, 1)'/> */}
                     <ProximaPage  rota='SignIn' title='Sair da Conta' BGcolor='rgba(72, 46, 46, 0.6)' color='rgba(220, 38, 38, 1)' Icon={SairAppSVG}/> 
                 </View>
                 <View style={{height: 30, width: 34}}/>

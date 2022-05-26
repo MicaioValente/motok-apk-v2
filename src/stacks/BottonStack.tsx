@@ -24,7 +24,6 @@ export default function BottomTabs() {
     }
     checkToken();
   }, []);
-console.log('userUp', user)
   return (
     <Tab.Navigator
         initialRouteName={'HomeTap'}

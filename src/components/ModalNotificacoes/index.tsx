@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import * as S from './styles';
 import { Modal } from "react-native";
 import api from '../../service/api';
+import moment from 'moment';
 
 export default function ModalComponent({ idCliente, modalVisible, setModalVisible }: any) {
         const [ notificacoes, setNotificacoes] = useState<[]>([])
@@ -9,8 +10,10 @@ export default function ModalComponent({ idCliente, modalVisible, setModalVisibl
 
         useEffect(() => {
             async function getNotificacoes() {
-                await api.get(`notificacoes/${idCliente}`)
+              console.log('idCliente', idCliente)
+                await api.get(`notificacoes/189`)
                     .then(async function (response) {
+                        console.log(111, response.data)
                         setNotificacoes(response.data)
                     })
                     .catch(function (error) {
@@ -21,30 +24,32 @@ export default function ModalComponent({ idCliente, modalVisible, setModalVisibl
 
         }, [])
 
-        let dates = [
+        let dates: any = [
             // {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
             // {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
             // {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
             // {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
         ]
+
+
     return (
         <Modal
             animationType="fade"
             transparent={true}
             visible={modalVisible}
             onRequestClose={() => {
-                setModalVisible(!modalVisible);
+                setModalVisible(false);
             }}
         >
-            <S.ContainerModal onPress={() => { setModalVisible(!modalVisible) }}>
+            <S.ContainerModal onPress={() => { setModalVisible(false) }}>
                 <S.ContainerContent>
                     <S.ContainerArrow>
                         <S.ContentArrow>
                             <S.CopiarTex>notificações</S.CopiarTex><S.Copiar />
                         </S.ContentArrow>
                     </S.ContainerArrow>
-                    <S.TitleDates>Maio 2022</S.TitleDates>
-                    {dates.map(item => 
+                    <S.TitleDates>{getMonthName(parseInt(moment(new Date()).format('MM')))}</S.TitleDates>
+                    {dates.map((item: any) => 
                             <>
                                 <S.ContainerDate>
                                     <S.ContainerDateHoraDia>
@@ -56,11 +61,38 @@ export default function ModalComponent({ idCliente, modalVisible, setModalVisibl
                             </>
                     )}
 
-
-
                 </S.ContainerContent>
 
             </S.ContainerModal>
         </Modal>
     )
+}
+
+function getMonthName(mes: number){
+    switch (mes) {
+        case 1:
+          return 'Janeiro'
+        case 2:
+          return 'Fevereiro'
+        case 3:
+          return 'Março'
+        case 4:
+          return 'Abril'
+        case 5:
+          return 'Maio'
+        case 6:
+          return 'Junho'
+        case 7:
+          return 'Julho'
+        case 8:
+          return 'Agosto'
+        case 9:
+          return 'Setembro'
+        case 10:
+          return 'Outubro'
+        case 11:
+          return 'Novembro'
+        case 12:
+          return 'Dezembro'
+    }
 }

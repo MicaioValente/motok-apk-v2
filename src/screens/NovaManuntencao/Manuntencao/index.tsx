@@ -34,11 +34,8 @@ export default function RegisterCPFStep1({ step, setStep, route}: StepProps) {
       const data = `${dataSplit[1]}/${dataSplit[0]}/${dataSplit[2]}`
       let dataEHora = new Date(`${data}, ${manutencao?.hora}`)
       let dataHoje  = new Date()
-      console.log('dataEHora', dataEHora)
-      console.log('dataHoje', dataHoje)
       if(dataEHora < dataHoje || dataHoje == dataEHora){
         setModalData(true)
-        console.log('igual')
         return
       }
 
@@ -52,10 +49,8 @@ export default function RegisterCPFStep1({ step, setStep, route}: StepProps) {
       }
       setLoading(true)
 
-      console.log('dataReq2', dataReq)
       api.post('manutencoes', dataReq).then(
         function (response){
-          console.log(response)
           if(response.status == 200){
               navigation.navigate('ManutencaoAgendada')
           }
@@ -77,11 +72,7 @@ export default function RegisterCPFStep1({ step, setStep, route}: StepProps) {
               [nome]: value    
       })
   }
-  console.log(manutencao?.hora)
-  console.log(manutencao?.data)
   let dataEHora = new Date(`${manutencao?.data}, ${manutencao?.hora}`)
-  console.log('dataEHora', dataEHora)
-
 
     return (<>
         <Loading loading={loading} setLoading={setLoading} mensage='Cadastrando Manutençāo...' />

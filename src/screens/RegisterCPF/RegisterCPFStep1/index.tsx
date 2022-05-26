@@ -8,6 +8,7 @@ import {LinearGradient} from 'expo-linear-gradient';
 import { ToastAndroid } from 'react-native';
 import { userCPF } from '../service';
 import { cpf } from 'cpf-cnpj-validator'; 
+import InputDataMoment from '../../../components/Inputs/InputDataMoment';
 
 export type StepProps = {
     setStep: Function
@@ -16,12 +17,16 @@ export type StepProps = {
     register?: boolean
     userCPF: userCPF
     title?: string
+    postUser?: Function
 }
 
-export default function RegisterCPFStep1({step, setStep, setUser, userCPF }: StepProps) {
-    const [segundaParte, setSegundaParte] = useState(userCPF.nomeCliente)
+export default function RegisterCPFStep1({step, setStep, setUser, userCPF, postUser}: StepProps) {
+    const [segundaParte, setSegundaParte] = useState(true)
+    // const [segundaParte, setSegundaParte] = useState(userCPF.nomeCliente)
 
     function situacao() {
+        postUser()
+        return
         if (segundaParte) {
             if(
                 userCPF.cpfCliente 
@@ -30,15 +35,15 @@ export default function RegisterCPFStep1({step, setStep, setUser, userCPF }: Ste
                 && userCPF.senhaCliente
                 && userCPF.nomeMae
                 && userCPF.nomePai
-                && userCPF.diaNascimento
-                && userCPF.mesNascimento
-                && userCPF.anoNascimento
+                && userCPF.dataNascimento
+                // && userCPF.mesNascimento
+                // && userCPF.anoNascimento
                 ){
                     if(cpf.isValid(userCPF.cpfCliente)){
                         setStep(2)
                         return
                     }else{
-                    ToastAndroid.show('cpf não é válido', ToastAndroid.LONG);
+                        ToastAndroid.show('cpf não é válido', ToastAndroid.LONG);
 
                     }
                     
@@ -64,8 +69,9 @@ export default function RegisterCPFStep1({step, setStep, setUser, userCPF }: Ste
                     <InputRegister value={userCPF.senhaCliente} border={false} placeholder="Informe sua senha" label="Senha"  name="senhaCliente" setUser={setUser} />
                     <InputRegister value={userCPF.nomeMae} border={false} placeholder="Nome da Mãe" label="Nome da Mãe"  name="nomeMae" setUser={setUser} />
                     <InputRegister value={userCPF.nomePai} border={false} placeholder="Nome do Pai" label="Nome do Pai"  name="nomePai" setUser={setUser} />
-                    <InputData  value={userCPF} label="Data de Nascimento" setUser={setUser} />
-                    <S.Button segundaParte={segundaParte} onPress={() => situacao()} >
+                    <InputData  value={userCPF.dataNascimento} placeholder={'Data de Nascimento'} label={'Data de Nascimento'} setUser={setUser} />
+                    {/* <InputDataMoment value={userCPF.ValidadeCarteira} border={true} placeholder={'Data de Nascimento'} label={'Data de Nascimento'} setUser={setUser} name={'nomePai'}/> */}
+                    <S.Button onPress={() => situacao()} >
                         <LinearGradient
                             colors={["#FE1D16", "#FD3C14", "#FA7311"]}
                             locations={[0.06, 0.26, 0.92]}  {...deg(68)}
@@ -82,7 +88,7 @@ export default function RegisterCPFStep1({step, setStep, setUser, userCPF }: Ste
             </>
             : null}
             {!segundaParte && 
-            <S.Button segundaParte={segundaParte} onPress={() => situacao()} >
+            <S.Button onPress={() => situacao()} >
                 <LinearGradient
                     colors={["#FE1D16", "#FD3C14", "#FA7311"]}
                     locations={[0.06, 0.26, 0.92]}  {...deg(68)}

@@ -25,6 +25,7 @@ export interface userCPF {
     ValidadeCarteira: string
     docComprovanteResidencia: string
     docCarteiraMotorista: string
+    dataNascimento: string
 }
 
 export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading: any, setAviso: any) {
@@ -58,8 +59,10 @@ export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading:
         setLoading(false)
     }
     let ValidadeCarteira = moment(userCPF.ValidadeCarteira, 'DDMMYYYY')
+    let dataNascimento = moment(userCPF.dataNascimento)
+    // return 
     var formdata = new FormData();
-    formdata.append("anoNascimento", userCPF.anoNascimento);
+    formdata.append("anoNascimento", dataNascimento.format('YYYY'));
     formdata.append("planoId", '0' );
     formdata.append("bairroEnderecoCliente", userCPF.bairroEnderecoCliente );
     formdata.append("cepEnderecoCliente", userCPF.cepEnderecoCliente );
@@ -67,10 +70,10 @@ export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading:
     formdata.append("codigoCliente", '12345' );
     formdata.append("complementoEnderecoCliente", userCPF.complementoEnderecoCliente );
     formdata.append("cpfCliente", userCPF.cpfCliente);
-    formdata.append("diaNascimento", userCPF.diaNascimento );
+    formdata.append("diaNascimento", dataNascimento.format('DD') );
     formdata.append("emailCliente", userCPF.emailCliente );
     formdata.append("estatoClienteId", userCPF.estatoClienteId );
-    formdata.append("mesNascimento", userCPF.mesNascimento );
+    formdata.append("mesNascimento", dataNascimento.format('MM') );
     formdata.append("nomeCliente", userCPF.nomeCliente );
     formdata.append("nomeMae",userCPF.nomeMae );
     formdata.append("nomePai", userCPF.nomePai );
@@ -85,22 +88,6 @@ export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading:
         method: 'POST',
         body: formdata,
         };
-    
-    // axios.post('https://motok-api.herokuapp.com/api/clientes/pf', formdata).then(function (response){console.log(response)} ).catch(function (err){console.log('err',err.response )} )
-    // axios({
-    //     method: "post",
-    //     url: "https://motok-api.herokuapp.com/api/clientes/pf",
-    //     data: formdata,
-    //     headers: { "Content-Type": "multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW" },
-    //   })
-    //     .then(function (response) {
-    //       //handle success
-    //     })
-    //     .catch(function (response) {
-    //       //handle error
-    //     });
-    
-    
     
     fetch(`${URL}clientes/pf`, requestOptions)
     .then(response => response.json())

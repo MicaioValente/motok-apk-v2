@@ -2,7 +2,7 @@ import styled from "styled-components/native";
 import { RFValue } from "react-native-responsive-fontsize";
 
 
-export const Wrapper = styled.View`
+export const Wrapper = styled.TouchableOpacity`
     margin-top: ${RFValue(20)}px;
 `
 
@@ -17,7 +17,7 @@ export const Container = styled.View`
     flex-direction: row;
     align-items: center;
     background-color: #3F3F46;
-    width: 30%;
+    width: 100%;
     height: ${RFValue(52)}px;
     border-radius: 10px;
 `

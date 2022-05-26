@@ -13,6 +13,11 @@ export default function RegisterCPFStep2({ userCPF, setStep, setUser, step}: Ste
 
     function situacao() {
         if(userCPF.telefoneCliente){
+            console.log(userCPF.telefoneCliente.length)
+            if(userCPF.telefoneCliente.length < 10 ){
+                ToastAndroid.show('Insira um número válido', ToastAndroid.LONG);
+                return
+            }
             setStep(3)
         }else{
             ToastAndroid.show('Prencha todos os Campos', ToastAndroid.LONG);

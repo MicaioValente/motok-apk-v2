@@ -40,7 +40,7 @@ export default function MainStack() {
 
     return (
         <Stack.Navigator
-            initialRouteName="RegisterCPF"
+            initialRouteName="Preload"
             screenOptions={{
                 headerShown: false,
             }}
