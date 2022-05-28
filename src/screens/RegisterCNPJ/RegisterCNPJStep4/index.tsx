@@ -79,7 +79,7 @@ export default function RegisterCPFStep4({ userCNPJ, postUser, setStep, step, se
         <S.ContainerScroll>
             <S.Container>
                 <Counter Label={"Dados Pessoais"} setStep={setStep} step={step} />
-                <CardRegisterCNH setCnh={setCnh} validade={true} setUser={setUser} setCamera={setCamera} camera={camera} setPhoto={setPhoto} photo={photo} />
+                <CardRegisterCNH userCPF={userCNPJ} setCnh={setCnh} validade={true} setUser={setUser} setCamera={setCamera} camera={camera} setPhoto={setPhoto} photo={photo} />
                 <CardRegisterCR setRes={setCnh}  setUser={setUser} setCameraResi={setCameraResi} cameraResi={cameraResi} setPhotoResi={setPhotoResi} photoResi={photoResi} />
                 <S.ContainerBottom>
                     <S.ContainerButtomLeft >

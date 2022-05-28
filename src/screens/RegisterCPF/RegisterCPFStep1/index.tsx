@@ -25,8 +25,6 @@ export default function RegisterCPFStep1({step, setStep, setUser, userCPF, postU
     // const [segundaParte, setSegundaParte] = useState(userCPF.nomeCliente)
 
     function situacao() {
-        postUser()
-        return
         if (segundaParte) {
             if(
                 userCPF.cpfCliente 

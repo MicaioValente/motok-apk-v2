@@ -14,6 +14,27 @@ export default function Input({ placeholder, iconRight, iconLeft,nome, setUser }
     const [isFocused, setIsFocused] = useState(false);
     const [show, setShow] = useState(false);
     const [text, setText] = useState('');
+
+    function setUserCpfOrCnpj(text: string) {
+        setText(text)
+        if(nome === 'cpf'){
+            if(text.length > 14){
+                console.log(text.length)
+                setUser('cnpj', text)
+                return
+            }
+            if(text.length <= 14){
+                console.log('cpf')
+
+                setUser('cpf', text)
+
+                return
+            }
+            return
+        }
+        setUser(nome, text)
+    }
+
     return(
      <S.Wrapper>
             {isFocused ? <S.ContainerLine /> : null}
@@ -31,7 +52,7 @@ export default function Input({ placeholder, iconRight, iconLeft,nome, setUser }
                         placeholder={placeholder}
                         value={text} 
                         text={text}
-                        onChangeText={(text: string) =>{ setText(text), setUser(nome, text) }}
+                        onChangeText={(text: string) => setUserCpfOrCnpj(text)}
                         onBlur={() => setIsFocused(false)}
                         onFocus={() => setIsFocused(true)}
                         />

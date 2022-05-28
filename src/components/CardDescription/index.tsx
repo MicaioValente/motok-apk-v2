@@ -7,7 +7,7 @@ const CardDescription = (setStep) => {
         <S.Container >
             <S.ContainerItem>
                 <S.ChaveSvg />
-                    <S.Title>manuntenção</S.Title>
+                    <S.Title>manutenção</S.Title>
                         <S.SubTitle>A manutenção preventiva é por nossa conta, não se</S.SubTitle>
                         <S.SubTitle> preocupe! Precisando é só nos avisar!</S.SubTitle>
             </S.ContainerItem>

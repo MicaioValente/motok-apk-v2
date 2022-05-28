@@ -25,34 +25,22 @@ const Home: React.FC = () => {
     const [refreshing, setRefreshing] = useState(false);
     const [trigger, setTrigger] = useState(false)
 
-
     useEffect(() => {
-
         const checkToken = async () => {
-
-
-
             const token = await AsyncStorage.getItem('user');
             const {idCliente} = JSON.parse(token) 
-            const user = JSON.parse(token) 
+            api.get(`clientes/${idCliente}`).then(function (response ){
+                delete response.data.arquivoBase64DocCarteira
+                delete response.data.arquivoBase64DocResidencia
 
-            async function getUserById(){
-                api.get(`clientes/${idCliente}`).then(function (response ){
-                    // api.get(`clientes/${userId.idCliente}`).then(function (response ){
-                    delete response.data.arquivoBase64DocCarteira
-                    delete response.data.arquivoBase64DocResidencia
+                setUser(response.data)
+                setRefreshing(false);
+                
+            }).catch(function (error){
+                console.log(error)
+                setRefreshing(false);
 
-                    setUser(response.data)
-                    setRefreshing(false);
-                    
-                }).catch(function (error){
-                    console.log(error)
-                    setRefreshing(false);
-
-                })
-               
-            }
-            getUserById()
+            })
         }
         checkToken();
     }, [trigger]);

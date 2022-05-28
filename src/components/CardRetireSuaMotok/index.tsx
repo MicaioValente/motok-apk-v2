@@ -19,7 +19,7 @@ const CardSemPlano = ({navigation, user}: CardProps) => {
                 </S.StatusTextContainer>  
                 <S.StatusTextContainer >
                     <S.Dot />
-                    <S.StatusText>Venha ate a motok e retire sua Motok</S.StatusText>
+                    <S.StatusText>Venha até a motok e retire sua Motok</S.StatusText>
                 </S.StatusTextContainer> 
                 <S.StatusTextContainer >
                     <S.Dot />

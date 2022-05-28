@@ -88,6 +88,7 @@ export async function postUserCpf(userCPF: userCPF, navigation: any, setLoading:
         method: 'POST',
         body: formdata,
         };
+        console.log('formdata', formdata)
     
     fetch(`${URL}clientes/pf`, requestOptions)
     .then(response => response.json())

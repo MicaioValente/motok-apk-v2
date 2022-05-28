@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import * as S from './style';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
+import { Platform } from 'react-native';
 
 export type InputRegisterProps = {
     label: string
@@ -20,7 +21,7 @@ export default function InputDataMoment({ label, setUser, name}: InputRegisterPr
     const [valueInput, setValueInput] = useState('');
 
     
-    const onChange = (event: any, selectedDate: any) => {
+    function onChange(event: any, selectedDate: any) {
         if (event?.type === 'dismissed') {
             setDate(date);
             return;
@@ -46,7 +47,10 @@ export default function InputDataMoment({ label, setUser, name}: InputRegisterPr
                         value={date}
                         mode={'date'}
                         is24Hour={true}
-                        onChange={onChange}
+                        onChange={(event:any, selectedDate:any) => {
+                            setShow(Platform.OS === 'ios'),
+                            onChange(event, selectedDate)
+                        }}
                     />
                 ): null}
 

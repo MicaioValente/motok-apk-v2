@@ -128,7 +128,7 @@ const PagamentoBoleto = ({ step, setStep, plano, formaDePagamento, cupon, user}:
                             <S.ContainerCaucao onPress={() => {Clipboard.setString(boleto.barCode), ToastAndroid.show('Código Copiado', ToastAndroid.LONG)}}>
                                 <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center'}}>
                                     <S.ValueCaucao >{`${boleto.barCode}`}</S.ValueCaucao>
-                                    <S.ContainerIconNumber onPress={() => Clipboard.setString('mail@mail.com')}> 
+                                    <S.ContainerIconNumber onPress={() => {Clipboard.setString(boleto.barCode), ToastAndroid.show('Código Copiado', ToastAndroid.LONG)}}> 
                                         <S.Copiar />
                                     </S.ContainerIconNumber>
                                 </View>

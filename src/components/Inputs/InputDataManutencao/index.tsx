@@ -2,35 +2,40 @@ import React, { useState } from 'react';
 import * as S from './style';
 import DateTimePicker from '@react-native-community/datetimepicker';
 import moment from 'moment';
-import { Platform } from 'react-native'
+import { Platform } from 'react-native';
+
 export type InputRegisterProps = {
     label: string
     placeholder: string
     setUser: Function
     value: string
+    name: string
     mask?: string | null
+    time?: boolean
 }
 
-export default function InputData({placeholder, label, setUser, value}: InputRegisterProps) {
-
-    const [isFocused, setIsFocused] = useState(false);
+export default function InputData({placeholder, label, setUser, value, time, name}: InputRegisterProps) {
     const [date, setDate] = useState(new Date());
     const [show, setShow] = useState(false);
     const [valueInput, setValueInput] = useState('');
 
     
-    function onChange (event: any, selectedDate: any) {
+    function onChange(event: any, selectedDate: any) {
         if (event?.type === 'dismissed') {
             setDate(date);
             return;
         }
         const dateMoment = moment(selectedDate)
+        if(time){
+            setValueInput(dateMoment.format('HH:MM'))
+            setUser(name, dateMoment.toISOString())
+            setShow(!show);
+            setDate(selectedDate);
+            return
+        }
+
         setValueInput(dateMoment.format('DD/MM/YYYY'))
-        setUser('dataNascimento', dateMoment.toISOString())
-        // console.log('diaNascimento', dateMoment.format('DD'))
-        // setUser('diaNascimento', dateMoment.format('DD'))
-        // setUser('mesNascimento', dateMoment.format('MM'))
-        // setUser('anoNascimento', dateMoment.format('YYYY'))
+        setUser(name, dateMoment.toISOString())
         setShow(!show);
         setDate(selectedDate);
     };
@@ -38,7 +43,7 @@ export default function InputData({placeholder, label, setUser, value}: InputReg
     const showDatepicker = () => {
         setShow(!show);
     };
-  
+  console.log('valor', value)
     return (
         <S.Wrapper onPress={showDatepicker}> 
             <S.Title>{label}</S.Title>
@@ -46,20 +51,19 @@ export default function InputData({placeholder, label, setUser, value}: InputReg
                 {show ? (
                     <DateTimePicker
                         value={date ? date : new Date()}
-                        mode={'date'}
+                        mode={time ? 'time' : 'date'}
                         is24Hour={true}
-                        // onChange={onChange}
                         onChange={(event:any, selectedDate:any) => {
                             setShow(Platform.OS === 'ios'),
                             onChange(event, selectedDate)
                         }}
-                        maximumDate={new Date()}
+                        minimumDate={new Date()}
                     />
                 ): null}
 
                 <S.Container>
                     <S.Title style={{color: value ? '#fff' : '#E4E4E755'}}> 
-                        {value ? moment(value).format('DD/MM/YYYY') : placeholder}
+                        {value ?  time ?  moment(value).format('HH:mm') : moment(value).format('DD/MM/YYYY') : placeholder}
                     </S.Title>
                 </S.Container>
                 

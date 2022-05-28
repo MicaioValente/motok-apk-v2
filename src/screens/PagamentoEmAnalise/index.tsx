@@ -29,7 +29,7 @@ export default function PagamentoEmAnalise(plano: any, user: any) {
                 {/* <S.SubTitle>Enquanto isso, você pode acompanhar no</S.SubTitle>
                 <S.SubTitle>seu Plano.</S.SubTitle> */}
                 <S.SubTitle>O plano foi cadastrado com sucesso!</S.SubTitle>
-                <S.SubTitle>é so levar os comprovante até a motok</S.SubTitle>
+                <S.SubTitle>Agora é só levar os comprovantes até a Motok</S.SubTitle>
                 <S.SubTitle>e retirar sua motok</S.SubTitle>
 
 

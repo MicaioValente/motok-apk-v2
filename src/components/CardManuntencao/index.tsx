@@ -67,6 +67,7 @@ const CardManuntencao = ({user, veiculoId}: CardPlano) => {
 
     return (
     <S.Container>
+        {veiculoId ?
             <S.Content>
                 <S.ContainerIcon>
                     <S.Barras />
@@ -83,17 +84,19 @@ const CardManuntencao = ({user, veiculoId}: CardPlano) => {
 
                 <S.ContainerText>
                     <S.Text>Próxima Manutenção</S.Text>
-                    <S.TextBold>{dataInicio ? moment(dataInicio).format('DD/MM/YYYY') : "Sem Manutenção"}</S.TextBold>
+                    <S.TextBold>{dataInicio ? moment(dataInicio).format('DD/MM/YYYY') : "XXXXX"}</S.TextBold>
                 </S.ContainerText>
                 <S.ContainerText>
                     <S.Text>Dia para retirada</S.Text>
-                    <S.TextBold>{dataEntrega ? moment(dataEntrega).format('DD/MM/YYYY') : "Sem Manutenção"}</S.TextBold>
+                    <S.TextBold>{dataEntrega ? moment(dataEntrega).format('DD/MM/YYYY') : "XXXXX"}</S.TextBold>
                 </S.ContainerText>
                 <S.ContainerBoleto onPress={() => {navigation.navigate('NovaManuntencao', {motoId: veiculoId})}}>
                     <S.TitleButton>solicitar nova manutenção</S.TitleButton>
                 </S.ContainerBoleto>    
 
-            </S.Content>
+            </S.Content> :
+            <></>
+        }
         </S.Container>)
 }
 

@@ -34,19 +34,19 @@ export default function RegisterCNPJStep3({ userCNPJ, step, setStep, setUser }: 
     return <S.Content>
         <Counter Label={"Dados empresariais"} setStep={setStep} step={step} />
         <S.ContainerTerceiraParte>
-            <InputCep  name="cepEnderecoCliente" setUser={setUser} />
+            <InputCep value={userCNPJ.cepEnderecoCliente} name="cepEnderecoCliente" setUser={setUser} />
            
             {/* <S.Row>
                 <InputCidade name="cidadeClienteId" setUser={setUser} />
                 <InputEstado name="estatoClienteId" setUser={setUser}/>
             </S.Row> */}
             <Select setUser={setUser} border={false} />
-            <InputRegister name="bairroEnderecoCliente" setUser={setUser} border={false} placeholder="Insira seu bairro" label="Bairro" />
+            <InputRegister value={userCNPJ.bairroEnderecoCliente} name="bairroEnderecoCliente" setUser={setUser} border={false} placeholder="Insira seu bairro" label="Bairro" />
             <S.Row>
-                <InputRua placeholder={'Insira a rua'} name="ruaEnderecoCliente" setUser={setUser} />
-                <InputNumero  name="numEnderecoCliente" setUser={setUser}/>
+                <InputRua value={userCNPJ.ruaEnderecoCliente} placeholder={'Insira a rua'} name="ruaEnderecoCliente" setUser={setUser} />
+                <InputNumero value={userCNPJ.numEnderecoCliente} name="numEnderecoCliente" setUser={setUser}/>
             </S.Row>
-            <InputRegister setUser={setUser} name={'complementoEnderecoCliente'} border={false} placeholder="Complemento Endereço" label="Complemento" />
+            <InputRegister value={userCNPJ.complementoEnderecoCliente} setUser={setUser} name={'complementoEnderecoCliente'} border={false} placeholder="Complemento Endereço" label="Complemento" />
 
         </S.ContainerTerceiraParte >
         <S.ContainerBottom>

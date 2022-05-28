@@ -21,9 +21,9 @@ export default function HeaderRegister() {
                 <S.ContainerText>
                     <S.Title>CADASTRO</S.Title>
                 </S.ContainerText>
-                <S.ContainerQuestion>
+                {/* <S.ContainerQuestion>
                     <S.Icon name="help" size={20} color="#E4E4E7" />
-                </S.ContainerQuestion>
+                </S.ContainerQuestion> */}
             </S.Content>
             <S.UnderLine>
                 <LinearGradient

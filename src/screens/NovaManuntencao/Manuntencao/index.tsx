@@ -3,7 +3,7 @@ import * as S from './styles'
 import Counter from '../../../components/Counter'
 import { deg } from 'react-native-linear-gradient-degree';
 import InputRegister from '../../../components/Inputs/InputRegister'
-import InputData from '../../../components/Inputs/InputData'
+import InputData from '../../../components/Inputs/InputDataManutencao'
 import {LinearGradient} from 'expo-linear-gradient';
 import { Alert, StyleSheet} from 'react-native';
 import { RFValue } from 'react-native-responsive-fontsize';
@@ -22,17 +22,25 @@ export type StepProps = {
     route?: any
 }
 
-export default function RegisterCPFStep1({ step, setStep, route}: StepProps) {
+export type Manutencao = {
+  DManutencao: string
+  NManutencao: string
+  data: string
+  tempo: string
+}
+
+export default function xRegisterCPFStep1({ step, setStep, route}: StepProps) {
     const [loading, setLoading] = useState(false)
     const [modal, setModal] = useState(false)
     const [modalData, setModalData] = useState(false)
     const navigation = useNavigation<any>()
-    const [manutencao, setManutencao] = useState<any>()
+    const [manutencao, setManutencao] = useState<Manutencao>()
+    let dataValue = null
 
     async function postManutencao(){
-      const dataSplit  = manutencao?.data.split('/')
-      const data = `${dataSplit[1]}/${dataSplit[0]}/${dataSplit[2]}`
-      let dataEHora = new Date(`${data}, ${manutencao?.hora}`)
+      console.log(manutencao)
+      let dataEHoraUnidos = unirDataEHora(manutencao)
+      let dataEHora = new Date(dataEHoraUnidos) 
       let dataHoje  = new Date()
       if(dataEHora < dataHoje || dataHoje == dataEHora){
         setModalData(true)
@@ -40,13 +48,16 @@ export default function RegisterCPFStep1({ step, setStep, route}: StepProps) {
       }
 
       let dataReq = {
-          idMoto: route.params.motoId,
+          idMoto: route?.params?.motoId,
           nomeManutencao: manutencao?.NManutencao,
           descricaoManutencao: manutencao?.DManutencao,
-          dataEntrega: dataEHora?.toISOString(),
-          dataEntrada:dataEHora?.toISOString(),
+          dataEntrega: dataEHora.toISOString(),
+          dataEntrada:dataEHora.toISOString(),
           sinistroId: 1
       }
+      console.log('popa')
+
+
       setLoading(true)
 
       api.post('manutencoes', dataReq).then(
@@ -66,33 +77,41 @@ export default function RegisterCPFStep1({ step, setStep, route}: StepProps) {
         }
       )
     }
-    function setUser(nome: string, value: any){
+    function setUser(nome: any, value: any){
       setManutencao({
           ...manutencao,
               [nome]: value    
       })
   }
-  let dataEHora = new Date(`${manutencao?.data}, ${manutencao?.hora}`)
 
+  function unirDataEHora(manutencao: Manutencao){
+    let data = manutencao.data.split('T')[0]
+    let hora = manutencao.tempo.split('T')[1]
+    let dataEHora = `${data}T${hora}`
+    return dataEHora
+  }
     return (<>
         <Loading loading={loading} setLoading={setLoading} mensage='Cadastrando Manutençāo...' />
     
         <S.Container >
                 <InputRegister 
                   border={false} 
-                  placeholder="Nome Manuntenção" 
-                  label="Nome Manuntenção"  
+                  placeholder="Nome manutenção" 
+                  label="Nome manutenção"  
                   name="NManutencao" 
                   setUser={setUser} />
 
                 <InputRegister 
                   border={false} 
-                  placeholder="Descrição da Manuntenção " 
-                  label="Descrição da Manuntenção"  
+                  placeholder="Descrição da manutenção " 
+                  label="Descrição da manutenção"  
                   name="DManutencao" 
                   setUser={setUser} />
-            <InputRegister mask={'99/99/9999'} name="data" setUser={setUser} border={false} placeholder="Ex. 10/10/2010" label="Data Entrada" />
-            <InputRegister mask={'99:99'} name="hora" setUser={setUser} border={false} placeholder="Ex. 10:10" label="Hora de Entrada" />
+            <InputData name={'data'} value={manutencao?.data} placeholder={'Data de Entrada'} label={'Data de Entrada'} setUser={setUser} />
+            <InputData name={'tempo'}  value={manutencao?.tempo} placeholder={'Hora de Entrada'} time={true} label={'Hora de Entrada'} setUser={setUser} />
+
+            {/* <InputRegister mask={'99/99/9999'} name="data" setUser={setUser} border={false} placeholder="Ex. 10/10/2010" label="Data Entrada" /> */}
+            {/* <InputRegister mask={'99:99'} name="hora" setUser={setUser} border={false} placeholder="Ex. 10:10" label="Hora de Entrada" /> */}
             <S.Button onPress={() => postManutencao()} >
                 <LinearGradient
                     colors={["#FE1D16", "#FD3C14", "#FA7311"]}

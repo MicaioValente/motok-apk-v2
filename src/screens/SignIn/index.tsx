@@ -14,9 +14,16 @@ import Loading from '../../components/Loading';
 import axios from 'axios';
 import messaging from '@react-native-firebase/messaging';
 import { Alert } from 'react-native'
+
+export type userLogin = {
+    cnpj: string | null
+    cpf: string | null
+    senha: string
+}
+
 const SignIn: React.FC = () => {
     const navigation = useNavigation<any>();
-    const [userLogin, setUserLogin] = useState({})
+    const [userLogin, setUserLogin] = useState<userLogin>({} as userLogin)
     const [modal, setModal] = useState(false)
     const [loading, setLoading] = useState(false)
     const [token, setToken] = useState<any>()
@@ -31,9 +38,14 @@ const SignIn: React.FC = () => {
     async function loginUser() {
         setLoading(true)
 
+        if(userLogin?.cnpj?.length == 18){
+            userLogin.cpf = null
+        }
+        
         await api.post('login', userLogin)
             .then(async function (response) {
             setLoading(false)
+            console.log('response', response)
             await AsyncStorage.setItem('user', JSON.stringify(response.data))
             await postTokenAndUser(response.data.idCliente)
             navigation.navigate('Home', { user: response.data})
@@ -74,6 +86,8 @@ const SignIn: React.FC = () => {
             //   return unsubscribe;
         }
     }
+    console.log('userLogin', userLogin)
+
     return (
         <>
         <Loading loading={loading} setLoading={setLoading} mensage='Entrando' />

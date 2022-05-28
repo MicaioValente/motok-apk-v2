@@ -53,7 +53,7 @@ const CardSinistro = ({user}: CardBoleto) => {
                     <S.TextBold>R$ {plano.precoPlano}</S.TextBold>
                 </S.ContainerText>
                 <S.ContainerText>
-                    <S.Text>Motos comtratadas</S.Text>
+                    <S.Text>Motos contratadas</S.Text>
                     <S.TextBold>1</S.TextBold>
                 </S.ContainerText>
 {/* criado 02/04/2022 */}

@@ -36,7 +36,7 @@ const RegisterCPF: React.FC = ({route} : any) => {
 
     return (
         <S.Container>
-            <HeaderRegister step={1} route={'Home'} title={'SOLICITAR NOVA MANUNTENÇÂO'} />
+            <HeaderRegister step={1} route={'Home'} title={'SOLICITAR NOVA MANUTENÇÂO'} />
             <Manuntencao route={route} setUser={setUser} />
         </S.Container>
     )

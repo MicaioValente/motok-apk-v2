@@ -7,7 +7,7 @@ import SinoSVG from '../../assets/sino.svg'
 
 
 export const Container = styled.View`
-    width: ${RFValue(310)}px;
+    /* width: ${RFValue(310)}px; */
     justify-content: flex-end;
     align-items: flex-end;
 

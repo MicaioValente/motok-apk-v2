@@ -23,7 +23,7 @@ export type Veiculo = {
 }
 const CardPlano = ({user, veiculoId}: CardPlano) => {
     const [ veiculo, setVeiculo] = useState<Veiculo>({} as Veiculo)
-
+    console.log('veiculo id ', veiculoId )
     useEffect(() => {
         api.get(`veiculo/${veiculoId}`).then(
             function (response){
@@ -37,13 +37,11 @@ const CardPlano = ({user, veiculoId}: CardPlano) => {
     }, [])
     return (
         <S.Container>
-
+            {veiculoId ? 
             <S.Content>
                 <S.ContainerIcon>
                     <S.Moto />
                 </S.ContainerIcon>
-
-
                 <S.ContainerText>
                     <S.Text>{veiculo.marcaModelo}</S.Text>
                     <S.TextBold>{veiculo.anoFabricacao}</S.TextBold>
@@ -52,7 +50,21 @@ const CardPlano = ({user, veiculoId}: CardPlano) => {
                     <S.Text>Placa</S.Text>
                     <S.TextBold>{veiculo.placa}</S.TextBold>
                 </S.ContainerText>
-            </S.Content>
+            </S.Content> :
+            <S.Content>
+                <S.ContainerIcon>
+                    <S.Moto />
+                </S.ContainerIcon>
+                <S.ContainerText>
+                    <S.Text>{veiculo.marcaModelo}</S.Text>
+                    <S.TextBold>{veiculo.anoFabricacao}</S.TextBold>
+                </S.ContainerText>
+                <S.ContainerText  style={{justifyContent: 'center'}}>
+                    <S.Text style={{textAlign: 'center'}}>Você ainda não possui veiculo</S.Text>
+                    <S.TextBold>{veiculo.placa}</S.TextBold>
+                </S.ContainerText>
+            </S.Content> 
+            }
         </S.Container>)
 }
 

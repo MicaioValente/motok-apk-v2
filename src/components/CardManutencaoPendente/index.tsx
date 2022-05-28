@@ -30,6 +30,8 @@ const CardManutencaoPendente = ({user, veiculoId}: CardPlano) => {
             }
         )
     }, [])
+
+    
     return (
         <>
         {manutencoes && 
@@ -49,10 +51,17 @@ const CardManutencaoPendente = ({user, veiculoId}: CardPlano) => {
                                 <S.Dot />
                                 <S.StatusText>Entrada {moment(e.dataEntrada).format('DD/MM/YYYY HH:mm')}</S.StatusText>
                             </S.StatusTextContainer>
-                            <S.StatusTextContainer >
-                                <S.Dot />
-                                <S.StatusText>Retirada {moment(e.dataEntrega).format('DD/MM/YYYY HH:mm')}</S.StatusText>
-                            </S.StatusTextContainer>
+                            {e.dataEntrada === e.dataEntrega ? 
+                                <S.StatusTextContainer >
+                                    <S.Dot />
+                                    <S.StatusText>Retirada A Combinar</S.StatusText>
+                                </S.StatusTextContainer> : 
+                                <S.StatusTextContainer >
+                                    <S.Dot />
+                                    <S.StatusText>Retirada {moment(e.dataEntrega).format('DD/MM/YYYY HH:mm')}</S.StatusText>
+                                </S.StatusTextContainer>
+                        }
+
                             {/* <S.StatusTextContainer >
                                 <S.Dot />
                                 <S.StatusText>aaaaa</S.StatusText>

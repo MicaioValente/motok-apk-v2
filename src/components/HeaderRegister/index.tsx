@@ -30,9 +30,9 @@ export default function HeaderRegister({ step, setStep, register, title, route, 
                 <S.ContainerText>
                     <S.Title>{title ? title : 'CADASTRO'}</S.Title>
                 </S.ContainerText>
-                <S.ContainerQuestion>
+                {/* <S.ContainerQuestion>
                     <S.Icon name="help" size={20} color="#E4E4E7" />
-                </S.ContainerQuestion>
+                </S.ContainerQuestion> */}
             </S.Content>
             <S.UnderLine>
                 <LinearGradient

@@ -53,7 +53,7 @@ export default function BottomTabs() {
         />
         <Tab.Screen 
           name="Perfil" 
-          component={() => <Perfil userUp={user}/>}
+          component={Perfil}
           options={{
               tabBarLabel: 'Perfil',
               tabBarIcon: ({ color, size }) => (
