@@ -9,13 +9,14 @@ import ProximaPage from '../../components/ProximaPage';
 import SairAppSVG from '../../assets/sairApp.svg'
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { User } from '../Preload';
-import { View, RefreshControl, SafeAreaView } from 'react-native';
+import { View, RefreshControl } from 'react-native';
 import CardRetireSuaMotok from '../../components/CardRetireSuaMotok';
 import api from '../../service/api';
 import { UserGetById } from '../../components/CardPlano/types';
 import CardManutencaoPendente from '../../components/CardManutencaoPendente';
 import ModalNotificacoes from '../../components/ModalNotificacoes';
 import Loading from '../../components/Loading';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
 export default function Perfil (){
     const [ user, setUser] = useState<UserGetById>({} as UserGetById)
@@ -29,9 +30,7 @@ export default function Perfil (){
     useEffect(() => {
         const GetVeiculo = async() => {
             const token = await AsyncStorage.getItem('user');
-            console.log('USER DADOS' ,token)
             const { veiculoId } = JSON.parse(token) 
-            console.log('veiculoId', veiculoId)
             setVeiculoId(veiculoId)
         }
         GetVeiculo()
@@ -47,7 +46,10 @@ export default function Perfil (){
                 delete response.data.arquivoBase64DocResidencia
                 setLoading(false)
                 setUser(response.data)
+                setRefreshing(false);
+
             }).catch(function (error){
+                setRefreshing(false);
                 setLoading(false)
                 console.log(333, error)
             })
@@ -83,18 +85,24 @@ export default function Perfil (){
             return '100%'
         }
         if( user?.planoId != null){
-            return 20
+            return 10
 
         }else {
             return '100%'
         }
     }
 
-    const onRefresh = () => {
+    const onRefresh = async () => {
         setRefreshing(true);
         setTrigger(!trigger);
 
     };
+    function userAprovado(aprovacaoId: number){
+        if(aprovacaoId === 1){
+            return true
+        }
+    }
+console.log('user', user)
     return (
         <>
             <Loading loading={loading} setLoading={setLoading} mensage='Carregando Perfil...' />
@@ -112,15 +120,17 @@ export default function Perfil (){
                     <S.Container>
                         <CardPerfil user={user} modalVisible={modal} setModalVisible={setModal}/>
                         {userReprovado(user.aprovacaoId) ? 
-                                <CardStatusCadastro user={user} reprovado={true}/>
-                                :
+                            <CardStatusCadastro user={user} reprovado={true}/>
+                            :
                         userEmAnalise(user?.aprovacaoId) ?
                             <CardStatusCadastro user={user}/> : null
                         }
 
-                            {planoComprado?.idPlanos &&
-                                <CardRetireSuaMotok user={user} /> 
+                            {
+                                planoComprado?.idPlanos ? user?.ativo === 'Ativo' ? null : <CardRetireSuaMotok user={user} /> : null
+                                     
                             }
+                            
                         {user?.planoId != null ? 
                             <>
                                 <CardSinistro user={user} veiculoId={veiculoId}/>
@@ -132,6 +142,21 @@ export default function Perfil (){
                                 <CardSemPlano user={user}/>
                             </>
                             : null
+                        }
+                        {
+                            userAprovado(user.aprovacaoId) ?
+                                user.planoId ? 
+                                (
+                                    <>
+                                    </>
+                                )
+                            :   planoComprado?.idPlanos ?
+                                <CardRetireSuaMotok user={user} />
+                            :!planoComprado?.idPlanos ? 
+                                <>
+                                    <CardSemPlano user={user} />
+                                </>
+                            : null : null 
                         }
                         
                         <View style={{marginTop: marginTop()}}>

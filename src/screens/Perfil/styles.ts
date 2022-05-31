@@ -5,7 +5,7 @@ export const Container = styled.View`
     flex: 1;
     align-items: center;
     padding:  ${RFValue(20)}px;
-    padding-top:  ${RFValue(50)}px;
+    /* padding-top:  ${RFValue(50)}px; */
 `
 
 export const Scroll = styled.ScrollView`

@@ -4,11 +4,18 @@ import { deg } from 'react-native-linear-gradient-degree';
 import { RFValue } from 'react-native-responsive-fontsize';
 import {LinearGradient} from 'expo-linear-gradient';
 import { useNavigation } from '@react-navigation/native';
+import { ToastAndroid } from 'react-native';
 
-export default function HeaderRegister({ step, setStep, register, title, route, stepRegister}: any) {
+export default function HeaderRegister({ step, setStep, register, title, route, stepRegister, boletoPlanoGerado, boletoCaucaoGerado} : any) {
     const navigation = useNavigation()
 
     function goBack() {
+        if(boletoPlanoGerado || boletoCaucaoGerado){
+            ToastAndroid.show('Finalize o pagamento', ToastAndroid.LONG)
+            return
+        }
+
+
         if(step === 1){
             if(route){
                 navigation.navigate('Home')

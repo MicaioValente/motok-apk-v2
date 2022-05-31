@@ -19,12 +19,10 @@ export default function Input({ placeholder, iconRight, iconLeft,nome, setUser }
         setText(text)
         if(nome === 'cpf'){
             if(text.length > 14){
-                console.log(text.length)
                 setUser('cnpj', text)
                 return
             }
             if(text.length <= 14){
-                console.log('cpf')
 
                 setUser('cpf', text)
 

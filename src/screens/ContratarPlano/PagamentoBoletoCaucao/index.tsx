@@ -12,7 +12,7 @@ import { Boleto } from '../PagamentoBoletoPlano';
 import * as Clipboard from 'expo-clipboard';
 import { ToastAndroid } from 'react-native'
 
-const PagamentoBoletoCaucao = ({ step, setStep, plano, formaDePagamento, setFormaDePagamento, user}: any) => {
+const PagamentoBoletoCaucao = ({ step, setStep, plano, formaDePagamento, setBoletoCaucaoGerado, user}: any) => {
     
     const [loading, setLoading] = useState(false);
     const [modal, setModal] = useState(false)
@@ -32,6 +32,7 @@ const PagamentoBoletoCaucao = ({ step, setStep, plano, formaDePagamento, setForm
         api.post('boleto/pagamentoContratacao', dataRequest).then(function (response){
             setLoading(false)
             setBoleto(response.data)
+            setBoletoCaucaoGerado(true)
             // Linking.openURL(response.data.boletoUrl)
 
         }).catch(function (response){
@@ -96,7 +97,7 @@ const PagamentoBoletoCaucao = ({ step, setStep, plano, formaDePagamento, setForm
                         <>
                             <S.ContainerCaucao  onPress={() => Linking.openURL(boleto.urlBoleto)}>
                                 <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <S.ValueCaucao>{`Baixar PDF2`}</S.ValueCaucao>
+                                    <S.ValueCaucao>{`Baixar PDF`}</S.ValueCaucao>
                                     <S.ContainerIconNumber> 
                                         <S.Icon name='download' size={25} color="#F14902"/>
                                     </S.ContainerIconNumber>

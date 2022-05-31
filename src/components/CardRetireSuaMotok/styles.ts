@@ -4,8 +4,8 @@ import FecharSVG from '../../assets/fechar.svg'
 
 export const Container = styled.View`
     width: ${RFValue(310)}px;
-    margin-top: ${RFValue(20)}px;
-    margin-bottom: ${RFValue(20)}px;
+    margin-top: ${RFValue(10)}px;
+    /* margin-bottom: ${RFValue(20)}px; */
     justify-content: flex-start;
     align-items: flex-start;
 `;  

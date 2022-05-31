@@ -38,7 +38,6 @@ export default function xRegisterCPFStep1({ step, setStep, route}: StepProps) {
     let dataValue = null
 
     async function postManutencao(){
-      console.log(manutencao)
       let dataEHoraUnidos = unirDataEHora(manutencao)
       let dataEHora = new Date(dataEHoraUnidos) 
       let dataHoje  = new Date()
@@ -55,7 +54,6 @@ export default function xRegisterCPFStep1({ step, setStep, route}: StepProps) {
           dataEntrada:dataEHora.toISOString(),
           sinistroId: 1
       }
-      console.log('popa')
 
 
       setLoading(true)

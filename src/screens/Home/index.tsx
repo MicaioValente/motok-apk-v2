@@ -2,16 +2,14 @@ import React, { useEffect, useState, useCallback } from 'react';
 import * as S from './styles'
 import CardPagamento from '../../components/CardPagamento'
 import CardBoleto from '../../components/CardBoleto';
+import CardBoletoCaucao from '../../components/CardBoletoCaucao';
 import CardPlano from '../../components/CardPlano';
 import CardStatusCadastro from '../../components/CardStatusCadastro';
-import ProximaPage from '../../components/ProximaPage';
 import ModalNotificacoes from '../../components/ModalNotificacoes'
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { User } from '../Preload';
 import CarroselPlanos from '../../components/CarroselPlanos';
 import CardSemPlano from '../../components/CardSemPlano';
 import CardRetireSuaMotok from '../../components/CardRetireSuaMotok';
-import { createIconSetFromFontello } from 'react-native-vector-icons';
 import api from '../../service/api';
 import { UserGetById } from '../../components/CardPlano/types';
 import { View, RefreshControl} from 'react-native';
@@ -83,9 +81,8 @@ const Home: React.FC = () => {
         setTrigger(!trigger);
 
     };
-
     return (<>
-        <ModalNotificacoes modalVisible={modalNotificacoes} setModalVisible={setModalVisible} idCliente={user?.idCliente} ></ModalNotificacoes>
+        <ModalNotificacoes modalVisible={modalNotificacoes} setModalVisible={setModalVisible} idCliente={user?.idCliente} />
             <SafeAreaView style={{backgroundColor: '#fff', flex: 1}}>
             <S.Scroll
                 refreshControl={<RefreshControl progressBackgroundColor={'#fff'}refreshing={refreshing} onRefresh={onRefresh} />}
@@ -103,7 +100,8 @@ const Home: React.FC = () => {
                                         user.planoId ? 
                                             (
                                                 <>
-                                                    <CardBoleto idUser={user.idCliente}/>
+                                                    <CardBoleto trigger={trigger} idUser={user.idCliente}/>
+                                                    <CardBoletoCaucao trigger={trigger} idUser={user.idCliente}/>
                                                     <CardPlano  user={user} />
                                                     <CardStatusCadastro user={user}/>
                                                     {/* <View style={{marginTop: user?.planoId != null ? 18 : '100%'}}>

@@ -24,13 +24,28 @@ export type Pagamento = {
     route: Route
 }
 export default function ContratarPlano({navigation, route}: Pagamento) {
-    
-    const plano = route.params.planoSelecionado
+    const plano = route?.params?.planoSelecionado
+    // const plano = {
+    //     ativo: true,
+    //     datecreate: "2022-04-18T12:58:18",
+    //     datemodified: null,
+    //     descricaoPlano: "Manutenção preventiva; Suporte e resgate; Seguro TOTAL;Isenção de IPVA e licenciamento; Cobrança semanal",
+    //     idPlanos: 24,
+    //     nomePlano: "PLANO MENSAL",
+    //     observacaoPlano: "Cobrança semanal;Valor semanal: R$ 335,30;Valor da caução: R$ 600,00",
+    //     pagamento: "Semanal",
+    //     periodoContratacaoPlano: 2,
+    //     precoPlano: "47,90",
+    //     valorCaucao: "600,00",
+    //     valorSemanal: "335,30",
+    //   }
     const [step, setStep] = useState(1)
     const [ user, setUser] = useState<User>({} as User)
     const [ cupon, setCupon] = useState(false)
     const [ formaDePagamento, setFormaDePagamento ] = useState({caucao: {parcelas: 1, forma: 'pix'}, plano: {parcelas: 1, forma: 'pix'} })
-    
+    const [ boletoPlanoGerado, setBoletoPlanoGerado] = useState(false)
+    const [ boletoCaucaoGerado, setBoletoCaucaoGerado] = useState(false)
+
     useEffect(() => {
         const checkToken = async () => {
             const token = await AsyncStorage.getItem('user');
@@ -49,9 +64,9 @@ export default function ContratarPlano({navigation, route}: Pagamento) {
             case 3:
                 return <Passo3  cupon={cupon} formaDePagamento={formaDePagamento} setFormaDePagamento={setFormaDePagamento} plano={plano} setStep={setStep} step={step} />
             case 4:
-                return <PagamentoBoletoPlano cupon={cupon} user={user} formaDePagamento={formaDePagamento} setFormaDePagamento={setFormaDePagamento} plano={plano} setStep={setStep} step={step} />
+                return <PagamentoBoletoPlano setBoletoPlanoGerado={setBoletoPlanoGerado} cupon={cupon} user={user} formaDePagamento={formaDePagamento} setFormaDePagamento={setFormaDePagamento} plano={plano} setStep={setStep} step={step} />
             case 5:
-                return <PagamentoBoletoCaucao  user={user} formaDePagamento={formaDePagamento} setFormaDePagamento={setFormaDePagamento} plano={plano} setStep={setStep} step={step} />
+                return <PagamentoBoletoCaucao setBoletoCaucaoGerado={setBoletoCaucaoGerado} user={user} formaDePagamento={formaDePagamento} setFormaDePagamento={setFormaDePagamento} plano={plano} setStep={setStep} step={step} />
             case 6:
                 return <PagamentoEmAnalise user={user} plano={plano}/>
                 default:
@@ -63,7 +78,7 @@ export default function ContratarPlano({navigation, route}: Pagamento) {
         <>
             <S.Container>
                 <S.ContainerScroll>
-                <HeaderRegister step={1} setStep={setStep} route={'Home'} title={'CONTRATAR PLANO'}/>
+                <HeaderRegister boletoPlanoGerado={boletoPlanoGerado} boletoCaucaoGerado={boletoCaucaoGerado} step={1} setStep={setStep} route={'Home'} title={'CONTRATAR PLANO'}/>
                 {stepComponete(step)}
                 </S.ContainerScroll>
             </S.Container>

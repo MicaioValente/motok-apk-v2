@@ -43,7 +43,6 @@ export default function InputData({placeholder, label, setUser, value, time, nam
     const showDatepicker = () => {
         setShow(!show);
     };
-  console.log('valor', value)
     return (
         <S.Wrapper onPress={showDatepicker}> 
             <S.Title>{label}</S.Title>

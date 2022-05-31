@@ -136,8 +136,8 @@ android {
         applicationId 'com.motok.moto.rental'
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 24
-        versionName "1.24.0"
+        versionCode 27
+        versionName "1.27.0"
     }
     splits {
         abi {

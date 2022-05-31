@@ -23,7 +23,6 @@ export type Veiculo = {
 }
 const CardPlano = ({user, veiculoId}: CardPlano) => {
     const [ veiculo, setVeiculo] = useState<Veiculo>({} as Veiculo)
-    console.log('veiculo id ', veiculoId )
     useEffect(() => {
         api.get(`veiculo/${veiculoId}`).then(
             function (response){

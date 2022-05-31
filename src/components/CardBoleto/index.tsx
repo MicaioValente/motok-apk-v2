@@ -11,6 +11,7 @@ import * as Linking from 'expo-linking';
 
 type CardBoleto = {
     idUser: number
+    trigger: boolean
 }
 type semPlano = {
     valor: number, 
@@ -18,18 +19,22 @@ type semPlano = {
     code: string
 }
 
-const CardBoleto = ({idUser}: CardBoleto) => {
-    const [ boleto, setBoleto ] = useState<Boleto>({} as Boleto)
+const CardBoleto = ({idUser, trigger}: CardBoleto) => {
+    const [ boleto, setBoleto ] = useState<Boleto | null>({} as Boleto)
     const [ colorStatus, setColorStatus ] = useState('')
     const [ labelBoletoStatus, setLabelBoletoStatus ] = useState('')
     const [ semBoletos, setSemBoletos ] = useState<semPlano | null>()
     useEffect(() => {
         api.get(`boleto/${idUser}`).then(
             function (response){
+                
                 if(response.data.length > 0){
-                    setBoleto(response.data[response.data.length - 1])
+                    console.log(response.data)
+                    let boletosPlano = response.data.filter((item: Boleto) => item.fimPagamento === 2)
+                    setBoleto(boletosPlano[boletosPlano.length - 1])
                     return
                 }
+                    setBoleto(null)
                     setSemBoletos({valor: 0, dataVencimento: 'Sem data', code: 'Sem código'})
                     return
             }
@@ -38,7 +43,7 @@ const CardBoleto = ({idUser}: CardBoleto) => {
                 console.log('error', response)
             }
         )
-    }, [])
+    }, [trigger])
 
 
 
@@ -88,7 +93,8 @@ const CardBoleto = ({idUser}: CardBoleto) => {
         ToastAndroid.show('Código Copiado', ToastAndroid.LONG)
     }
 
-    return (
+    return (<>
+        {boleto && 
         <S.Container>
             <S.Content>
                 <S.ContainerIcon>
@@ -130,7 +136,10 @@ const CardBoleto = ({idUser}: CardBoleto) => {
                     </S.ContainerArrow>
                 </S.ContainerBoleto>    
             </S.Content>
-        </S.Container>)
+        </S.Container>
+        }
+    </>
+        )
 }
 
 export default CardBoleto;

@@ -4,7 +4,7 @@ import * as S from './styles';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type ProximaPage = {
-    rota: string
+    rota: any
     title: string
     color: string
     BGcolor: string
@@ -23,8 +23,8 @@ const ProximaPage = ({rota, title, color, BGcolor, Icon}:ProximaPage ) => {
     async function sair (){
         await AsyncStorage.removeItem('user')
         await AsyncStorage.removeItem('comprado')
-
-        navigation.navigate(rota)
+        navigation.reset({ routes: [{ name: rota }] })
+        // navigation.navigate(rota)
 
     }
     return (

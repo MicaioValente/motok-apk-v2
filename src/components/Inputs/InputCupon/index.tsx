@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ActivityIndicator, Alert, StyleSheet, View } from 'react-native';
+import { ActivityIndicator, Alert, StyleSheet, ToastAndroid, View } from 'react-native';
 import api from '../../../service/api';
 import * as S from './style'
 import ModalAlert from '../../ModalAlert';
@@ -14,6 +14,10 @@ export default function InputCupon({step, setStep, setCupon} : any) {
     const [loading, setLoading] = useState(false);
 
     async function verifyCupon() {
+        if(!text){
+            ToastAndroid.show('Insira um cupom', ToastAndroid.LONG)
+            return
+        }
         setLoading(!loading)
 
         await api.post(`Cupons/aplicar?codigo=${text}`)
@@ -26,6 +30,7 @@ export default function InputCupon({step, setStep, setCupon} : any) {
                 setModal(!modal)
             }
         }).catch((error) => {
+            setLoading(false)
             console.log('error', error)
         })
     }

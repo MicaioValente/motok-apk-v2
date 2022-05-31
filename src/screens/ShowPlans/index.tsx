@@ -13,12 +13,10 @@ import { URL } from '../../service/url';
 const ShowPlans = ({route}: any) => {
     const navigation = useNavigation();
     const [teste, setTeste] = useState(true)
-    const [ modal, setModal] = useState(false)
-    const [ version, setVersion ] = useState<number>(1)
     const [ modalVersion, setModalVersion] = useState(false)
 
     useEffect(() => {
-        const versao = 24
+        const versao = 27
         const checkVersion = async () => {
             await api.get(`appversions/${1}`)
               .then(async response => {

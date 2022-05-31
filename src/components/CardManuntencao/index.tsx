@@ -33,6 +33,7 @@ const CardManuntencao = ({user, veiculoId}: CardPlano) => {
     const [ dataInicio, setDataInicio] = useState<any>()
     const [ dataEntrega, setEntrega] = useState<any>()
     const navigation = useNavigation<any>()
+    console.log('manutencoes', manutencoes)
 
     useEffect(() => {
         api.get(`veiculo/${veiculoId}`).then(
@@ -48,14 +49,14 @@ const CardManuntencao = ({user, veiculoId}: CardPlano) => {
             function (response){
                 setManutencoes(response.data)
 
-                // let result: Manutencao[] = response.data.filter((e: Manutencao, i: number) => {
-                //     if(e.idMoto === veiculoId){
-                //         return e.dataEntrada
-                //         // return moment(e.dataEntrada).format('DD/MM/YYYY')
-                //     }
-                // })
-                // setDataInicio(result[0].dataEntrada)
-                // setEntrega(result[0].dataEntrega)
+                let result: Manutencao[] = response.data.filter((e: Manutencao, i: number) => {
+                    if(e.idMoto === veiculoId){
+                        return e.dataEntrada
+                        // return moment(e.dataEntrada).format('DD/MM/YYYY')
+                    }
+                })
+                setDataInicio(result[0].dataEntrada)
+                setEntrega(result[0].dataEntrega)
             }
         ).catch(
             function (error){
@@ -82,17 +83,37 @@ const CardManuntencao = ({user, veiculoId}: CardPlano) => {
                     </S.ContainerIconNumber>
                 </S.ContainerTextNumber>
 
-                <S.ContainerText>
-                    <S.Text>Próxima Manutenção</S.Text>
-                    <S.TextBold>{dataInicio ? moment(dataInicio).format('DD/MM/YYYY') : "XXXXX"}</S.TextBold>
-                </S.ContainerText>
-                <S.ContainerText>
-                    <S.Text>Dia para retirada</S.Text>
-                    <S.TextBold>{dataEntrega ? moment(dataEntrega).format('DD/MM/YYYY') : "XXXXX"}</S.TextBold>
-                </S.ContainerText>
+                
+                {
+                    dataInicio && dataEntrega ?
+                    dataInicio === dataEntrega ?
+                    <>
+                        <S.ContainerText>
+                            <S.Text>Próxima Manutenção</S.Text>
+                            <S.TextBold>{dataInicio ? moment(dataInicio).format('DD/MM-HH:mm') : "XXXXX"}</S.TextBold>
+                        </S.ContainerText> 
+                        <S.ContainerText>
+                            <S.Text>Dia para retirada</S.Text>
+                            <S.TextBold>{'A Combinar'}</S.TextBold>
+                        </S.ContainerText>
+                    </>
+                    :
+                    <>
+                        <S.ContainerText>
+                            <S.Text>Próxima Manutenção</S.Text>
+                            <S.TextBold>{dataInicio ? moment(dataInicio).format('DD/MM-HH:mm') : "XXXXX"}</S.TextBold>
+                        </S.ContainerText> 
+                        <S.ContainerText>
+                            <S.Text>Dia para retirada</S.Text>
+                            <S.TextBold>{dataEntrega ? moment(dataEntrega).format('DD/MM, HH:mm') : "XXXXX"}</S.TextBold>
+                        </S.ContainerText> 
+                    </> 
+                    : null
+                }
                 <S.ContainerBoleto onPress={() => {navigation.navigate('NovaManuntencao', {motoId: veiculoId})}}>
                     <S.TitleButton>solicitar nova manutenção</S.TitleButton>
-                </S.ContainerBoleto>    
+                </S.ContainerBoleto> 
+                   
 
             </S.Content> :
             <></>

@@ -3,7 +3,7 @@ import styled from 'styled-components/native';
 import CopiarSVG from '../../assets/close.svg'
 
 
-export const ContainerModal = styled.Pressable`
+export const ContainerModal = styled.TouchableOpacity`
     flex: 1;
     justify-content: flex-end;
     align-items: center;
@@ -18,7 +18,7 @@ export const ContainerContent = styled.View`
     border-radius: ${RFValue(20)}px;
     padding: ${RFValue(20)}px ${RFValue(40)}px;
 `
-export const ContainerArrow = styled.TouchableOpacity`
+export const ContainerArrow = styled.View`
     height: ${RFValue(35)}px;
     width: 100%;
     border-radius: ${RFValue(10)}px;
@@ -64,13 +64,15 @@ export const ContainerDate = styled.View`
     padding: ${RFValue(10)}px;
     margin-bottom: ${RFValue(10)}px;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
 `
 export const TitleDate = styled.Text`
     font-family: "Teko_500Medium";
     font-size: ${RFValue(18)}px;
     color: #D4D4D8;
-    width: 80%;
+    /* width: 80%; */
+    text-align: center;
 `
 
 export const ContainerDateHoraDia = styled.View`

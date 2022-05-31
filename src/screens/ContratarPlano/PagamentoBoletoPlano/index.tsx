@@ -16,6 +16,7 @@ import { ToastAndroid } from 'react-native'
 export type Boleto = {
     codigoPagamento: string 
     formaPagamento: string 
+    fimPagamento: BoletoTipoPagamento
     dataEmissao: string 
     dataVencimento: string 
     statusPagamento: string 
@@ -27,7 +28,13 @@ export type Boleto = {
     client: User 
     idPagamento: string
 }
-const PagamentoBoleto = ({ step, setStep, plano, formaDePagamento, cupon, user}: any) => {
+
+export enum BoletoTipoPagamento {
+    Caucao = 1,
+    Plano = 2
+}
+
+const PagamentoBoleto = ({ step, setStep, plano, formaDePagamento, cupon, user, setBoletoPlanoGerado}: any) => {
     const [loading, setLoading] = useState(false);
     const [modal, setModal] = useState(false)
     const [modalAviso, setModalAviso] = useState(false)
@@ -47,9 +54,11 @@ const PagamentoBoleto = ({ step, setStep, plano, formaDePagamento, cupon, user}:
         api.post('boleto/pagamentoContratacao', dataRequest).then(function (response){
             setLoading(false)
             setBoleto(response.data)
+            setBoletoPlanoGerado(true)
             // Linking.openURL(response.data.boletoUrl)
 
         }).catch(function (response){
+            console.log('erro boleto plano', response)
             setLoading(false)
             setModal(true)
         })
@@ -119,7 +128,7 @@ const PagamentoBoleto = ({ step, setStep, plano, formaDePagamento, cupon, user}:
                         <>
                             <S.ContainerCaucao  onPress={() => Linking.openURL(boleto.urlBoleto)}>
                                 <View style={{width: '100%', flexDirection: 'row', justifyContent: 'space-between'}}>
-                                    <S.ValueCaucao>{`Baixar PDF1`}</S.ValueCaucao>
+                                    <S.ValueCaucao>{`Baixar PDF`}</S.ValueCaucao>
                                     <S.ContainerIconNumber> 
                                         <S.Icon name='download' size={25} color="#F14902"/>
                                     </S.ContainerIconNumber>

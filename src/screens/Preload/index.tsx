@@ -41,20 +41,23 @@ const Preload = () => {
 
         reactToUpdates()
         
-        const checkToken = async () => {
-            const token = await AsyncStorage.getItem('user');
-            if(token && JSON.parse(token).token){
-                navigation.navigate('ShowPlans');
-            }else{
-                navigation.navigate('Presentation');
+        setTimeout(() => {
+            const checkToken = async () => {
+                const token = await AsyncStorage.getItem('user');
+                if(token && JSON.parse(token).token){
+                    navigation.navigate('ShowPlans');
+                }else{
+                    navigation.navigate('Presentation');
+                }
+                await api.get(`Planos/ativos`)
+                .then(async response => {
+                    await AsyncStorage.setItem('planos', JSON.stringify(response.data))
+                }).catch(function (error) {
+                });
             }
-            await api.get(`Planos/ativos`)
-              .then(async response => {
-                await AsyncStorage.setItem('planos', JSON.stringify(response.data))
-              }).catch(function (error) {
-              });
-            }
-        checkToken();
+            checkToken()
+        }, 1000);
+            
     }, []);
 
     const reactToUpdates = async () => {

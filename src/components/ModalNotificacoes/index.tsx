@@ -3,18 +3,29 @@ import * as S from './styles';
 import { Modal } from "react-native";
 import api from '../../service/api';
 import moment from 'moment';
+import { UserGetById } from '../CardPlano/types';
 
+
+type NewType = {
+  idNotificacao: number;
+  nomeNotificacao: string;
+  descricaoNotificacao: string;
+  ativo: string;
+  cliente: UserGetById;
+};
+
+export type Notificacoes = NewType
 export default function ModalComponent({ idCliente, modalVisible, setModalVisible }: any) {
         const [ notificacoes, setNotificacoes] = useState<[]>([])
+        const [ dates, setDates] = useState<Notificacoes[]>([] as Notificacoes[])
 
 
         useEffect(() => {
             async function getNotificacoes() {
-              console.log('idCliente', idCliente)
-                await api.get(`notificacoes/189`)
+                await api.get(`Notificacao`)
                     .then(async function (response) {
-                        console.log(111, response.data)
-                        setNotificacoes(response.data)
+                        let DatesCliente = response.data.filter((item: Notificacoes) => item.cliente.idCliente == idCliente) 
+                        setDates(DatesCliente)
                     })
                     .catch(function (error) {
                         console.log('notificacoes ', error)
@@ -23,14 +34,6 @@ export default function ModalComponent({ idCliente, modalVisible, setModalVisibl
                 getNotificacoes()
 
         }, [])
-
-        let dates: any = [
-            // {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
-            // {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
-            // {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
-            // {dia: 27, hora: '13:48', descricao: 'Seu boleto foi gerado com vencimento para o dia 30/01/2022.'  },
-        ]
-
 
     return (
         <Modal
@@ -49,17 +52,24 @@ export default function ModalComponent({ idCliente, modalVisible, setModalVisibl
                         </S.ContentArrow>
                     </S.ContainerArrow>
                     <S.TitleDates>{getMonthName(parseInt(moment(new Date()).format('MM')))}</S.TitleDates>
-                    {dates.map((item: any) => 
+                    {dates.map((item: Notificacoes, index: any) => 
                             <>
-                                <S.ContainerDate>
-                                    <S.ContainerDateHoraDia>
-                                        <S.TitleDia>{item.dia}</S.TitleDia>
-                                        <S.TitleHora>{item.hora}</S.TitleHora>
-                                    </S.ContainerDateHoraDia>
-                                    <S.TitleDate>{item.descricao}</S.TitleDate>
+                                <S.ContainerDate key={index}>
+                                    <S.TitleDate>{item.descricaoNotificacao}</S.TitleDate>
                                 </S.ContainerDate>
                             </>
                     )}
+                    {/* {dates.map((item: Notificacoes, index: any) => 
+                            <>
+                                <S.ContainerDate key={index}>
+                                    <S.ContainerDateHoraDia>
+                                        <S.TitleDia>10</S.TitleDia>
+                                        <S.TitleHora>{'13:20'}</S.TitleHora>
+                                    </S.ContainerDateHoraDia>
+                                    <S.TitleDate>{item.descricaoNotificacao}</S.TitleDate>
+                                </S.ContainerDate>
+                            </>
+                    )} */}
 
                 </S.ContainerContent>
 
